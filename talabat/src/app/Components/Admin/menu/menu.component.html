@@ -1,0 +1,9 @@
+<ul class="layout-menu">
+  @for (item of model; let i = $index; track item.label || i) {
+    @if (!item.separator) {
+      <app-menuitem [item]="item" [index]="i" [root]="true"></app-menuitem>
+    } @else {
+      <li class="menu-separator"></li>
+    }
+  }
+</ul>

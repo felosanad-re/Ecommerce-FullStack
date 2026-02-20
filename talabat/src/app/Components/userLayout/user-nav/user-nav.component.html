@@ -1,0 +1,53 @@
+<div class="card">
+  <p-menubar [model]="items">
+    <ng-template pTemplate="start">
+      <figure class="m-0">
+        <img class="w-2rem" src="./assets/Images/Logo.svg" alt="Logo" />
+      </figure>
+    </ng-template>
+
+    <ng-template pTemplate="item" let-item let-root="root">
+      <a
+        pRipple
+        [routerLink]="item['path']"
+        class="flex align-items-center p-menuitem-link"
+      >
+        <span [class]="item.icon"></span>
+        <span class="ml-2">{{ item.label }}</span>
+      </a>
+    </ng-template>
+
+    <ng-template pTemplate="end">
+      <div class="card flex justify-content-center align-items-center gap-3">
+        <a class="cursor-pointer" [routerLink]="['cart']"
+          ><i
+            class="pi pi-shopping-cart text-3xl"
+            pBadge
+            [value]="cartCount"
+          ></i
+        ></a>
+        <a
+          (click)="isLogOut = !isLogOut"
+          class="user-name p-2 border-round-2xl text-white cursor-pointer font-bold capitalize"
+        >
+          <span>{{ userName }}</span>
+          @if (isLogOut) {
+            <a
+              (click)="logOut()"
+              class="py-2 px-3 font-bold capitalize log-out border-round-2xl flex align-items-center gap-2"
+            >
+              <span>LogOut</span>
+              <span class="pi pi-sign-out"></span>
+            </a>
+            <a
+              class="py-2 px-3 font-bold capitalize profile border-round-2xl flex align-items-center gap-2"
+            >
+              <span>profile</span>
+              <span class="pi pi-user"></span>
+            </a>
+          }
+        </a>
+      </div>
+    </ng-template>
+  </p-menubar>
+</div>

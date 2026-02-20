@@ -1,0 +1,53 @@
+<section>
+  <div class="container-fluid">
+    <div class="grid my-6">
+      <!-- Slider Images -->
+      <div class="col-12 md:col-5">
+        <div class="card">
+          <p-galleria
+            [value]="images"
+            [numVisible]="5"
+            [circular]="true"
+            [showItemNavigators]="true"
+            [showThumbnails]="false"
+            [containerStyle]="{
+              'max-width': '100%',
+              'border-radius': '10px',
+              overflow: 'hidden',
+            }"
+          >
+            <ng-template pTemplate="item" let-item>
+              <img
+                [src]="item.itemImageSrc"
+                style="width: 100%; display: block; height: 240px"
+              />
+            </ng-template>
+          </p-galleria>
+        </div>
+      </div>
+
+      <!-- Main Container [Parent] -->
+      <div class="hidden md:block md:col-6">
+        <!-- Products [Childrens]-->
+        <app-card [isSmallCard]="true" [products]="smallProducts" />
+      </div>
+
+      <!-- Start Show Our Products -->
+      <div class="product">
+        <h1>Best Sellers</h1>
+        <!-- Container -->
+        <app-card [isSmallCard]="false" [products]="allProducts" />
+      </div>
+      <!-- End Show Our Products -->
+    </div>
+  </div>
+  <div class="card flex justify-content-center">
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="20"
+    />
+    <!-- [rowsPerPageOptions]="[6, 12, 24]" -->
+  </div>
+</section>

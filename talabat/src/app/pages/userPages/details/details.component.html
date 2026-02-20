@@ -1,0 +1,66 @@
+<section>
+  <div class="container">
+    <div class="grid align-items-center my-5">
+      <div class="md:col-6">
+        <figure>
+          <img
+            class="w-full"
+            [src]="productDetails.pictureUrl"
+            [alt]="productDetails.name"
+          />
+        </figure>
+      </div>
+      <div class="md:col-6">
+        <div class="content">
+          <h3>{{ productDetails.name }}</h3>
+          <p class="my-1">
+            {{ productDetails.descripaion }}
+          </p>
+          <div class="price text-red-500">
+            <p>price:</p>
+            <span class="text-green-400 font-bold">$</span>
+            {{ productDetails.price }}
+          </div>
+          <div
+            class="flex align-items-center justify-content-between capitalize"
+          >
+            <p>category:</p>
+            <p class="font-bold text-orange-400">
+              {{ productDetails.category }}
+            </p>
+          </div>
+          <div
+            class="flex align-items-center justify-content-between capitalize"
+          >
+            <p>brand:</p>
+            <p class="font-bold text-orange-400">
+              {{ productDetails.brand }}
+            </p>
+          </div>
+        </div>
+        @if (!productDetails.isAddedToCart) {
+          <p-button
+            (onClick)="
+              addToCart(productDetails); productDetails.isAddedToCart = true
+            "
+            label="Add To Cart"
+            styleClass="my-2 uppercase w-full font-bold"
+            icon="pi pi-cart-plus text-2xl mx-5"
+            iconPos="right"
+            severity="info"
+          />
+        }
+        @if (productDetails.isAddedToCart) {
+          <p-button
+            [routerLink]="['/cart']"
+            label="Go To Cart"
+            styleClass="my-2 uppercase w-full font-bold"
+            icon="pi pi-shopping-cart text-2xl mx-5"
+            iconPos="right"
+            severity="warning"
+          />
+        }
+      </div>
+    </div>
+  </div>
+</section>

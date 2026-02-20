@@ -1,0 +1,34 @@
+.user-name {
+  background-color: #1c99ab;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    border: {
+      width: 15px;
+      style: solid;
+      color: #1c99ab transparent transparent transparent;
+    }
+  }
+}
+.log-out {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, calc(100% + 15px));
+  background-color: #1c99ab;
+}
+
+.profile {
+  position: absolute;
+  bottom: -115%;
+  left: 50%;
+  transform: translate(-50%, calc(100% + 15px));
+  background-color: #1c99ab;
+}
+.p-badge {
+  background-color: #1c99ab !important;
+}

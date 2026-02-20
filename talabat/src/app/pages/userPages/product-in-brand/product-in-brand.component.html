@@ -1,0 +1,10 @@
+<section>
+  <div class="container">
+    <h2>
+      All
+      <span class="text-red-500 font-bold">{{ brandType?.brand }}</span>
+      products
+    </h2>
+    <app-card [products]="productWithBrand" [isSmallCard]="false" />
+  </div>
+</section>

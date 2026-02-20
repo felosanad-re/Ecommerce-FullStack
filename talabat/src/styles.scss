@@ -1,0 +1,97 @@
+@import "primeicons/primeicons.css";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.min.css";
+@import "primeflex/primeflex.css";
+
+/* General */
+$scale: 14px; /* main font size */
+$borderRadius: 12px; /* border radius of layout element e.g. card, sidebar */
+$transitionDuration: 0.2s; /* transition duration of layout elements e.g. sidebar, overlay menus */
+
+body {
+  margin: 0;
+}
+
+.container-fluid {
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: {
+    left: 20px;
+    right: 20px;
+  }
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: {
+    left: 20px;
+    right: 20px;
+  }
+}
+
+.container-fluid {
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: {
+    left: 20px;
+    right: 20px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    max-width: 740px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .container {
+    max-width: 980px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+/* You can add global styles to this file, and also import other style files */
+/* Text Colors from PrimeNG theme */
+.text-primary {
+  color: var(--primary-color);
+}
+
+.text-secondary {
+  color: var(--secondary-color);
+}
+
+.text-success {
+  color: var(--success-color);
+}
+
+.text-info {
+  color: var(--info-color);
+}
+
+.text-warning {
+  color: var(--warning-color);
+}
+
+.text-danger {
+  color: var(--danger-color);
+}
+
+.text-contrast {
+  color: var(--text-color-contrast);
+}

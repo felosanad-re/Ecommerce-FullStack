@@ -1,0 +1,292 @@
+<section>
+  <div class="container py-5">
+    <h1>Register Page</h1>
+    <form [formGroup]="regiterForm" (ngSubmit)="submitForm()">
+      <!-- First Name -->
+      <div class="field">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-user"></i>
+          </p-inputGroupAddon>
+          <input
+            formControlName="firstName"
+            pInputText
+            [autofocus]="true"
+            placeholder="First Name"
+          />
+        </p-inputGroup>
+        <div class="validation-msg">
+          <div class="card">
+            @if (firstName.dirty && firstName.touched) {
+              @if (firstName.getError("required")) {
+                <p-messages
+                  [value]="[
+                    {
+                      severity: 'error',
+                      summary: 'Validation Error',
+                      detail: 'This Field Is Required',
+                    },
+                  ]"
+                  [enableService]="false"
+                  [closable]="false"
+                />
+              }
+            }
+            @if (firstName.getError("minlength")) {
+              <p-messages
+                [value]="[
+                  {
+                    severity: 'error',
+                    summary: 'Validation Error',
+                    detail: 'This Field Must Be At Least 5 Characters',
+                  },
+                ]"
+                [enableService]="false"
+                [closable]="false"
+              />
+            }
+          </div>
+        </div>
+      </div>
+      <!-- Last Name -->
+      <div class="field">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-user"></i>
+          </p-inputGroupAddon>
+          <input
+            formControlName="lastName"
+            pInputText
+            placeholder="Last Name"
+          />
+        </p-inputGroup>
+        <div class="validation-msg">
+          <div class="card">
+            @if (lastName.dirty && lastName.touched) {
+              @if (lastName.getError("required")) {
+                <p-messages
+                  [value]="[
+                    {
+                      severity: 'error',
+                      summary: 'Validation Error',
+                      detail: 'This Field Is Required',
+                    },
+                  ]"
+                  [enableService]="false"
+                  [closable]="false"
+                />
+              }
+            }
+            @if (lastName.getError("minlength")) {
+              <p-messages
+                [value]="[
+                  {
+                    severity: 'error',
+                    summary: 'Validation Error',
+                    detail: 'This Field Must Be At Least 5 Characters',
+                  },
+                ]"
+                [enableService]="false"
+                [closable]="false"
+              />
+            }
+          </div>
+        </div>
+      </div>
+      <!-- User Name -->
+      <div class="field">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-user"></i>
+          </p-inputGroupAddon>
+          <input
+            formControlName="userName"
+            pInputText
+            placeholder="User Name"
+          />
+        </p-inputGroup>
+        <div class="validation-msg">
+          <div class="card">
+            @if (userName.dirty && userName.touched) {
+              @if (userName.getError("required")) {
+                <p-messages
+                  [value]="[
+                    {
+                      severity: 'error',
+                      summary: 'Validation Error',
+                      detail: 'This Field Is Required',
+                    },
+                  ]"
+                  [enableService]="false"
+                  [closable]="false"
+                />
+              }
+            }
+            @if (userName.getError("minlength")) {
+              <p-messages
+                [value]="[
+                  {
+                    severity: 'error',
+                    summary: 'Validation Error',
+                    detail: 'This Field Must Be At Least 5 Characters',
+                  },
+                ]"
+                [enableService]="false"
+                [closable]="false"
+              />
+            }
+          </div>
+        </div>
+      </div>
+      <!-- Email -->
+      <div class="field">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-envelope"></i>
+          </p-inputGroupAddon>
+          <input formControlName="email" pInputText placeholder="Email" />
+        </p-inputGroup>
+        <div class="validation-msg">
+          <div class="card">
+            @if (email.dirty && email.touched) {
+              @if (email.getError("required")) {
+                <p-messages
+                  [value]="[
+                    {
+                      severity: 'error',
+                      summary: 'Validation Error',
+                      detail: 'This Field Is Required',
+                    },
+                  ]"
+                  [enableService]="false"
+                  [closable]="false"
+                />
+              }
+            }
+            @if (email.getError("email")) {
+              <p-messages
+                [value]="[
+                  {
+                    severity: 'error',
+                    summary: 'Validation Error',
+                    detail: 'This Field Must Be A Valid Email',
+                  },
+                ]"
+                [enableService]="false"
+                [closable]="false"
+              />
+            }
+          </div>
+        </div>
+      </div>
+      <!-- Password -->
+      <div class="field">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-key"></i>
+          </p-inputGroupAddon>
+          <input
+            formControlName="password"
+            type="password"
+            pInputText
+            placeholder="Password"
+          />
+        </p-inputGroup>
+        <div class="validation-msg">
+          <div class="card">
+            @if (password.dirty && password.touched) {
+              @if (password.getError("required")) {
+                <p-messages
+                  [value]="[
+                    {
+                      severity: 'error',
+                      summary: 'Validation Error',
+                      detail: 'This Field Is Required',
+                    },
+                  ]"
+                  [enableService]="false"
+                  [closable]="false"
+                />
+              }
+            }
+          </div>
+        </div>
+      </div>
+      <!-- Confirm Password -->
+      <div class="field">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-key"></i>
+          </p-inputGroupAddon>
+          <input
+            formControlName="confirmPassword"
+            type="password"
+            pInputText
+            placeholder="Confirm Password"
+          />
+        </p-inputGroup>
+        <div class="validation-msg">
+          <div class="card">
+            @if (confirmPassword.dirty && confirmPassword.touched) {
+              @if (confirmPassword.getError("required")) {
+                <p-messages
+                  [value]="[
+                    {
+                      severity: 'error',
+                      summary: 'Validation Error',
+                      detail: 'This Field Is Required',
+                    },
+                  ]"
+                  [enableService]="false"
+                  [closable]="false"
+                />
+              }
+            }
+            @if (confirmPassword.getError("notSame")) {
+              <p-messages
+                [value]="[
+                  {
+                    severity: 'error',
+                    summary: 'Validation Error',
+                    detail: 'Passwords Must Match',
+                  },
+                ]"
+                [enableService]="false"
+                [closable]="false"
+              />
+            }
+          </div>
+        </div>
+      </div>
+      <!-- Address -->
+      <div class="field">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-home"></i>
+          </p-inputGroupAddon>
+          <input formControlName="address" pInputText placeholder="Address" />
+        </p-inputGroup>
+      </div>
+      <div class="card flex justify-content-center gap-2">
+        <p-button type="Submit" label="Submit" />
+        <p-button
+          severity="info"
+          class="capitalize font-bold btn btn-info"
+          [routerLink]="['/login']"
+        >
+          log in
+        </p-button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- spinner loading -->
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-spin-fade"
+  [fullScreen]="true"
+  ><p style="color: white">Loading...</p></ngx-spinner
+>

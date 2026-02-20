@@ -1,0 +1,14 @@
+<section>
+  <div class="container">
+    <h1>Verify Code</h1>
+    <form [formGroup]="verifyCode" (ngSubmit)="submitForm()">
+      <div class="card flex justify-content-center">
+        <h3 class="mx-3">Enter Code:</h3>
+        <p-inputOtp formControlName="code" />
+      </div>
+      <div class="my-5 card flex justify-content-center">
+        <p-button type="Submit" label="Submit" />
+      </div>
+    </form>
+  </div>
+</section>

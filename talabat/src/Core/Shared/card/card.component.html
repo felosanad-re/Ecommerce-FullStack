@@ -1,0 +1,73 @@
+<!-- Shared Component -->
+<div class="flex justify-content-between align-items-center flex-wrap">
+  @for (product of products; track $index) {
+    <!-- containter -->
+    <div
+      [ngClass]="{
+        'col-6': isSmallCard,
+        'col-12 md:col-4 lg:col-3': !isSmallCard,
+      }"
+      class=""
+    >
+      <div
+        [ngClass]="{
+          'flex flex-wrap lg:flex-nowrap justify-content-center gap-2':
+            isSmallCard,
+          '': !isSmallCard,
+        }"
+      >
+        <!-- isSmallCard ==>  -->
+        <figure
+          [routerLink]="['/details', product.id, product.name]"
+          [ngClass]="{
+            'lg:w-full md:w-7rem': isSmallCard,
+            'w-full': !isSmallCard,
+          }"
+          class="m-1 shadow-2 border-round-2xl overflow-hidden cursor-pointer"
+        >
+          <img
+            [ngClass]="{ 'h-full': isSmallCard, 'h-20rem': !isSmallCard }"
+            class="w-full"
+            [src]="product.pictureUrl"
+          />
+        </figure>
+        <!-- Content -->
+        <div class="content">
+          <h3>{{ product.name }}</h3>
+          <p class="reancate-text overflow-hidden my-1">
+            {{ product.descripaion }}
+          </p>
+          <div class="price text-red-500">
+            <span class="text-green-400">$</span> {{ product.price }}
+          </div>
+        </div>
+      </div>
+      @if (!isSmallCard) {
+        @if (!product.isAddedToCart) {
+          <p-button
+            (onClick)="addToCart(product)"
+            label="Add To Cart"
+            styleClass="my-2 uppercase w-full font-bold"
+            icon="pi pi-cart-plus text-2xl mx-5"
+            iconPos="right"
+            severity="info"
+          />
+        }
+        @if (product.isAddedToCart) {
+          <p-button
+            [routerLink]="['/cart']"
+            label="Go To Cart"
+            styleClass="my-2 uppercase w-full font-bold"
+            icon="pi pi-shopping-cart text-2xl mx-5"
+            iconPos="right"
+            severity="warning"
+          />
+        }
+      }
+    </div>
+  } @empty {
+    <div class="w-full">
+      <app-page-not-found [searchValue]="searchKey" ] />
+    </div>
+  }
+</div>

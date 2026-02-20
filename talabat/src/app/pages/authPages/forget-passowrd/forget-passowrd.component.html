@@ -1,0 +1,67 @@
+<section>
+  <div class="container py-5">
+    <h1>Forget Password Page</h1>
+    <form [formGroup]="forgetPasswordForm" (ngSubmit)="submitForm()">
+      <!-- Email -->
+      <div class="field">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-envelope"></i>
+          </p-inputGroupAddon>
+          <input
+            formControlName="email"
+            [autofocus]="true"
+            pInputText
+            placeholder="Email"
+          />
+        </p-inputGroup>
+        <div class="validation-msg">
+          <div class="card">
+            @if (email.dirty && email.touched) {
+              @if (email.getError("required")) {
+                <p-messages
+                  [value]="[
+                    {
+                      severity: 'error',
+                      summary: 'Validation Error',
+                      detail: 'This Field Is Required',
+                    },
+                  ]"
+                  [enableService]="false"
+                  [closable]="false"
+                />
+              }
+            }
+            @if (email.getError("email")) {
+              <p-messages
+                [value]="[
+                  {
+                    severity: 'error',
+                    summary: 'Validation Error',
+                    detail: 'This Field Must Be A Valid Email',
+                  },
+                ]"
+                [enableService]="false"
+                [closable]="false"
+              />
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="card flex justify-content-center">
+        <p-button type="Submit" label="Submit" />
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- spinner -->
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-spin-fade"
+  [fullScreen]="true"
+  ><p style="color: white">Loading...</p></ngx-spinner
+>

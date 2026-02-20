@@ -1,0 +1,154 @@
+<div class="card">
+  <h1>Check Out Your Order</h1>
+  <div class="container">
+    <p-tabView [activeIndex]="activeIndex">
+      <p-tabPanel header="Delivary Method">
+        <h2>Select Your Delivary Method</h2>
+        <form [formGroup]="delivaryForm" (ngSubmit)="goToAddress()">
+          <div class="card flex justify-content-center">
+            <div class="flex flex-wrap gap-3">
+              <div class="field-checkbox">
+                @for (method of delivary; track $index) {
+                  <div class="grid">
+                    <div class="col-6">
+                      <p-radioButton
+                        [inputId]="method.id.toString()"
+                        name="delivary"
+                        [value]="method.id"
+                        formControlName="delivary"
+                        (onClick)="selectDelivaryMethod()"
+                      />
+                      <label [for]="method.id" class="ml-2">
+                        {{ method.shortName }} - {{ method.cost }}$ -
+                        {{ method.delivaryTime }} - {{ method.description }}
+                      </label>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+          <button
+            pButton
+            pRipple
+            label="Add Your Your Address"
+            class="p-button-success"
+          ></button>
+        </form>
+      </p-tabPanel>
+      <p-tabPanel header="Address">
+        <h2>Enter Your Address</h2>
+        <form [formGroup]="adressForm" (ngSubmit)="submitAddressForm()">
+          <!-- First Name -->
+          <div class="field">
+            <p-inputGroup>
+              <p-inputGroupAddon>
+                <i class="pi pi-envelope"></i>
+              </p-inputGroupAddon>
+              <input
+                formControlName="firstName"
+                pInputText
+                placeholder="First Name"
+              />
+            </p-inputGroup>
+            <div class="validation-msg">
+              <div class="card">
+                @if (firstName.dirty && firstName.touched) {
+                  @if (firstName.getError("required")) {
+                    <p-messages
+                      [value]="[
+                        {
+                          severity: 'error',
+                          summary: 'Validation Error',
+                          detail: 'This Field Is Required',
+                        },
+                      ]"
+                      [enableService]="false"
+                      [closable]="false"
+                    />
+                  }
+                }
+              </div>
+            </div>
+          </div>
+          <!-- lastName -->
+          <div class="field">
+            <p-inputGroup>
+              <p-inputGroupAddon>
+                <i class="pi pi-key"></i>
+              </p-inputGroupAddon>
+              <input
+                formControlName="lastName"
+                pInputText
+                placeholder="lastName"
+              />
+            </p-inputGroup>
+            <div class="validation-msg">
+              <div class="card">
+                @if (lastName.dirty && lastName.touched) {
+                  @if (lastName.getError("required")) {
+                    <p-messages
+                      [value]="[
+                        {
+                          severity: 'error',
+                          summary: 'Validation Error',
+                          detail: 'This Field Is Required',
+                        },
+                      ]"
+                      [enableService]="false"
+                      [closable]="false"
+                    />
+                  }
+                }
+              </div>
+            </div>
+          </div>
+          <!-- City -->
+          <div class="field">
+            <p-inputGroup>
+              <p-inputGroupAddon>
+                <i class="pi pi-key"></i>
+              </p-inputGroupAddon>
+              <input formControlName="city" pInputText placeholder="City" />
+            </p-inputGroup>
+            <div class="validation-msg">
+              <div class="card">
+                @if (city.dirty && city.touched) {
+                  @if (city.getError("required")) {
+                    <p-messages
+                      [value]="[
+                        {
+                          severity: 'error',
+                          summary: 'Validation Error',
+                          detail: 'This Field Is Required',
+                        },
+                      ]"
+                      [enableService]="false"
+                      [closable]="false"
+                    />
+                  }
+                }
+              </div>
+            </div>
+          </div>
+          <!-- street -->
+          <div class="field">
+            <p-inputGroup>
+              <p-inputGroupAddon>
+                <i class="pi pi-home"></i>
+              </p-inputGroupAddon>
+              <input formControlName="street" pInputText placeholder="street" />
+            </p-inputGroup>
+          </div>
+          <button
+            pButton
+            pRipple
+            label="Add Your Address"
+            type="submit"
+            class="p-button-success"
+          ></button>
+        </form>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>

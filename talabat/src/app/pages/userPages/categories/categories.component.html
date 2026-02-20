@@ -1,0 +1,22 @@
+<section>
+  <div class="container">
+    <h2 class="font-bold">All Categories</h2>
+    <div class="grid">
+      @for (category of categorys; track $index) {
+        <div class="md:col-4 lg:col-3">
+          <figure
+            [routerLink]="['/productCategory', category.name, category.id]"
+            class="m-1 shadow-2 border-round-2xl overflow-hidden cursor-pointer"
+          >
+            <img
+              [src]="getCategoryImage(category.name)"
+              [alt]=""
+              class="w-full h-full"
+            />
+          </figure>
+          <p class="text-center">{{ category.name }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

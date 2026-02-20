@@ -1,0 +1,23 @@
+<div class="card">
+  <p-menubar>
+    <ng-template pTemplate="start">
+      <figure class="m-0">
+        <img class="w-2rem" src="./assets/Images/Logo.svg" alt="Logo" />
+      </figure>
+    </ng-template>
+
+    <ng-template pTemplate="end" let-item let-root="root">
+      @for (item of items; track $index) {
+        <a
+          pRipple
+          [routerLinkActive]="['text-orange-500']"
+          [routerLink]="item['path']"
+          class="inline-flex justify-content-center align-items-center p-2 p-menuitem-link hover:text-700 border-round-2xl border-1 font-bold mx-1"
+        >
+          <span [class]="item.icon"></span>
+          <span class="ml-2">{{ item.label }}</span>
+        </a>
+      }
+    </ng-template>
+  </p-menubar>
+</div>

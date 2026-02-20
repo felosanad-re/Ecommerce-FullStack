@@ -1,0 +1,18 @@
+<section>
+  <div class="container">
+    <h2 class="font-bold">All Brands</h2>
+    <div class="grid">
+      @for (brand of brands; track $index) {
+        <div class="md:col-4 lg:col-3">
+          <figure
+            [routerLink]="['/productBrand', brand.name, brand.id]"
+            class="m-1 shadow-2 border-round-2xl overflow-hidden cursor-pointer w-full"
+          >
+            <img [src]="getBrandImg(brand.name)" [alt]="" class="w-full" />
+          </figure>
+          <p class="text-center">{{ brand.name }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

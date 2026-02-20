@@ -1,0 +1,97 @@
+<section>
+  <div class="container py-5">
+    <h1>Login Page</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+      <!-- Email -->
+      <div class="field">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-envelope"></i>
+          </p-inputGroupAddon>
+          <input
+            formControlName="email"
+            [autofocus]="true"
+            pInputText
+            placeholder="Email"
+          />
+        </p-inputGroup>
+        <div class="validation-msg">
+          <div class="card">
+            @if (email.dirty && email.touched) {
+              @if (email.getError("required")) {
+                <p-messages
+                  [value]="[
+                    {
+                      severity: 'error',
+                      summary: 'Validation Error',
+                      detail: 'This Field Is Required',
+                    },
+                  ]"
+                  [enableService]="false"
+                  [closable]="false"
+                />
+              }
+            }
+            @if (email.getError("email")) {
+              <p-messages
+                [value]="[
+                  {
+                    severity: 'error',
+                    summary: 'Validation Error',
+                    detail: 'This Field Must Be A Valid Email',
+                  },
+                ]"
+                [enableService]="false"
+                [closable]="false"
+              />
+            }
+          </div>
+        </div>
+      </div>
+      <!-- Password -->
+      <div class="field">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-key"></i>
+          </p-inputGroupAddon>
+          <input
+            formControlName="password"
+            type="password"
+            pInputText
+            placeholder="Password"
+          />
+        </p-inputGroup>
+        <div class="validation-msg">
+          <div class="card">
+            @if (password.dirty && password.touched) {
+              @if (password.getError("required")) {
+                <p-messages
+                  [value]="[
+                    {
+                      severity: 'error',
+                      summary: 'Validation Error',
+                      detail: 'This Field Is Required',
+                    },
+                  ]"
+                  [enableService]="false"
+                  [closable]="false"
+                />
+              }
+            }
+          </div>
+        </div>
+      </div>
+      <div class="card flex justify-content-center">
+        <p-button type="Submit" label="Submit" />
+      </div>
+      <div class="my-3 card flex justify-content-center">
+        <a class="btn btn-primary" [routerLink]="['/forgetPassword']"
+          >Forget Password</a
+        >
+      </div>
+      <div class="my-3 card flex justify-content-center">
+        <a class="btn btn-primary" [routerLink]="['/home']">See Our Products</a>
+      </div>
+    </form>
+  </div>
+</section>

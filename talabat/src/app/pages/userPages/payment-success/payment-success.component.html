@@ -1,0 +1,33 @@
+<div class="card my-5">
+  <div class="container">
+    <h2>Order List</h2>
+    <p-table
+      [value]="orderData"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      styleClass="center-table"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Number</th>
+          <th>order Status</th>
+          <th>sub Total</th>
+          <th>order Date</th>
+          <th>delivary Method</th>
+          <th>Total Price</th>
+          <th>Order Details</th>
+          <th>Delete Order</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-order>
+        <tr>
+          <td>{{ order.id }}</td>
+          <td>{{ order.orderStatus }}</td>
+          <td>{{ order.subTotal }}</td>
+          <td>{{ order.orderDate.slice(0, 10) }}</td>
+          <td>{{ order.delivaryMethod }}</td>
+          <td>{{ order.total }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
