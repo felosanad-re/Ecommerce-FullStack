@@ -1,0 +1,162 @@
+[
+  {
+    "Name": "iPhone 15 Pro Max",
+    "Price": 1299.99,
+    "Descripaion": "Apple flagship smartphone with A17 Pro chip and titanium body.",
+    "PictureUrl": "Images/iphone15promax.png",
+    "BrandId": 1,
+    "CategoryId": 1
+  },
+  {
+    "Name": "Samsung Galaxy S24 Ultra",
+    "Price": 1199.99,
+    "Descripaion": "Samsung flagship phone with Snapdragon 8 Gen 3 and 200MP camera.",
+    "PictureUrl": "Images/s24ultra.png",
+    "BrandId": 2,
+    "CategoryId": 1
+  },
+  {
+    "Name": "MacBook Pro 14 M3",
+    "Price": 1999.99,
+    "Descripaion": "Apple MacBook Pro with M3 chip and Liquid Retina XDR display.",
+    "PictureUrl": "Images/macbookpro14.png",
+    "BrandId": 1,
+    "CategoryId": 2
+  },
+  {
+    "Name": "Dell XPS 15",
+    "Price": 1799.99,
+    "Descripaion": "Premium Windows laptop with Intel Core i7 and OLED display.",
+    "PictureUrl": "Images/dellxps15.png",
+    "BrandId": 5,
+    "CategoryId": 2
+  },
+  {
+    "Name": "HP Pavilion 15",
+    "Price": 899.99,
+    "Descripaion": "Reliable everyday laptop with Intel Core i5 processor.",
+    "PictureUrl": "Images/hppavilion15.png",
+    "BrandId": 4,
+    "CategoryId": 2
+  },
+  {
+    "Name": "Logitech MX Master 3S",
+    "Price": 99.99,
+    "Descripaion": "Advanced wireless mouse for productivity and creative work.",
+    "PictureUrl": "Images/mxmaster3s.png",
+    "BrandId": 3,
+    "CategoryId": 3
+  },
+  {
+    "Name": "Logitech G Pro X Keyboard",
+    "Price": 149.99,
+    "Descripaion": "Mechanical gaming keyboard with GX switches.",
+    "PictureUrl": "Images/logitechgprox.png",
+    "BrandId": 3,
+    "CategoryId": 6
+  },
+  {
+    "Name": "Razer DeathAdder V3",
+    "Price": 79.99,
+    "Descripaion": "Ergonomic gaming mouse with high precision optical sensor.",
+    "PictureUrl": "Images/deathadderv3.png",
+    "BrandId": 8,
+    "CategoryId": 6
+  },
+  {
+    "Name": "Sony WH-1000XM5",
+    "Price": 399.99,
+    "Descripaion": "Industry-leading noise cancelling wireless headphones.",
+    "PictureUrl": "Images/sonywh1000xm5.png",
+    "BrandId": 6,
+    "CategoryId": 4
+  },
+  {
+    "Name": "JBL Charge 5",
+    "Price": 179.99,
+    "Descripaion": "Portable Bluetooth speaker with powerful sound and deep bass.",
+    "PictureUrl": "Images/jblcharge5.png",
+    "BrandId": 10,
+    "CategoryId": 4
+  },
+  {
+    "Name": "Apple AirPods Pro (2nd Gen)",
+    "Price": 249.99,
+    "Descripaion": "Wireless earbuds with active noise cancellation and spatial audio.",
+    "PictureUrl": "Images/airpodspro2.png",
+    "BrandId": 1,
+    "CategoryId": 4
+  },
+  {
+    "Name": "Canon EOS R6 Mark II",
+    "Price": 2499.99,
+    "Descripaion": "Full-frame mirrorless camera with 24.2MP sensor.",
+    "PictureUrl": "Images/canoneosr6.png",
+    "BrandId": 7,
+    "CategoryId": 5
+  },
+  {
+    "Name": "Sony Alpha a7 III",
+    "Price": 1999.99,
+    "Descripaion": "Full-frame mirrorless camera with excellent low-light performance.",
+    "PictureUrl": "Images/sonya7iii.png",
+    "BrandId": 6,
+    "CategoryId": 5
+  },
+  {
+    "Name": "ASUS ROG Strix G16",
+    "Price": 1599.99,
+    "Descripaion": "Gaming laptop with Intel Core i7 and RTX 4060 GPU.",
+    "PictureUrl": "Images/rogstrixg16.png",
+    "BrandId": 9,
+    "CategoryId": 6
+  },
+  {
+    "Name": "Razer BlackShark V2",
+    "Price": 129.99,
+    "Descripaion": "Esports gaming headset with THX Spatial Audio.",
+    "PictureUrl": "Images/blacksharkv2.png",
+    "BrandId": 8,
+    "CategoryId": 6
+  },
+  {
+    "Name": "Logitech C920 HD Pro",
+    "Price": 89.99,
+    "Descripaion": "Full HD 1080p webcam for streaming and video calls.",
+    "PictureUrl": "Images/logitechc920.png",
+    "BrandId": 3,
+    "CategoryId": 3
+  },
+  {
+    "Name": "Samsung T7 Portable SSD 1TB",
+    "Price": 139.99,
+    "Descripaion": "High-speed external SSD with USB-C connectivity.",
+    "PictureUrl": "Images/samsungt7.png",
+    "BrandId": 2,
+    "CategoryId": 3
+  },
+  {
+    "Name": "Apple Magic Keyboard",
+    "Price": 99.99,
+    "Descripaion": "Wireless keyboard with sleek design and long battery life.",
+    "PictureUrl": "Images/magickeyboard.png",
+    "BrandId": 1,
+    "CategoryId": 3
+  },
+  {
+    "Name": "Sony PlayStation 5",
+    "Price": 499.99,
+    "Descripaion": "Next-gen gaming console with ultra-fast SSD.",
+    "PictureUrl": "Images/ps5.png",
+    "BrandId": 6,
+    "CategoryId": 6
+  },
+  {
+    "Name": "Xbox Series X",
+    "Price": 499.99,
+    "Descripaion": "Microsoft gaming console with powerful performance and 4K gaming.",
+    "PictureUrl": "Images/xboxseriesx.png",
+    "BrandId": 2,
+    "CategoryId": 6
+  }
+]

@@ -1,0 +1,15 @@
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\bin\Debug\net9.0\Talabat.Repositaries.deps.json
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\bin\Debug\net9.0\Talabat.Repositaries.dll
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\bin\Debug\net9.0\Talabat.Repositaries.pdb
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\bin\Debug\net9.0\Talabat.Core.dll
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\bin\Debug\net9.0\Talabat.Core.pdb
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\obj\Debug\net9.0\Talabat.Repositaries.csproj.AssemblyReference.cache
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\obj\Debug\net9.0\Talabat.Repositaries.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\obj\Debug\net9.0\Talabat.Repositaries.AssemblyInfoInputs.cache
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\obj\Debug\net9.0\Talabat.Repositaries.AssemblyInfo.cs
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\obj\Debug\net9.0\Talabat.Repositaries.csproj.CoreCompileInputs.cache
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\obj\Debug\net9.0\Talabat..E2735F45.Up2Date
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\obj\Debug\net9.0\Talabat.Repositaries.dll
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\obj\Debug\net9.0\refint\Talabat.Repositaries.dll
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\obj\Debug\net9.0\Talabat.Repositaries.pdb
+C:\Users\Act\source\repos\Solution.Talabat\Talabat.Repositaries\obj\Debug\net9.0\ref\Talabat.Repositaries.dll

@@ -1,0 +1,6 @@
+@Felo.Talabat.first_HostAddress = http://localhost:5251
+
+GET {{Felo.Talabat.first_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
