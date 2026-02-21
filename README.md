@@ -9,7 +9,7 @@ A full-stack E-Commerce web application built with Angular and ASP.NET Core.
 ### 🔹 Frontend
 - Angular
 - TypeScript
-- Bootstrap / PrimeNG (لو مستخدم)
+- PrimeNG
 
 ### 🔹 Backend
 - ASP.NET Core Web API
@@ -21,7 +21,7 @@ A full-stack E-Commerce web application built with Angular and ASP.NET Core.
 
 ## ✨ Features
 
-- User Registration & Login
+- User Registration & Login & Forget Paswword
 - Role-based Authorization (Admin / Customer)
 - Product Management
 - Category & Brand Management
@@ -29,6 +29,7 @@ A full-stack E-Commerce web application built with Angular and ASP.NET Core.
 - Order Processing
 - Pagination & Filtering
 - Secure APIs with JWT
+- Dashboard
 
 ---
 
@@ -54,7 +55,7 @@ dotnet run
 
 API will run on:
 ```
-https://localhost:xxxx
+https://localhost:7109
 ```
 
 ---
