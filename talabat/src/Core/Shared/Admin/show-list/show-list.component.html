@@ -1,0 +1,145 @@
+<div class="card">
+  <h1>{{ title }}</h1>
+  <p-button
+    severity="success"
+    label="New"
+    icon="pi pi-plus"
+    class="mb-5"
+    (onClick)="openNew()"
+  />
+  <p-table
+    [value]="data"
+    dataKey="id"
+    editMode="row"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 20%">Code</th>
+        <th style="width: 20%">Name</th>
+        <th style="width: 20%"></th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-item
+      let-editing="editing"
+      let-ri="rowIndex"
+    >
+      <tr [pEditableRow]="item">
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="number" [value]="item.id" disabled />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ item.id }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                type="text"
+                required
+                [value]="item.name"
+                [(ngModel)]="item.name"
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ item.name }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-dialog
+            [(visible)]="dataDialog"
+            [style]="{ width: '450px' }"
+            header="Brand Details"
+            [modal]="true"
+            styleClass="p-fluid"
+          >
+            <ng-template pTemplate="content">
+              <div class="field">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  pInputText
+                  id="name"
+                  [(ngModel)]="item.name"
+                  required
+                  autofocus
+                />
+                <small class="p-error" *ngIf="submitted && !item.name">
+                  Name is required.
+                </small>
+              </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+              <p-button
+                label="Cancel"
+                icon="pi pi-times"
+                [text]="true"
+                (onClick)="hideDialog()"
+              />
+              <p-button
+                label="Save"
+                icon="pi pi-check"
+                [text]="true"
+                (onClick)="save(item)"
+              />
+            </ng-template>
+          </p-dialog>
+          <div class="flex align-items-center justify-content-center gap-2">
+            <!-- Edit -->
+            <button
+              *ngIf="!editing"
+              pButton
+              pRipple
+              type="button"
+              pInitEditableRow
+              icon="pi pi-pencil"
+              (click)="onRowEditInit(item)"
+              class="p-button-rounded p-button-text"
+            ></button>
+            <button
+              *ngIf="!editing"
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-trash"
+              severity="danger"
+              (click)="deleteBrand(item)"
+              class="p-button-rounded p-button-text"
+            ></button>
+            <!-- Save -->
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              pSaveEditableRow
+              icon="pi pi-check"
+              (click)="onRowEditSave(item)"
+              class="p-button-rounded p-button-text p-button-success mr-2"
+            ></button>
+            <!-- Cancel -->
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              pCancelEditableRow
+              icon="pi pi-times"
+              class="p-button-rounded p-button-text p-button-danger"
+              (click)="onRowEditCancel(item, ri)"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

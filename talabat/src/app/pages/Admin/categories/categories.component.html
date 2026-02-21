@@ -1,1 +1,7 @@
-<p>categories works!</p>
+<app-show-list
+  [title]="list"
+  [data]="categories"
+  (add)="addCategory($event)"
+  (edit)="editCategory($event)"
+  (delete)="deleteCategory($event)"
+/>

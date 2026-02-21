@@ -1,1 +1,9 @@
-<p>brands works!</p>
+<div class="container">
+  <app-show-list
+    [data]="brands"
+    [title]="List"
+    (edit)="saveBrand($event)"
+    (add)="addBrand($event)"
+    (delete)="deleteBrand($event)"
+  />
+</div>

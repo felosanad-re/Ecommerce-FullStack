@@ -8,6 +8,7 @@ using Talabat.Core.Entites.Categories;
 using Talabat.Core.RequestModels;
 using Talabat.Core.RequestModels.BrandRequests;
 using Talabat.Core.RequestModels.CategoriesRequests;
+using Talabat.Core.Services.Contract.AttachmentService;
 using Talabat.Core.Services.Contract.ProductServices;
 using Talabat.Core.Specifications.SpecModel;
 
@@ -22,13 +23,15 @@ namespace Felo.Talabat.Api.Controllers.Admin
         private readonly IProductService _productService;
         private readonly IBrandService _brandService;
         private readonly ICategoryService _categoryService;
+        private readonly IAttachmentService _attachmentService;
         private readonly IMapper _mapper;
-        public AdminController(IProductService productService, IMapper mapper, IBrandService brandService, ICategoryService categoryService)
+        public AdminController(IProductService productService, IMapper mapper, IBrandService brandService, ICategoryService categoryService, IAttachmentService attachmentService)
         {
             _productService = productService;
             _brandService = brandService;
             _categoryService = categoryService;
             _mapper = mapper;
+            _attachmentService = attachmentService;
         }
         #endregion
 
@@ -47,10 +50,24 @@ namespace Felo.Talabat.Api.Controllers.Admin
 
         #region add Product
         [HttpPost("AddProduct")] // Post: /api/Admin/AddProduct
-        public async Task<ActionResult<ProductToReturnDto>> AddProduct([FromBody] AddProductRequest addProductRequest)
+        public async Task<ActionResult<ProductToReturnDto>> AddProduct([FromForm] AddProductRequest addProductRequest)
         {
+            string? productPic = null;
+            if(addProductRequest.ProductPic != null && addProductRequest.ProductPic.Length > 0)
+            {
+                try
+                {
+                   var fileName = await _attachmentService.UploadAsync(addProductRequest.ProductPic, "products");
+                    productPic = $"/files/products/{fileName}";
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest("Failed to upload image: " +ex.Message);
+                }
+            }
+            addProductRequest.PictureUrl = productPic;
             var product = await _productService.AddProductAsync(addProductRequest);
-            return Ok(_mapper.Map<ProductToReturnDto>(_mapper.Map<ProductToReturnDto>(product)));
+            return Ok(_mapper.Map<ProductToReturnDto>(product));
         }
         #endregion
 

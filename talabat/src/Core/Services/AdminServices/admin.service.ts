@@ -7,6 +7,7 @@ import { IProduct } from '../../Interfaces/UserInterfaces/iproduct';
 import { BaseUrl } from '../../BaseUrl';
 import { ICategory } from '../../Interfaces/UserInterfaces/icategory';
 import { IBrand } from '../../Interfaces/UserInterfaces/ibrand';
+import { IAddProductRequest } from '../../Interfaces/iadd-product-request';
 
 @Injectable({
   providedIn: 'root',
@@ -34,8 +35,21 @@ export class AdminService {
     );
   }
 
-  addProduct(data: IProduct): Observable<IProduct> {
-    return this._http.post<IProduct>(`${BaseUrl}/api/Admin/AddProduct`, data);
+  addProduct(productData: any, imageFile: File | null = null): Observable<any> {
+    const formData = new FormData();
+
+    formData.append('Name', productData.name);
+    formData.append('Descripaion', productData.descripaion);
+    formData.append('Price', productData.price.toString());
+    formData.append('BrandId', productData.brandId.toString());
+    formData.append('CategoryId', productData.categoryId.toString());
+    formData.append('Stock', productData.stock.toString());
+
+    if (imageFile) {
+      formData.append('ProductPic', imageFile, imageFile.name);
+    }
+
+    return this._http.post<any>(`${BaseUrl}/api/Admin/AddProduct`, formData);
   }
 
   editProduct(data: IProduct): Observable<IProduct> {
@@ -52,7 +66,34 @@ export class AdminService {
     return this._http.get<ICategory[]>(`${BaseUrl}/api/Admin/Categories`);
   }
 
+  editCategory(data: ICategory): Observable<ICategory> {
+    return this._http.put<ICategory>(`${BaseUrl}/api/Admin/EditCategory`, data);
+  }
+
+  addCategory(data: ICategory): Observable<ICategory> {
+    return this._http.post<ICategory>(`${BaseUrl}/api/Admin/AddCategory`, data);
+  }
+
+  deleteCategory(id: number): Observable<string> {
+    return this._http.delete<string>(`${BaseUrl}/api/Admin/DeleteCategory`, {
+      params: { id },
+    });
+  }
+
   getbrand(): Observable<IBrand[]> {
     return this._http.get<IBrand[]>(`${BaseUrl}/api/Admin/Brands`);
+  }
+
+  addBrand(data: IBrand): Observable<IBrand> {
+    return this._http.post<IBrand>(`${BaseUrl}/api/Admin/addBrand`, data);
+  }
+
+  editBrand(data: IBrand): Observable<IBrand> {
+    return this._http.put<IBrand>(`${BaseUrl}/api/Admin/EditBrand`, data);
+  }
+  deleteBrand(id: number): Observable<string> {
+    return this._http.delete<string>(`${BaseUrl}/api/Admin/DeleteBrand`, {
+      params: { id },
+    });
   }
 }

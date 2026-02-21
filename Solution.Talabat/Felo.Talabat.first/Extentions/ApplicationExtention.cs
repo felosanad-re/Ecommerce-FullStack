@@ -1,5 +1,6 @@
 ﻿using Felo.Talabat.Api.Helpers;
 using Talabat.Core.GenaricRepo;
+using Talabat.Core.Services.Contract.AttachmentService;
 using Talabat.Core.Services.Contract.CartServices;
 using Talabat.Core.Services.Contract.OrderService;
 using Talabat.Core.Services.Contract.PaymentsService;
@@ -7,6 +8,7 @@ using Talabat.Core.Services.Contract.ProductServices;
 using Talabat.Core.UnitOfWork;
 using Talabat.Repositaries.Data;
 using Talabat.Repositaries.Data.UnitOfWorks;
+using Talabat.Services.AttachmentServices;
 using Talabat.Services.CartServices;
 using Talabat.Services.OrderServices;
 using Talabat.Services.PaymentServices;
@@ -18,6 +20,7 @@ namespace Felo.Talabat.Api.Extentions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services) 
         {
+            services.AddScoped(typeof(IAttachmentService), typeof(AttachmentService));
             // Allow IPaymentService
             services.AddScoped(typeof(IPaymentService), typeof(PaymentService));
             // Allow IOrderBuilder

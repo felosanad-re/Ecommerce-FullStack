@@ -15,15 +15,11 @@ export class ProductService {
   // Call Api To Get Products
   getProducts(paramsObj: ProductParams): Observable<IPagination<IProduct>> {
     let params = new HttpParams(); // send parameters with request
-    if (paramsObj.search) params = params.append('search', paramsObj.search);
-    if (paramsObj.pageSize)
-      params = params.append('pageSize', paramsObj.pageSize);
-    if (paramsObj.pageIndex)
-      params = params.append('pageIndex', paramsObj.pageIndex);
-    if (paramsObj.brandId) params = params.append('brandId', paramsObj.brandId);
-    if (paramsObj.categoryId)
-      params = params.append('categoryId', paramsObj.categoryId);
-
+    Object.entries(paramsObj).forEach(([key, value]) => {
+      if (value != undefined && value != null) {
+        params = params.append(key, value.toString());
+      }
+    });
     return this._http.get<IPagination<IProduct>>(`${BaseUrl}/api/Products`, {
       params,
     });

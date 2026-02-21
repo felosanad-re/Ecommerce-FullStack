@@ -31,8 +31,8 @@ namespace Felo.Talabat.Api.Helpers
                 .ForMember(d => d.ProductId, o => o.MapFrom(s => s.Product.ProductId))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderWithPictureResolver>());
 
-            CreateMap<UpdateProductRequest, Product>();
             CreateMap<AddProductRequest, Product>();
+            CreateMap<UpdateProductRequest, Product>();
 
             CreateMap<BrandRequest, Brand>();
 
