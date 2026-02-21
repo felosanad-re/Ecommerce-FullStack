@@ -1,4 +1,6 @@
-﻿namespace Talabat.Core.Specifications.SpecModel
+﻿using Talabat.Core.Entites.Products;
+
+namespace Talabat.Core.Specifications.SpecModel
 {
     public class ProductParams
     {
@@ -26,7 +28,6 @@
 
         public bool? IsDeleted { get; set; }
 
-        public bool IsInStock { get; set; } // Check if product have stock
-
+        public StockType? StockStatus { get; set; }
     }
 }

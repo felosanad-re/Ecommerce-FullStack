@@ -23,7 +23,7 @@ export class MenuComponent {
           {
             label: 'Dashboard',
             icon: 'pi pi-fw pi-home',
-            routerLink: ['/admin/dashbord'],
+            routerLink: ['/admin/dashboard'],
           },
         ],
       },

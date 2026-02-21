@@ -39,7 +39,7 @@ namespace Talabat.Repositaries.Data.Migrations.ShopMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands", (string)null);
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("Talabat.Core.Entites.Categories.Category", b =>
@@ -59,7 +59,7 @@ namespace Talabat.Repositaries.Data.Migrations.ShopMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Talabat.Core.Entites.Orders.DelivaryMethod", b =>
@@ -90,7 +90,7 @@ namespace Talabat.Repositaries.Data.Migrations.ShopMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DeliveryMethods", (string)null);
+                    b.ToTable("DeliveryMethods");
                 });
 
             modelBuilder.Entity("Talabat.Core.Entites.Orders.Order", b =>
@@ -128,7 +128,7 @@ namespace Talabat.Repositaries.Data.Migrations.ShopMigrations
 
                     b.HasIndex("DelivaryMethodId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Talabat.Core.Entites.Orders.OrderItems", b =>
@@ -155,7 +155,7 @@ namespace Talabat.Repositaries.Data.Migrations.ShopMigrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("Talabat.Core.Entites.Products.Product", b =>
@@ -199,7 +199,7 @@ namespace Talabat.Repositaries.Data.Migrations.ShopMigrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Talabat.Core.Entites.StockTransactions.StockTransaction", b =>
@@ -232,7 +232,7 @@ namespace Talabat.Repositaries.Data.Migrations.ShopMigrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("StockTransactions", (string)null);
+                    b.ToTable("StockTransactions");
                 });
 
             modelBuilder.Entity("Talabat.Core.Entites.Orders.Order", b =>
@@ -265,7 +265,7 @@ namespace Talabat.Repositaries.Data.Migrations.ShopMigrations
 
                             b1.HasKey("OrderId");
 
-                            b1.ToTable("Orders", (string)null);
+                            b1.ToTable("Orders");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
@@ -302,7 +302,7 @@ namespace Talabat.Repositaries.Data.Migrations.ShopMigrations
 
                             b1.HasKey("OrderItemsId");
 
-                            b1.ToTable("OrderItems", (string)null);
+                            b1.ToTable("OrderItems");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderItemsId");

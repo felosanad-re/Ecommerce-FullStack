@@ -1,3 +1,5 @@
+import { StockTypes } from '../stock-types';
+
 export interface IProduct {
   id: number;
   name: string;
@@ -9,4 +11,7 @@ export interface IProduct {
   categoryId: number;
   category: string;
   isAddedToCart: boolean; // make it optional
+  stock: number;
+  stockType: StockTypes;
+  isDeleted: boolean;
 }

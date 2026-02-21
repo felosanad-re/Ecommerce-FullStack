@@ -11,6 +11,8 @@ namespace Talabat.Repositaries.Data.Configurations
             builder.Property(P => P.Id).UseIdentityColumn(1, 1);
             builder.Property(P => P.Price).HasColumnType("decimal(18, 2)");
 
+            builder.Ignore(p => p.StockType);
+
             builder.HasOne(P => P.Brand)
                 .WithMany()
                 .HasForeignKey(P => P.BrandId)

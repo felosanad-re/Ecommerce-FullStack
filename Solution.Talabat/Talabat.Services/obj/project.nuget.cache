@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qkCPU6HIilw=",
+  "dgSpecHash": "l8NkzPEZUTk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Act\\source\\repos\\Solution.Talabat\\Talabat.Services\\Talabat.Services.csproj",
+  "projectFilePath": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Services\\Talabat.Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Act\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Act\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\9.0.12\\microsoft.aspnetcore.authentication.jwtbearer.9.0.12.nupkg.sha512",

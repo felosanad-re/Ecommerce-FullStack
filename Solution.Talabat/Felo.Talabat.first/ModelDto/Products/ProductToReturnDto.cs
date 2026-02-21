@@ -18,6 +18,7 @@ namespace Felo.Talabat.Api.ModelDto.Products
         public bool IsAddedToCart { get; set; }
 
         public int Stock { get; set; }
+        public string StockType { get; set; }
         public string IsDeleted { get; set; }
     }
 }

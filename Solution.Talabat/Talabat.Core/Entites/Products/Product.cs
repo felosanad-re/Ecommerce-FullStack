@@ -1,4 +1,5 @@
-﻿using Talabat.Core.Entites.Brands;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Talabat.Core.Entites.Brands;
 using Talabat.Core.Entites.Categories;
 using Talabat.Core.Entites.StockTransactions;
 
@@ -19,8 +20,33 @@ namespace Talabat.Core.Entites.Products
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
 
-        public int Stock { get; set; } // Product in Stock
-
         public ICollection<StockTransaction> StockTransactions { get; set; } = new HashSet<StockTransaction>();
+
+
+        private int stock;
+
+        public int Stock
+        {
+            get =>  stock;
+            set
+            {
+                stock = Math.Max(0, value);
+            }
+        }
+        private readonly int LowStockThreshold = 5;
+
+        public StockType StockType
+        {
+            get
+            {
+                if (Stock <= 0)
+                    return StockType.OUTOFSTOCK;
+
+                if (Stock <= LowStockThreshold)
+                    return StockType.LOWSTOCK;
+
+                return StockType.INSTOCK;
+            }
+        }
     }
 }

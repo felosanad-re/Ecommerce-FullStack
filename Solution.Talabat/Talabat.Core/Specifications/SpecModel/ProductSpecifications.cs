@@ -12,7 +12,7 @@ namespace Talabat.Core.Specifications.SpecModel
                     &&
                     (!productParams.CategoryId.HasValue || P.CategoryId == productParams.CategoryId.Value)
                     &&
-                    (!productParams.IsInStock || P.Stock > 0)
+                    (!productParams.StockStatus.HasValue || P.StockType == productParams.StockStatus.Value)
                     &&
                     (!productParams.IsDeleted.HasValue || P.IsDeleted == productParams.IsDeleted.Value)
                   )
@@ -30,6 +30,12 @@ namespace Talabat.Core.Specifications.SpecModel
                         break;
                     case "PriceDesc":
                         AddOrderByDesc(P => P.Price);
+                        break;
+                    case "stockAsc":
+                        AddOrderBy(P => P.Stock);
+                        break;
+                    case "stockDesc"
+:                       AddOrderByDesc(P => P.Stock);
                         break;
                     default:
                         AddOrderBy(P => P.Name);

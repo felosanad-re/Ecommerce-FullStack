@@ -1048,11 +1048,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Act\\source\\repos\\Solution.Talabat\\Talabat.Core\\Talabat.Core.csproj",
+      "projectUniqueName": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Core\\Talabat.Core.csproj",
       "projectName": "Talabat.Core",
-      "projectPath": "C:\\Users\\Act\\source\\repos\\Solution.Talabat\\Talabat.Core\\Talabat.Core.csproj",
+      "projectPath": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Core\\Talabat.Core.csproj",
       "packagesPath": "C:\\Users\\Act\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Act\\source\\repos\\Solution.Talabat\\Talabat.Core\\obj\\",
+      "outputPath": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

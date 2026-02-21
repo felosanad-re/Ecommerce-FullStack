@@ -428,8 +428,8 @@
         "IsRequired": false
       },
       {
-        "Name": "IsInStock",
-        "Type": "System.Boolean",
+        "Name": "StockStatus",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
@@ -705,8 +705,8 @@
         "IsRequired": false
       },
       {
-        "Name": "IsInStock",
-        "Type": "System.Boolean",
+        "Name": "StockStatus",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
