@@ -4,10 +4,9 @@ import { ProductParams } from '../../Interfaces/UserInterfaces/product-params';
 import { Observable } from 'rxjs';
 import { IPagination } from '../../Interfaces/UserInterfaces/ipagination';
 import { IProduct } from '../../Interfaces/UserInterfaces/iproduct';
-import { BaseUrl } from '../../BaseUrl';
 import { ICategory } from '../../Interfaces/UserInterfaces/icategory';
 import { IBrand } from '../../Interfaces/UserInterfaces/ibrand';
-import { IAddProductRequest } from '../../Interfaces/iadd-product-request';
+import { environment } from '../../../environment';
 
 @Injectable({
   providedIn: 'root',
@@ -24,14 +23,14 @@ export class AdminService {
       }
     });
     return this._http.get<IPagination<IProduct>>(
-      `${BaseUrl}/api/Admin/GetProducts`,
+      `${environment.apiUrl}/api/Admin/GetProducts`,
       { params },
     );
   }
 
   getProductDetails(productId: number): Observable<IProduct> {
     return this._http.get<IProduct>(
-      `${BaseUrl}/api/Admin/GetProduct/${productId}`,
+      `${environment.apiUrl}/api/Admin/GetProduct/${productId}`,
     );
   }
 
@@ -49,51 +48,77 @@ export class AdminService {
       formData.append('ProductPic', imageFile, imageFile.name);
     }
 
-    return this._http.post<any>(`${BaseUrl}/api/Admin/AddProduct`, formData);
+    return this._http.post<any>(
+      `${environment.apiUrl}/api/Admin/AddProduct`,
+      formData,
+    );
   }
 
   editProduct(data: IProduct): Observable<IProduct> {
-    return this._http.put<IProduct>(`${BaseUrl}/api/Admin/UpdateProduct`, data);
+    return this._http.put<IProduct>(
+      `${environment.apiUrl}/api/Admin/UpdateProduct`,
+      data,
+    );
   }
 
   deleteProduct(id: number): Observable<any> {
-    return this._http.delete(`${BaseUrl}/api/Admin/DeleteProduct`, {
+    return this._http.delete(`${environment.apiUrl}/api/Admin/DeleteProduct`, {
       params: { id },
     });
   }
 
   getCategory(): Observable<ICategory[]> {
-    return this._http.get<ICategory[]>(`${BaseUrl}/api/Admin/Categories`);
+    return this._http.get<ICategory[]>(
+      `${environment.apiUrl}/api/Admin/Categories`,
+    );
   }
 
   editCategory(data: ICategory): Observable<ICategory> {
-    return this._http.put<ICategory>(`${BaseUrl}/api/Admin/EditCategory`, data);
+    return this._http.put<ICategory>(
+      `${environment.apiUrl}/api/Admin/EditCategory`,
+      data,
+    );
   }
 
   addCategory(data: ICategory): Observable<ICategory> {
-    return this._http.post<ICategory>(`${BaseUrl}/api/Admin/AddCategory`, data);
+    return this._http.post<ICategory>(
+      `${environment.apiUrl}/api/Admin/AddCategory`,
+      data,
+    );
   }
 
   deleteCategory(id: number): Observable<string> {
-    return this._http.delete<string>(`${BaseUrl}/api/Admin/DeleteCategory`, {
-      params: { id },
-    });
+    return this._http.delete<string>(
+      `${environment.apiUrl}/api/Admin/DeleteCategory`,
+      {
+        params: { id },
+      },
+    );
   }
 
   getbrand(): Observable<IBrand[]> {
-    return this._http.get<IBrand[]>(`${BaseUrl}/api/Admin/Brands`);
+    return this._http.get<IBrand[]>(`${environment.apiUrl}/api/Admin/Brands`);
   }
 
   addBrand(data: IBrand): Observable<IBrand> {
-    return this._http.post<IBrand>(`${BaseUrl}/api/Admin/addBrand`, data);
+    return this._http.post<IBrand>(
+      `${environment.apiUrl}/api/Admin/addBrand`,
+      data,
+    );
   }
 
   editBrand(data: IBrand): Observable<IBrand> {
-    return this._http.put<IBrand>(`${BaseUrl}/api/Admin/EditBrand`, data);
+    return this._http.put<IBrand>(
+      `${environment.apiUrl}/api/Admin/EditBrand`,
+      data,
+    );
   }
   deleteBrand(id: number): Observable<string> {
-    return this._http.delete<string>(`${BaseUrl}/api/Admin/DeleteBrand`, {
-      params: { id },
-    });
+    return this._http.delete<string>(
+      `${environment.apiUrl}/api/Admin/DeleteBrand`,
+      {
+        params: { id },
+      },
+    );
   }
 }

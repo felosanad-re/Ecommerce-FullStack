@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BaseUrl } from '../../BaseUrl';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { IProduct } from '../../Interfaces/UserInterfaces/iproduct';
 import { IPagination } from '../../Interfaces/UserInterfaces/ipagination';
 import { ProductParams } from '../../Interfaces/UserInterfaces/product-params';
+import { environment } from '../../../environment';
 
 @Injectable({
   providedIn: 'root',
@@ -20,21 +20,24 @@ export class ProductService {
         params = params.append(key, value.toString());
       }
     });
-    return this._http.get<IPagination<IProduct>>(`${BaseUrl}/api/Products`, {
-      params,
-    });
+    return this._http.get<IPagination<IProduct>>(
+      `${environment.apiUrl}/api/Products`,
+      {
+        params,
+      },
+    );
   }
 
   // Get All Category
   getAllCategory(): Observable<any> {
-    return this._http.get(`${BaseUrl}/api/Products/Categories`);
+    return this._http.get(`${environment.apiUrl}/api/Products/Categories`);
   }
 
   getAllBrands(): Observable<any> {
-    return this._http.get(`${BaseUrl}/api/products/brands`);
+    return this._http.get(`${environment.apiUrl}/api/products/brands`);
   }
 
   getProductDetails(productId: number): Observable<any> {
-    return this._http.get(`${BaseUrl}/api/Products/${productId}`);
+    return this._http.get(`${environment.apiUrl}/api/Products/${productId}`);
   }
 }

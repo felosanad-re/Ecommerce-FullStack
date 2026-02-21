@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { IRegister } from '../../Interfaces/authInterfaces/iregister';
-import { BaseUrl } from '../../BaseUrl';
 import { ILogin } from '../../Interfaces/authInterfaces/ilogin';
 import { IForgetPassword } from '../../Interfaces/authInterfaces/iforget-password';
 import { ICheckCode } from '../../Interfaces/authInterfaces/icheck-code';
 import { IResetPassword } from '../../Interfaces/authInterfaces/ireset-password';
 import { ILoginToReturnDto } from '../../Interfaces/authInterfaces/ilogin-to-return-dto';
 import { jwtDecode } from 'jwt-decode';
+import { environment } from '../../../environment';
 
 // InterFaces
 interface DecodedToken {
@@ -45,13 +45,19 @@ export class AuthService {
 
   // Call Api To Register
   register(dataRegister: IRegister): Observable<any> {
-    return this._http.post(`${BaseUrl}/api/Account/Register`, dataRegister);
+    return this._http.post(
+      `${environment.apiUrl}/api/Account/Register`,
+      dataRegister,
+    );
   }
 
   // Call Api To Login
   login(dataLogin: ILogin): Observable<ILoginToReturnDto> {
     return this._http
-      .post<ILoginToReturnDto>(`${BaseUrl}/api/Account/Login`, dataLogin)
+      .post<ILoginToReturnDto>(
+        `${environment.apiUrl}/api/Account/Login`,
+        dataLogin,
+      )
       .pipe(
         map((res) => {
           if (res.token) this.handleSuccessfulLogin(res);
@@ -181,20 +187,23 @@ export class AuthService {
       ClientURL: `${window.location.origin}/forgetPassword`, // Get Current Url
     };
     return this._http.post(
-      `${BaseUrl}/api/Account/ForgetPassword`,
+      `${environment.apiUrl}/api/Account/ForgetPassword`,
       forgetPassDto,
     );
   }
 
   // Call Api To Check Otp
   checkOtp(dataCheckOtp: ICheckCode): Observable<any> {
-    return this._http.post(`${BaseUrl}/api/Account/CheckCode`, dataCheckOtp);
+    return this._http.post(
+      `${environment.apiUrl}/api/Account/CheckCode`,
+      dataCheckOtp,
+    );
   }
 
   // Reset Password
   resetPassword(dataResetPassword: IResetPassword): Observable<any> {
     return this._http.post(
-      `${BaseUrl}/api/Account/ResetPassword`,
+      `${environment.apiUrl}/api/Account/ResetPassword`,
       dataResetPassword,
     );
   }

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { BaseUrl } from '../../BaseUrl';
 import { ICart } from '../../Interfaces/UserInterfaces/icart';
+import { environment } from '../../../environment';
 
 @Injectable({
   providedIn: 'root',
@@ -15,18 +15,18 @@ export class CartService {
 
   // Call Api To Get Cart Count for user --> Cart array of string
   getCartCount(): Observable<ICart> {
-    return this._http.get<ICart>(`${BaseUrl}/api/Carts/CartDetails`);
+    return this._http.get<ICart>(`${environment.apiUrl}/api/Carts/CartDetails`);
   }
 
   addToCart(cartData: ICart): Observable<ICart> {
     return this._http.post<ICart>(
-      `${BaseUrl}/api/Carts/UpdateOrCreateCart`,
+      `${environment.apiUrl}/api/Carts/UpdateOrCreateCart`,
       cartData,
     );
   }
 
   getCartDetails(): Observable<ICart> {
-    return this._http.get<ICart>(`${BaseUrl}/api/Carts/CartDetails`);
+    return this._http.get<ICart>(`${environment.apiUrl}/api/Carts/CartDetails`);
     // .pipe(tap((cart) => this.cartState.next(cart)));
   }
 
@@ -35,6 +35,6 @@ export class CartService {
   }
 
   deleteCart(): Observable<any> {
-    return this._http.delete(`${BaseUrl}/api/Carts/DeleteCart`);
+    return this._http.delete(`${environment.apiUrl}/api/Carts/DeleteCart`);
   }
 }

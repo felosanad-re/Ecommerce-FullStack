@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Felo.Talabat.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+62a3f3e31a3573e1dd992355b086c64da641cd6b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b34ffe9fa25df6fc936ccb8e9d12d21067fdf735")]
 [assembly: System.Reflection.AssemblyProductAttribute("Felo.Talabat.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Felo.Talabat.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

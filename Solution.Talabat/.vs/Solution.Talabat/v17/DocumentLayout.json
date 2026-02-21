@@ -3,40 +3,16 @@
   "WorkspaceRootPath": "F:\\angular\\E-commerance\\Solution.Talabat\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|f:\\angular\\e-commerance\\solution.talabat\\felo.talabat.first\\controllers\\payments\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|solutionrelative:felo.talabat.first\\controllers\\payments\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|f:\\angular\\e-commerance\\solution.talabat\\felo.talabat.first\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|solutionrelative:felo.talabat.first\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|f:\\angular\\e-commerance\\solution.talabat\\felo.talabat.first\\controllers\\orders\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|solutionrelative:felo.talabat.first\\controllers\\orders\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|f:\\angular\\e-commerance\\solution.talabat\\felo.talabat.first\\felo.talabat.api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|solutionrelative:felo.talabat.first\\felo.talabat.api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|f:\\angular\\e-commerance\\solution.talabat\\felo.talabat.first\\controllers\\admin\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|solutionrelative:felo.talabat.first\\controllers\\admin\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A84DBC1-B104-49EF-AB79-07934F3459D8}|Talabat.Core\\Talabat.Core.csproj|f:\\angular\\e-commerance\\solution.talabat\\talabat.core\\requestmodels\\addproductrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A84DBC1-B104-49EF-AB79-07934F3459D8}|Talabat.Core\\Talabat.Core.csproj|solutionrelative:talabat.core\\requestmodels\\addproductrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA7DD6AD-751E-4141-AECA-9C212699C78F}|Talabat.Services\\Talabat.Services.csproj|f:\\angular\\e-commerance\\solution.talabat\\talabat.services\\productservices\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA7DD6AD-751E-4141-AECA-9C212699C78F}|Talabat.Services\\Talabat.Services.csproj|solutionrelative:talabat.services\\productservices\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA7DD6AD-751E-4141-AECA-9C212699C78F}|Talabat.Services\\Talabat.Services.csproj|f:\\angular\\e-commerance\\solution.talabat\\talabat.services\\attachmentservices\\attachmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA7DD6AD-751E-4141-AECA-9C212699C78F}|Talabat.Services\\Talabat.Services.csproj|solutionrelative:talabat.services\\attachmentservices\\attachmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|f:\\angular\\e-commerance\\solution.talabat\\felo.talabat.first\\extentions\\applicationextention.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|solutionrelative:felo.talabat.first\\extentions\\applicationextention.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|f:\\angular\\e-commerance\\solution.talabat\\felo.talabat.first\\helpers\\profilemapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|solutionrelative:felo.talabat.first\\helpers\\profilemapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A84DBC1-B104-49EF-AB79-07934F3459D8}|Talabat.Core\\Talabat.Core.csproj|f:\\angular\\e-commerance\\solution.talabat\\talabat.core\\services.contract\\attachmentservice\\iattachmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A84DBC1-B104-49EF-AB79-07934F3459D8}|Talabat.Core\\Talabat.Core.csproj|solutionrelative:talabat.core\\services.contract\\attachmentservice\\iattachmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|f:\\angular\\e-commerance\\solution.talabat\\felo.talabat.first\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|solutionrelative:felo.talabat.first\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -59,118 +35,39 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PaymentController.cs",
-              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Controllers\\Payments\\PaymentController.cs",
-              "RelativeDocumentMoniker": "Felo.Talabat.first\\Controllers\\Payments\\PaymentController.cs",
-              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Controllers\\Payments\\PaymentController.cs",
-              "RelativeToolTip": "Felo.Talabat.first\\Controllers\\Payments\\PaymentController.cs",
-              "ViewState": "AgIAAGEAAAAAAAAAAIAwwGQAAAB0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-21T20:15:01.32Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ApplicationExtention.cs",
-              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Extentions\\ApplicationExtention.cs",
-              "RelativeDocumentMoniker": "Felo.Talabat.first\\Extentions\\ApplicationExtention.cs",
-              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Extentions\\ApplicationExtention.cs",
-              "RelativeToolTip": "Felo.Talabat.first\\Extentions\\ApplicationExtention.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAAABYAAABWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-21T18:54:02.12Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ProfileMapping.cs",
-              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Helpers\\ProfileMapping.cs",
-              "RelativeDocumentMoniker": "Felo.Talabat.first\\Helpers\\ProfileMapping.cs",
-              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Helpers\\ProfileMapping.cs",
-              "RelativeToolTip": "Felo.Talabat.first\\Helpers\\ProfileMapping.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAQwCEAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-21T18:45:20.925Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AddProductRequest.cs",
-              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Core\\RequestModels\\AddProductRequest.cs",
-              "RelativeDocumentMoniker": "Talabat.Core\\RequestModels\\AddProductRequest.cs",
-              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Core\\RequestModels\\AddProductRequest.cs",
-              "RelativeToolTip": "Talabat.Core\\RequestModels\\AddProductRequest.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAQwAwAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-21T18:44:30.408Z",
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Felo.Talabat.first\\Properties\\launchSettings.json",
+              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Felo.Talabat.first\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-21T23:27:33.551Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "OrderController.cs",
-              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Controllers\\Orders\\OrderController.cs",
-              "RelativeDocumentMoniker": "Felo.Talabat.first\\Controllers\\Orders\\OrderController.cs",
-              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Controllers\\Orders\\OrderController.cs",
-              "RelativeToolTip": "Felo.Talabat.first\\Controllers\\Orders\\OrderController.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAApwBkAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-21T13:06:35.544Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AttachmentService.cs",
-              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Services\\AttachmentServices\\AttachmentService.cs",
-              "RelativeDocumentMoniker": "Talabat.Services\\AttachmentServices\\AttachmentService.cs",
-              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Services\\AttachmentServices\\AttachmentService.cs",
-              "RelativeToolTip": "Talabat.Services\\AttachmentServices\\AttachmentService.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAlwCMAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-21T18:14:03.379Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IAttachmentService.cs",
-              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Core\\Services.Contract\\AttachmentService\\IAttachmentService.cs",
-              "RelativeDocumentMoniker": "Talabat.Core\\Services.Contract\\AttachmentService\\IAttachmentService.cs",
-              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Core\\Services.Contract\\AttachmentService\\IAttachmentService.cs",
-              "RelativeToolTip": "Talabat.Core\\Services.Contract\\AttachmentService\\IAttachmentService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-21T18:11:03.874Z",
+              "Title": "Felo.Talabat.Api",
+              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Felo.Talabat.Api.csproj",
+              "RelativeDocumentMoniker": "Felo.Talabat.first\\Felo.Talabat.Api.csproj",
+              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Felo.Talabat.Api.csproj",
+              "RelativeToolTip": "Felo.Talabat.first\\Felo.Talabat.Api.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-02-21T23:27:26.944Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Controllers\\Admin\\AdminController.cs",
-              "RelativeDocumentMoniker": "Felo.Talabat.first\\Controllers\\Admin\\AdminController.cs",
-              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Controllers\\Admin\\AdminController.cs",
-              "RelativeToolTip": "Felo.Talabat.first\\Controllers\\Admin\\AdminController.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAlwEYAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-19T00:02:04.777Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ProductService.cs",
-              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Services\\ProductServices\\ProductService.cs",
-              "RelativeDocumentMoniker": "Talabat.Services\\ProductServices\\ProductService.cs",
-              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Services\\ProductServices\\ProductService.cs",
-              "RelativeToolTip": "Talabat.Services\\ProductServices\\ProductService.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAApwDEAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-18T23:41:24.698Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\appsettings.json",
+              "RelativeDocumentMoniker": "Felo.Talabat.first\\appsettings.json",
+              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\appsettings.json",
+              "RelativeToolTip": "Felo.Talabat.first\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-21T21:06:53.541Z",
               "EditorCaption": ""
             }
           ]

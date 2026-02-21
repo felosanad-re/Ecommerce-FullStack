@@ -1,4 +1,5 @@
 wwwroot\files\products\002e54f9-4988-430b-866c-4c30224d8611.png
+wwwroot\files\products\79acc023-d1b2-4514-ba46-468fdc840e78.png
 wwwroot\files\products\f62301de-b1ed-4a36-8fab-370a707ad70f.png
 wwwroot\Images\airpodspro2.png
 wwwroot\Images\blacksharkv2.png

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { BaseUrl } from '../../BaseUrl';
+import { environment } from '../../../environment';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,10 @@ export class PaymentService {
       const res = await this._http
         .post<{
           checkoutUrl: string; // will reseve the checkoutUrl from api
-        }>(`${BaseUrl}/api/Payment/createCheckoutSession/${orderId}`, {})
+        }>(
+          `${environment.apiUrl}/api/Payment/createCheckoutSession/${orderId}`,
+          {},
+        )
         .toPromise();
 
       if (!res?.checkoutUrl) {
