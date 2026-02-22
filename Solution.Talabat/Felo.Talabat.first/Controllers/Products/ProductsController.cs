@@ -32,24 +32,32 @@ namespace Felo.Talabat.Api.Controllers.Products
         [HttpGet]
         public async Task<ActionResult<Pagination<IReadOnlyList<ProductToReturnDto>>>> Get([FromQuery] ProductParams productParams)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // To Get Cart
-            var cartId = $"Cart:{userId}";
-            var products = await _productService.GetProductsAsync(productParams);
-            var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
-
-            // Get Cart To Check If User Add This Product To His Carts
-            var cart = await _cartRepo.GetCacheAsync(cartId);
-            if(cart?.Items.Count > 0)
+            try
             {
-                var productInCart = cart.Items.Select(i => i.Id).ToHashSet();
-                foreach (var item in data)
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // To Get Cart
+                var cartId = $"Cart:{userId}";
+                var products = await _productService.GetProductsAsync(productParams);
+                var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
+
+                // Get Cart To Check If User Add This Product To His Carts
+                var cart = await _cartRepo.GetCacheAsync(cartId);
+                if (cart?.Items.Count > 0)
                 {
-                    item.IsAddedToCart = productInCart.Contains(item.Id);
+                    var productInCart = cart.Items.Select(i => i.Id).ToHashSet();
+                    foreach (var item in data)
+                    {
+                        item.IsAddedToCart = productInCart.Contains(item.Id);
+                    }
                 }
+
+                var count = await _productService.GetProductCountAsync(productParams);
+                return Ok(new Pagination<ProductToReturnDto>(productParams.PageSize, productParams.PageIndex, data, count));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
 
-            var count = await _productService.GetProductCountAsync(productParams);
-            return Ok(new Pagination<ProductToReturnDto>(productParams.PageSize, productParams.PageIndex, data, count));
         }
 
         // GET api/Products/5

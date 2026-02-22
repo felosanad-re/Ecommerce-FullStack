@@ -40,9 +40,16 @@ namespace Talabat.Repositaries.Data
 
         public async Task<TRedies?> GetCacheAsync(string key)
         {
-            var Data = await _database.StringGetAsync(key);
-            if(Data.IsNullOrEmpty) return null;
-            return JsonSerializer.Deserialize<TRedies>(Data!); // Convert from text to Json
+            try
+            {
+                var data = await _database.StringGetAsync(key);
+                if (data.IsNullOrEmpty) return null;
+                return JsonSerializer.Deserialize<TRedies>(data!);
+            }
+            catch
+            {
+                return null; // لو Redis فشل → كمل
+            }
         }
 
         public async Task RemoveCacheAsync(string Key)

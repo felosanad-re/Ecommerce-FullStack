@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAoZOK1M9JbkmEAFMn1firpwAAAAACAAAAAAAQZgAAAAEAACAAAAASI/aIzQik3UPyPKk2mHsftErlo119/FdciLNFZ4FS+QAAAAAOgAAAAAIAACAAAAAAjklcxxSGqiR2CDzemHiQ2EP5N+ufwJksmrxRMDu/dSAAAADa/xtl/wLzvlvR55oJhaDDH8/YrDyDmColP0b95bXzWEAAAACMxjeac2uFxaUhOGB2AVPAbMdJEfI4G1i/fIxp9Clt8w1jWYhfGrg17XwsiBAkndznzusilOho6mdwM8Jdy7yM</EncryptedPassword>
+    <History>True|2026-02-22T19:58:30.2774038Z||;True|2026-02-22T21:48:47.5583122+02:00||;True|2026-02-22T20:41:10.8450426+02:00||;True|2026-02-22T20:36:05.2168468+02:00||;True|2026-02-22T20:21:11.2486438+02:00||;True|2026-02-22T20:15:35.8808615+02:00||;True|2026-02-22T20:09:06.1357998+02:00||;True|2026-02-22T20:02:47.6264720+02:00||;True|2026-02-22T19:48:15.6949410+02:00||;True|2026-02-22T19:01:18.7415449+02:00||;True|2026-02-22T18:11:21.4409482+02:00||;True|2026-02-22T18:00:15.9553546+02:00||;True|2026-02-22T17:58:29.2126559+02:00||;True|2026-02-22T17:54:26.8441278+02:00||;True|2026-02-22T17:47:45.0718019+02:00||;True|2026-02-22T17:40:02.1832436+02:00||;True|2026-02-22T17:37:32.5607786+02:00||;True|2026-02-22T17:31:19.6542760+02:00||;True|2026-02-22T17:26:55.5667446+02:00||;True|2026-02-22T17:10:05.7084395+02:00||;True|2026-02-22T17:04:15.4539688+02:00||;True|2026-02-22T16:57:55.3028691+02:00||;True|2026-02-22T16:55:31.8289891+02:00||;True|2026-02-22T16:53:28.5104224+02:00||;True|2026-02-22T16:47:10.8652008+02:00||;True|2026-02-22T16:39:48.6596429+02:00||;True|2026-02-22T16:33:58.4058853+02:00||;True|2026-02-22T16:23:29.7905388+02:00||;True|2026-02-22T16:11:17.5415031+02:00||;True|2026-02-22T16:04:30.1424135+02:00||;True|2026-02-22T16:01:36.3535882+02:00||;True|2026-02-22T15:49:44.1672795+02:00||;True|2026-02-22T15:44:38.3205013+02:00||;True|2026-02-22T15:15:35.0573694+02:00||;True|2026-02-22T15:02:52.2108182+02:00||;True|2026-02-22T14:36:27.9244005+02:00||;True|2026-02-22T14:27:21.6479180+02:00||;True|2026-02-22T14:12:42.8538938+02:00||;True|2026-02-22T02:56:07.5089295+02:00||;True|2026-02-22T02:47:08.9430425+02:00||;True|2026-02-22T02:40:29.0864128+02:00||;True|2026-02-22T02:35:26.4847571+02:00||;True|2026-02-22T02:27:41.5394698+02:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=db41668.public.databaseasp.net%3b Database=db41668%3b User Id=db41668%3b Password=9Rg%40p8%25F6Bm+%3b Encrypt=True%3b TrustServerCertificate=True%3b</Value>
+    </DestinationConnectionStrings>
+    <DestinationConnectionStrings Include="IdentityConnection">
+      <Value>Server=db41669.public.databaseasp.net%3b Database=db41669%3b User Id=db41669%3b Password=G+b4_a2C3Pk%3f%3b Encrypt=True%3b TrustServerCertificate=True%3b MultipleActiveResultSets=True%3b</Value>
+    </DestinationConnectionStrings>
+    <DestinationConnectionStrings Include="Redis">
+      <Value>rediss://default:Ab78AAIncDI5YjdjMzNlYTBhOTk0NTM4YjNlMGFiMDg0YWIwZDA4NXAyNDg4OTI%40cheerful-slug-48892.upstash.io:6379</Value>
+    </DestinationConnectionStrings>
+    <DestinationConnectionStrings Include="StripeSitting:SecretKey">
+      <Value>sk_test_51SyxIDAuofGdgrd8aPTZjkeoRFd8LBuDK5lwC9PfuurFnfWWuZeckBHgi13lY8ks5oV3tbm4lnP7SFeLIVN6s2aC005iE8dRpg</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

@@ -498,6 +498,18 @@
         }
       }
     },
+    "/api/Carts/test-redis": {
+      "get": {
+        "tags": [
+          "Carts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Admin/GetProducts": {
       "get": {
         "tags": [

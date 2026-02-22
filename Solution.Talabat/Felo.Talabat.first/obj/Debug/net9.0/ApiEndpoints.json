@@ -538,6 +538,16 @@
   },
   {
     "ContainingType": "Felo.Talabat.Api.Controllers.Carts.CartsController",
+    "Method": "TestRedis",
+    "RelativePath": "api/Carts/test-redis",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Carts.CartsController",
     "Method": "UpdateOrCreateCart",
     "RelativePath": "api/Carts/UpdateOrCreateCart",
     "HttpMethod": "POST",

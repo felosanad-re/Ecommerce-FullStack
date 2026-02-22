@@ -1,4 +1,4 @@
-using Felo.Talabat.Api.Extentions;
+﻿using Felo.Talabat.Api.Extentions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
@@ -25,10 +25,12 @@ namespace Felo.Talabat.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            
+
             // Add secret file
             builder.Configuration
-            .AddJsonFile("C:\\Users\\Act\\AppData\\Roaming\\Microsoft\\UserSecrets\\ac7b37e3-e66e-42fc-b593-ce3d528b9b78\\secrets.json", optional: false, reloadOnChange: true);
+                .AddJsonFile("C:\\Users\\Act\\AppData\\Roaming\\Microsoft\\UserSecrets\\ac7b37e3-e66e-42fc-b593-ce3d528b9b78\\secrets.json",
+                             optional: true,   // خليه optional علشان ميفشلش لو مش موجود
+                             reloadOnChange: builder.Environment.IsDevelopment());
 
             // Add ShopDbContext
             builder.Services.AddDbContext<ShopDbContext>(optionsAction =>
@@ -43,10 +45,14 @@ namespace Felo.Talabat.Api
             });
 
             // Add Redis Connection
-            builder.Services.AddSingleton<IConnectionMultiplexer>(options =>
+
+            builder.Services.AddStackExchangeRedisCache(options =>
             {
-                var connection = builder.Configuration.GetConnectionString("Redis");
-                return ConnectionMultiplexer.Connect(connection);
+                var connStr = builder.Configuration.GetConnectionString("Redis");
+
+                options.Configuration = connStr + ",abortConnect=false,connectTimeout=20000,syncTimeout=20000,connectRetry=10,keepAlive=60";
+
+                options.InstanceName = "FastShop_";  // مهم عشان ما يتداخلش مع apps تانية
             });
 
             // Add Identity Services
@@ -68,14 +74,19 @@ namespace Felo.Talabat.Api
             {
                 action.AddPolicy("AllowAngular", options =>
                 {
-                    options.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+                    options.WithOrigins(
+                        "http://localhost:4200",
+                        "https://localhost:4200",
+                        "http://shop-web.runasp.net", // deploy in monester
+                        "https://shop-web.runasp.net" // deploy in monester
+                    )
+                     .AllowAnyHeader().AllowAnyMethod().AllowCredentials(); ;
                 });
             });
             #endregion
             StripeConfiguration.ApiKey = builder.Configuration["StripeSitting:SecretKey"];
             var app = builder.Build();
 
-            app.UseCors("AllowAngular");
             #region Update DataBase And Applyed Migrations
             // Add Scope
             var scope = app.Services.CreateScope();
@@ -105,10 +116,37 @@ namespace Felo.Talabat.Api
                 _logger.LogError(ex, "Error in database");
             }
             #endregion
-
+            //builder.Logging.AddFile("logs/app-{Date}.log");
             // Configure the HTTP request pipeline.
             #region Middlwears 
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();   // ده بيظهر stack trace كامل
+            }
+            else
+            {
+                // حتى في Production، خلينا نشوف الخطأ مؤقتاً
+                app.UseExceptionHandler(errorApp =>
+                {
+                    errorApp.Run(async context =>
+                    {
+                        context.Response.StatusCode = 500;
+                        context.Response.ContentType = "text/plain";
+                        var error = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>();
+                        if (error != null)
+                        {
+                            await context.Response.WriteAsync("Error: " + error.Error.Message + "\n" + error.Error.StackTrace);
+                        }
+                        else
+                        {
+                            await context.Response.WriteAsync("Unknown server error");
+                        }
+                    });
+                });
+            }
+            app.UseRouting();
 
+            app.UseCors("AllowAngular");
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
