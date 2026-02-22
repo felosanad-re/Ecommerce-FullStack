@@ -39,3 +39,9 @@ pids
 # OS
 .DS_Store
 Thumbs.db
+
+# .NET Build / Publish folders
+bin/
+obj/
+*.user
+Properties/PublishProfiles/*.user
