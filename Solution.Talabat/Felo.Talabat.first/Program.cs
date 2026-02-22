@@ -50,7 +50,7 @@ namespace Felo.Talabat.Api
             {
                 var connStr = builder.Configuration.GetConnectionString("Redis");
 
-                options.Configuration = connStr + ",abortConnect=false,connectTimeout=20000,syncTimeout=20000,connectRetry=10,keepAlive=60";
+                options.Configuration = connStr;
 
                 options.InstanceName = "FastShop_";  // مهم عشان ما يتداخلش مع apps تانية
             });
