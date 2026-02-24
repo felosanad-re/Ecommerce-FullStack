@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
 using Felo.Talabat.Api.ModelDto.Products;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Talabat.Core;
 using Talabat.Core.Entites.Brands;
 using Talabat.Core.Entites.Categories;
+using Talabat.Core.Entites.Identity;
 using Talabat.Core.RequestModels;
 using Talabat.Core.RequestModels.BrandRequests;
 using Talabat.Core.RequestModels.CategoriesRequests;
 using Talabat.Core.Services.Contract.AttachmentService;
+using Talabat.Core.Services.Contract.OrderService;
 using Talabat.Core.Services.Contract.ProductServices;
 using Talabat.Core.Specifications.SpecModel;
 
@@ -24,8 +27,16 @@ namespace Felo.Talabat.Api.Controllers.Admin
         private readonly IBrandService _brandService;
         private readonly ICategoryService _categoryService;
         private readonly IAttachmentService _attachmentService;
+
         private readonly IMapper _mapper;
-        public AdminController(IProductService productService, IMapper mapper, IBrandService brandService, ICategoryService categoryService, IAttachmentService attachmentService)
+        public AdminController(
+            IProductService productService,
+            IMapper mapper,
+            IBrandService brandService,
+            ICategoryService categoryService,
+            IAttachmentService attachmentService,
+            IOrderServices orderService,
+            UserManager<ApplicationUser> userManager)
         {
             _productService = productService;
             _brandService = brandService;

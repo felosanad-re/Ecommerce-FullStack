@@ -14,13 +14,13 @@ namespace Felo.Talabat.Api.Controllers.Orders
     [Authorize]
     public class OrderController(
         IOrderServices orderService,
-        IMapper mapper,
-        IConfiguration configuration) : BaseController
+        IMapper mapper
+        ) : BaseController
     {
         private readonly IOrderServices _orderService = orderService;
         private readonly IMapper _mapper = mapper;
-        #region Create Order
 
+        #region Create Order
         [HttpPost("CreateOrder")] // Post: /api/Order/CreateOrder
         public async Task<ActionResult<OrderToReturnDto>> CreateOrder([FromBody] OrderRequest orderRequest)
         {

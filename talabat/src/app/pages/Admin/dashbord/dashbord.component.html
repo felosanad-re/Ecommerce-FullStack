@@ -4,7 +4,9 @@
       <div class="flex justify-content-between mb-3">
         <div>
           <span class="block text-500 font-medium mb-3">Orders</span>
-          <div class="text-900 font-medium text-xl">152</div>
+          <div class="text-900 font-medium text-xl">
+            {{ getOrderCount }}
+          </div>
         </div>
         <div
           class="flex align-items-center justify-content-center bg-blue-100 border-round"
@@ -40,7 +42,9 @@
       <div class="flex justify-content-between mb-3">
         <div>
           <span class="block text-500 font-medium mb-3">Customers</span>
-          <div class="text-900 font-medium text-xl">28441</div>
+          <div class="text-900 font-medium text-xl">
+            {{ getAccountCount }}
+          </div>
         </div>
         <div
           class="flex align-items-center justify-content-center bg-cyan-100 border-round"
@@ -49,7 +53,7 @@
           <i class="pi pi-inbox text-cyan-500 text-xl"></i>
         </div>
       </div>
-      <span class="text-green-500 font-medium">520 </span>
+      <span class="text-green-500 font-medium"> 520 </span>
       <span class="text-500">newly registered</span>
     </div>
   </div>

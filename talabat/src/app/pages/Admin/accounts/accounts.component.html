@@ -1,0 +1,87 @@
+<div class="card">
+  <p-table [value]="users" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>User Name</th>
+        <th>Address</th>
+        <th>Lock Up</th>
+        <th>Active</th>
+        <th>Delete</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>
+          {{ user.email }}
+        </td>
+        <td>
+          {{ user.firstName }}
+        </td>
+        <td>
+          {{ user.lastName }}
+        </td>
+        <td>
+          {{ user.userName }}
+        </td>
+        <td>
+          {{ user.address }}
+        </td>
+        <td>
+          <div class="card flex justify-content-center">
+            <p-button
+              label="Lock Up"
+              severity="warning"
+              [outlined]="true"
+              (onClick)="openLockDialog(user.id)"
+            />
+          </div>
+        </td>
+        <td>
+          <div class="card flex justify-content-center">
+            <p-button
+              (onClick)="activeUser(user.id)"
+              label="Active"
+              severity="success"
+              [outlined]="true"
+            />
+          </div>
+        </td>
+        <td>
+          <div class="card flex justify-content-center">
+            <p-button
+              (onClick)="deleteUser(user.id)"
+              label="Delete"
+              severity="danger"
+              [outlined]="true"
+            />
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog
+    header="Lock User"
+    [(visible)]="lockDialog"
+    [modal]="true"
+    [style]="{ width: '350px' }"
+  >
+    <div class="field">
+      <label>Number of days</label>
+      <p-inputNumber [(ngModel)]="lockDays" name="lockDays"></p-inputNumber>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <p-button
+        label="Cancel"
+        (onClick)="lockDialog = false"
+        severity="secondary"
+      />
+      <p-button label="Confirm" (onClick)="confirmLock()" severity="danger" />
+    </ng-template>
+  </p-dialog>
+  <p-confirmDialog />
+</div>

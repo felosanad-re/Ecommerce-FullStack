@@ -30,7 +30,7 @@ export class UserNavComponent {
     this.items = [
       {
         label: 'Home',
-        icon: 'pi pi-user-plus',
+        icon: 'pi pi-home',
         path: 'home',
       },
       {

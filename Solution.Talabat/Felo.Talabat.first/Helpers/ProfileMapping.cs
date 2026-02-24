@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Felo.Talabat.Api.Helpers.Resolvers;
+using Felo.Talabat.Api.ModelDto.AdminModels;
 using Felo.Talabat.Api.ModelDto.OrderRequests;
 using Felo.Talabat.Api.ModelDto.Products;
 using Talabat.Core.Entites.Brands;
 using Talabat.Core.Entites.Categories;
+using Talabat.Core.Entites.Identity;
 using Talabat.Core.Entites.Orders;
 using Talabat.Core.Entites.Products;
 using Talabat.Core.RequestModels;
@@ -37,6 +39,8 @@ namespace Felo.Talabat.Api.Helpers
             CreateMap<BrandRequest, Brand>();
 
             CreateMap<AddCategoryRequest, Category>();
+
+            CreateMap<ApplicationUser, ApplicationUserToReturn>();
         }
     }
 }

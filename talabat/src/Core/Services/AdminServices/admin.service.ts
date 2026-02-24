@@ -7,6 +7,8 @@ import { IProduct } from '../../Interfaces/UserInterfaces/iproduct';
 import { ICategory } from '../../Interfaces/UserInterfaces/icategory';
 import { IBrand } from '../../Interfaces/UserInterfaces/ibrand';
 import { environment } from '../../../environment';
+import { Iorder } from '../../Interfaces/UserInterfaces/iorder';
+import { ApplicationUser } from '../../Interfaces/application-user';
 
 @Injectable({
   providedIn: 'root',
@@ -119,6 +121,41 @@ export class AdminService {
       {
         params: { id },
       },
+    );
+  }
+
+  getAccounts(): Observable<ApplicationUser[]> {
+    return this._http.get<ApplicationUser[]>(
+      `${environment.apiUrl}/api/AdminUser/Accounts`,
+    );
+  }
+
+  deleteAccount(id: string): Observable<any> {
+    return this._http.delete<any>(
+      `${environment.apiUrl}/api/AdminUser/DeleteUser`,
+      {
+        params: { id },
+      },
+    );
+  }
+
+  lockAccount(id: string, days: number): Observable<any> {
+    return this._http.post<any>(
+      `${environment.apiUrl}/api/AdminUser/LockAccount?id=${id}&days=${days}`,
+      {},
+    );
+  }
+
+  activeAccount(id: string): Observable<any> {
+    return this._http.post<any>(
+      `${environment.apiUrl}/api/AdminUser/ActiveAccount?id=${id}`,
+      {},
+    );
+  }
+
+  getOrders(): Observable<Iorder[]> {
+    return this._http.get<Iorder[]>(
+      `${environment.apiUrl}/api/AdminOrder/Orders`,
     );
   }
 }

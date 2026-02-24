@@ -57,6 +57,7 @@ export class ShowListComponent<T extends { id: number | string }> {
   }
 
   deleteBrand(item: T) {
+    this.dataDialog = true;
     this.delete.emit(item);
   }
 

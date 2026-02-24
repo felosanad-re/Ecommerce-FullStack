@@ -23,6 +23,14 @@ namespace Talabat.Services.OrderServices
         private readonly IOrderBuilder _orderBuilder = orderBuilder;
         #endregion
 
+        public async Task<IReadOnlyList<Order>> GetOrdersAsync()
+        {
+            var spec = new OrderWithItemsSpec();
+            var order = await _unitOfWork.RepositaryAsync<Order>().GetAllAsyncSpec(spec);
+
+            return order;
+        }
+
         #region Create Order Service
         public async Task<Order?> CreateOrder(string cartId, string buyerEmail, AddressShiper addressShiper, int delivary)
         {
@@ -123,5 +131,6 @@ namespace Talabat.Services.OrderServices
             _unitOfWork.RepositaryAsync<Order>().delete(order!);
             await _unitOfWork.CompleteAsync();
         }
+
     }
 }

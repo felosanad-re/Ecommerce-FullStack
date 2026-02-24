@@ -199,6 +199,20 @@ export const routes: Routes = [
             (c) => c.BrandsComponent,
           ),
       },
+      {
+        path: 'Orders',
+        loadComponent: () =>
+          import('./pages/Admin/orders/orders.component').then(
+            (c) => c.OrdersComponent,
+          ),
+      },
+      {
+        path: 'Accounts',
+        loadComponent: () =>
+          import('./pages/Admin/accounts/accounts.component').then(
+            (c) => c.AccountsComponent,
+          ),
+      },
     ],
   },
 ];

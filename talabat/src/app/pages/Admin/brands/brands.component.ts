@@ -33,12 +33,13 @@ import { ConfirmationService } from 'primeng/api';
 })
 export class BrandsComponent {
   brands!: IBrand[];
-  brand!: IBrand;
   List = 'Brands';
+
+  submitted: boolean = false;
+  brandDialog: boolean = false;
 
   constructor(
     private _adminService: AdminService,
-    private _notifications: NotificationsService,
     private confirmationService: ConfirmationService,
     private _notificationService: NotificationsService,
   ) {}
@@ -46,7 +47,10 @@ export class BrandsComponent {
   ngOnInit() {
     this.getBrands();
   }
-
+  openNew() {
+    this.submitted = false;
+    this.brandDialog = true;
+  }
   getBrands(): void {
     this._adminService.getbrand().subscribe({
       next: (res: IBrand[]) => {
@@ -59,7 +63,7 @@ export class BrandsComponent {
   saveBrand(data: IBrand): void {
     this._adminService.editBrand(data).subscribe({
       next: (res: IBrand) => {
-        this._notifications.showSuccedded(
+        this._notificationService.showSuccedded(
           'Update',
           'Brand Updated Successfully',
         );
@@ -70,37 +74,32 @@ export class BrandsComponent {
   addBrand(data: IBrand): void {
     this._adminService.addBrand(data).subscribe({
       next: (res: IBrand) => {
-        this._notifications.showSuccedded('Add', 'Brand Added Successfully');
+        this._notificationService.showSuccedded(
+          'Add',
+          'Brand Added Successfully',
+        );
       },
     });
   }
 
   deleteBrand(data: IBrand): void {
-    this._adminService.deleteBrand(data.id).subscribe({
-      next: (res: string) => {
-        this._notifications.showSuccedded(
-          'Delete',
-          'Brand Deleted Successfully',
-        );
-      },
-    });
     this.confirmationService.confirm({
       message: `Are you sure you want to delete <b>${data.name}</b>?`,
-      header: 'Confirm Delete Product',
+      header: 'Confirm Delete Brand',
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Yes',
       rejectLabel: 'Cancel',
       accept: () => {
-        this._adminService.deleteProduct(data.id).subscribe({
+        this._adminService.deleteBrand(data.id).subscribe({
           next: () => {
             this._notificationService.showSuccedded(
-              'DeleteProduct',
-              'Product Deleted Succsesfully',
+              'Delete Brand',
+              'Brand Deleted Succsesfully',
             );
           },
           error: (err) => {
             this._notificationService.showError(
-              'DeleteProduct',
+              'Delete Brand',
               'There Is A Probelm',
             );
             console.error(err);

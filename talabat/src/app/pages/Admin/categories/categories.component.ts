@@ -3,6 +3,7 @@ import { AdminService } from '../../../../Core/Services/AdminServices/admin.serv
 import { ICategory } from '../../../../Core/Interfaces/UserInterfaces/icategory';
 import { ShowListComponent } from '../../../../Core/Shared/Admin/show-list/show-list.component';
 import { NotificationsService } from '../../../../Core/Services/notifications.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-categories',
@@ -10,11 +11,13 @@ import { NotificationsService } from '../../../../Core/Services/notifications.se
   imports: [ShowListComponent],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss',
+  providers: [ConfirmationService],
 })
 export class CategoriesComponent {
   constructor(
     private _adminService: AdminService,
-    private _notifications: NotificationsService,
+    private confirmationService: ConfirmationService,
+    private _notificationService: NotificationsService,
   ) {}
 
   list = 'Categories';
@@ -31,13 +34,16 @@ export class CategoriesComponent {
 
   addCategory(data: ICategory): void {
     this._adminService.addCategory(data).subscribe((next) => {
-      this._notifications.showSuccedded('Add', 'Category Added Successfully');
+      this._notificationService.showSuccedded(
+        'Add',
+        'Category Added Successfully',
+      );
     });
   }
 
   editCategory(data: ICategory): void {
     this._adminService.editCategory(data).subscribe((next) => {
-      this._notifications.showSuccedded(
+      this._notificationService.showSuccedded(
         'Update',
         'Category Updated Successfully',
       );
@@ -45,11 +51,29 @@ export class CategoriesComponent {
   }
 
   deleteCategory(data: ICategory): void {
-    this._adminService.deleteCategory(data.id).subscribe((next) => {
-      this._notifications.showSuccedded(
-        'Delete',
-        'Category Deleted Successfully',
-      );
+    this.confirmationService.confirm({
+      message: `Are you sure you want to delete <b>${data.name}</b>?`,
+      header: 'Confirm Delete Category',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Yes',
+      rejectLabel: 'Cancel',
+      accept: () => {
+        this._adminService.deleteCategory(data.id).subscribe({
+          next: () => {
+            this._notificationService.showSuccedded(
+              'Delete Category',
+              'Category Deleted Succsesfully',
+            );
+          },
+          error: (err) => {
+            this._notificationService.showError(
+              'Delete Category',
+              'There Is A Probelm',
+            );
+            console.error(err);
+          },
+        });
+      },
     });
   }
 }

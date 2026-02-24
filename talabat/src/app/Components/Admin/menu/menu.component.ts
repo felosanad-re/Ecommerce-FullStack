@@ -55,6 +55,16 @@ export class MenuComponent {
                 icon: 'pi pi-list',
                 routerLink: ['Brands'],
               },
+              {
+                label: 'Orders',
+                icon: 'pi pi-list',
+                routerLink: ['Orders'],
+              },
+              {
+                label: 'Accounts',
+                icon: 'pi pi-user-plus',
+                routerLink: ['Accounts'],
+              },
             ],
           },
         ],

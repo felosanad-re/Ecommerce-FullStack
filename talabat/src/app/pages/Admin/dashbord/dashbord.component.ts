@@ -1,3 +1,4 @@
+import { AdminService } from './../../../../Core/Services/AdminServices/admin.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,6 +15,9 @@ import { Subscription, debounceTime } from 'rxjs';
 import { IProduct } from '../../../../Core/Interfaces/UserInterfaces/iproduct';
 import { ProductService } from '../../../../Core/Services/UserServices/product.service';
 import { LayoutService } from '../../../../Core/Services/app.layout.service';
+import { Iorder } from '../../../../Core/Interfaces/UserInterfaces/iorder';
+import { Application } from 'express';
+import { ApplicationUser } from '../../../../Core/Interfaces/application-user';
 @Component({
   selector: 'app-dashbord',
   standalone: true,
@@ -43,9 +47,13 @@ export class DashbordComponent implements OnInit, OnDestroy {
 
   productParams = new ProductParams();
 
+  getOrderCount!: number;
+
+  getAccountCount!: number;
   constructor(
     private _productService: ProductService,
     public layoutService: LayoutService,
+    private _adminService: AdminService,
   ) {
     this.subscription = this.layoutService.configUpdate$
       .pipe(debounceTime(25))
@@ -69,6 +77,18 @@ export class DashbordComponent implements OnInit, OnDestroy {
       { label: 'Add New', icon: 'pi pi-fw pi-plus' },
       { label: 'Remove', icon: 'pi pi-fw pi-minus' },
     ];
+
+    this._adminService.getOrders().subscribe({
+      next: (res: Iorder[]) => {
+        this.getOrderCount = res.length;
+      },
+    });
+
+    this._adminService.getAccounts().subscribe({
+      next: (res: ApplicationUser[]) => {
+        this.getAccountCount = res.length;
+      },
+    });
   }
 
   initChart() {

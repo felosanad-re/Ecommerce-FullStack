@@ -1,9 +1,8 @@
 <div class="card">
   <p-menubar [model]="items">
     <ng-template pTemplate="start">
-      <figure class="m-0">
-        <img class="w-2rem" src="./assets/Images/Logo.svg" alt="Logo" />
-      </figure>
+      <img class="w-2rem" src="./assets/Images/Logo.svg" alt="Logo" />
+      <span class="text-center">Ecommerance</span>
     </ng-template>
 
     <ng-template pTemplate="item" let-item let-root="root">
@@ -39,12 +38,12 @@
               <span>LogOut</span>
               <span class="pi pi-sign-out"></span>
             </a>
-            <a
+            <!-- <a
               class="py-2 px-3 font-bold capitalize profile border-round-2xl flex align-items-center gap-2"
             >
               <span>profile</span>
               <span class="pi pi-user"></span>
-            </a>
+            </a> -->
           }
         </a>
       </div>

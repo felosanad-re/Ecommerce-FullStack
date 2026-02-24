@@ -2,7 +2,7 @@ import { Component, Input, input } from '@angular/core';
 import { AdminService } from '../../../../Core/Services/AdminServices/admin.service';
 import { IProduct } from '../../../../Core/Interfaces/UserInterfaces/iproduct';
 import { ProductParams } from '../../../../Core/Interfaces/UserInterfaces/product-params';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { RippleModule } from 'primeng/ripple';
@@ -50,7 +50,7 @@ import { Subject } from 'rxjs';
   ],
   templateUrl: './taple.component.html',
   styleUrl: './taple.component.scss',
-  providers: [MessageService, ConfirmationService],
+  providers: [ConfirmationService],
   styles: [
     `
       :host ::ng-deep .p-dialog .product-image {

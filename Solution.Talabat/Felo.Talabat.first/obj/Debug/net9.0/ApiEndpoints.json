@@ -507,6 +507,99 @@
     ]
   },
   {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminOrderController",
+    "Method": "GetAllOrders",
+    "RelativePath": "api/AdminOrder/Orders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IReadOnlyList\u00601[[Felo.Talabat.Api.ModelDto.OrderRequests.OrderToReturnDto, Felo.Talabat.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminUserController",
+    "Method": "GetUSers",
+    "RelativePath": "api/AdminUser/Accounts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Felo.Talabat.Api.ModelDto.AdminModels.ApplicationUserToReturn",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminUserController",
+    "Method": "Active",
+    "RelativePath": "api/AdminUser/ActiveAccount",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminUserController",
+    "Method": "DeleteUser",
+    "RelativePath": "api/AdminUser/DeleteUser",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminUserController",
+    "Method": "Lock",
+    "RelativePath": "api/AdminUser/LockAccount",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "days",
+        "Type": "System.Double",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Felo.Talabat.Api.Controllers.Carts.CartsController",
     "Method": "GetCartDetails",
     "RelativePath": "api/Carts/CartDetails",

@@ -13,18 +13,6 @@ namespace Talabat.Core.Entites.Orders
             
         }
 
-        public Order(string buyerEmail, OrderStatus orderStatus, DelivaryMethod? delivaryMethod, AddressShiper addressShiper, int? delivaryMethodId, decimal subTotal, DateTimeOffset orderDate, string paymentId)
-        {
-            BuyerEmail = buyerEmail;
-            OrderStatus = orderStatus;
-            DelivaryMethod = delivaryMethod;
-            AddressShiper = addressShiper;
-            DelivaryMethodId = delivaryMethodId;
-            SubTotal = subTotal;
-            OrderDate = orderDate;
-            PaymentId = paymentId;
-        }
-
         public Order(string buyerEmail, DelivaryMethod? delivaryMethod, AddressShiper addressShiper, ICollection<OrderItems> items, decimal subTotal, string paymentId)
         {
             BuyerEmail = buyerEmail;

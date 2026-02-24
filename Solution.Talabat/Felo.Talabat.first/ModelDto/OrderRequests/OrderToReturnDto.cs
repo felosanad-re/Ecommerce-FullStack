@@ -14,6 +14,7 @@ namespace Felo.Talabat.Api.ModelDto.OrderRequests
         public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.UtcNow;
         public decimal SubTotal { get; set; }
         public decimal Total { get; set; }
-        public string PaymentId { get; set; } = "";
+        public string IsDeleted { get; set; }
+        //public string PaymentId { get; set; } = "";
     }
 }

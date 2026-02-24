@@ -46,14 +46,20 @@ namespace Felo.Talabat.Api
 
             // Add Redis Connection
 
-            builder.Services.AddStackExchangeRedisCache(options =>
+            builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
             {
-                var connStr = builder.Configuration.GetConnectionString("Redis");
+                var configuration = ConfigurationOptions.Parse(
+                    builder.Configuration.GetConnectionString("Redis"),
+                    true
+                );
 
-                options.Configuration = connStr;
-
-                options.InstanceName = "FastShop_";  // مهم عشان ما يتداخلش مع apps تانية
+                configuration.AbortOnConnectFail = false;
+                configuration.ConnectRetry = 3;
+                configuration.ConnectTimeout = 5000;
+                configuration.SyncTimeout = 5000;
+                return ConnectionMultiplexer.Connect(configuration);
             });
+
 
             // Add Identity Services
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
