@@ -527,6 +527,32 @@
     ]
   },
   {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminOrderController",
+    "Method": "UpdateStatus",
+    "RelativePath": "api/AdminOrder/UpdateOrderStatus",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Felo.Talabat.Api.ModelDto.AdminModels.UpdateOrderStatus",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Felo.Talabat.Api.ModelDto.OrderRequests.OrderToReturnDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminUserController",
     "Method": "GetUSers",
     "RelativePath": "api/AdminUser/Accounts",

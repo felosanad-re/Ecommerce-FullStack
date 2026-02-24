@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace Talabat.Core.Entites.Orders
 {
@@ -14,6 +9,14 @@ namespace Talabat.Core.Entites.Orders
         [EnumMember(Value = "Payment Succedded")]
         PaymentSuccedded,
         [EnumMember(Value = "Payment Faild")]
-        PaymentFaild
+        PaymentFaild,
+        [EnumMember(Value = "Preparing Order")]
+        Preparing,
+        [EnumMember(Value = "Order Out For Delivary")]
+        OutForDelivery,
+        [EnumMember(Value = "Order Arrived")]
+        Delivaery,
+        [EnumMember(Value = "Order Cancellded")]
+        Cancelled
     }
 }

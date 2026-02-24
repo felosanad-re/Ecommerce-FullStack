@@ -17,5 +17,9 @@ namespace Talabat.Core.Services.Contract.OrderService
         Task DeleteOrder(string cartId, int orderId);
 
         Task<IReadOnlyList<DelivaryMethod>> GetDelivaryMethods();
+
+        // For Admin
+
+        Task<Order?> UpdateOrderStatusAsync(int id, OrderStatus status);
     }
 }

@@ -27,8 +27,7 @@
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 5rem"></th>
-        <th pSortableColumn="name">Name <p-sortIcon field="name" /></th>
-        <!-- <th>Image</th> -->
+        <th pSortableColumn="name">Buyer Email<p-sortIcon field="name" /></th>
         <th pSortableColumn="price">Price <p-sortIcon field="price" /></th>
         <th pSortableColumn="category">
           Delivary Method <p-sortIcon field="category" />
@@ -51,42 +50,32 @@
             [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
           />
         </td>
-        <td>{{ order.name }}</td>
-        <!-- <td>
-          <img
-            [src]="
-              'https://primefaces.org/cdn/primeng/images/demo/product/' +
-              order.image
-            "
-            [alt]="order.name"
-            width="50"
-            class="shadow-4"
-          />
-        </td> -->
-        <td>{{ order.subTotal | currency: "USD" }}</td>
+        <td>{{ order.buyerEmail }}</td>
+        <td>{{ order.total | currency: "USD" }}</td>
         <td>{{ order.delivaryMethod }}</td>
         <td>{{ order.orderStatus }}</td>
       </tr>
     </ng-template>
+    <!-- Order Items Details -->
     <ng-template pTemplate="rowexpansion" let-order>
       <tr>
         <td colspan="7">
           <div class="p-3">
-            <p-table [value]="order.orders" dataKey="id">
+            <p-table [value]="order.items" dataKey="id">
               <ng-template pTemplate="header">
                 <tr>
                   <th pSortableColumn="id">Id <p-sortIcon field="price" /></th>
                   <th pSortableColumn="customer">
-                    Customer <p-sortIcon field="customer" />
+                    Product Name <p-sortIcon field="customer" />
                   </th>
                   <th pSortableColumn="date">
-                    Date <p-sortIcon field="date" />
+                    Count <p-sortIcon field="date" />
                   </th>
                   <th pSortableColumn="amount">
-                    Amount <p-sortIcon field="amount" />
+                    Price <p-sortIcon field="amount" />
                   </th>
                   <th pSortableColumn="status">
-                    Status <p-sortIcon field="status" />
+                    Image <p-sortIcon field="status" />
                   </th>
                   <th style="width: 4rem"></th>
                 </tr>
@@ -94,12 +83,15 @@
               <ng-template pTemplate="body" let-order>
                 <tr>
                   <td>{{ order.id }}</td>
-                  <td>{{ order.customer }}</td>
-                  <td>{{ order.date }}</td>
-                  <td>{{ order.amount | currency: "USD" }}</td>
+                  <td>{{ order.name }}</td>
+                  <td>{{ order.count }}</td>
+                  <td>{{ order.price | currency: "USD" }}</td>
                   <td>
-                    <p-tag [value]="order.status" />
-                    <!-- [severity]="getStatusSeverity(order.status)" -->
+                    <img
+                      [src]="order.pictureUrl"
+                      [alt]="order.name"
+                      width="50"
+                    />
                   </td>
                   <td><p-button type="button" icon="pi pi-search" /></td>
                 </tr>

@@ -5,6 +5,7 @@ namespace Felo.Talabat.Api.ModelDto.OrderRequests
     public class OrderToReturnDto
     {
         public int Id { get; set; }
+        public string BuyerEmail { get; set; }
         public string OrderStatus { get; set; }
         public int DelivaryMethodId { get; set; }
         public string DelivaryMethod { get; set; }
@@ -12,8 +13,8 @@ namespace Felo.Talabat.Api.ModelDto.OrderRequests
         public AddressShiper AddressShiper { get; set; }
         public ICollection<OrderItemsDto> Items { get; set; } = new HashSet<OrderItemsDto>();
         public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.UtcNow;
-        public decimal SubTotal { get; set; }
-        public decimal Total { get; set; }
+        public decimal SubTotal { get; set; } // Total price for items
+        public decimal Total { get; set; } // Subtotal + delevary Cost
         public string IsDeleted { get; set; }
         //public string PaymentId { get; set; } = "";
     }

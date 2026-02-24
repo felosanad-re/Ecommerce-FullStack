@@ -6,6 +6,7 @@ using Stripe;
 using Talabat.Core.Entites.Identity;
 using Talabat.Core.Services.Contract.AuthServices;
 using Talabat.Repositaries.Data;
+using Talabat.Repositaries.Data.Hubs;
 
 namespace Felo.Talabat.Api
 {
@@ -28,9 +29,7 @@ namespace Felo.Talabat.Api
 
             // Add secret file
             builder.Configuration
-                .AddJsonFile("C:\\Users\\Act\\AppData\\Roaming\\Microsoft\\UserSecrets\\ac7b37e3-e66e-42fc-b593-ce3d528b9b78\\secrets.json",
-                             optional: true,   // خليه optional علشان ميفشلش لو مش موجود
-                             reloadOnChange: builder.Environment.IsDevelopment());
+                .AddJsonFile("C:\\Users\\Act\\AppData\\Roaming\\Microsoft\\UserSecrets\\ac7b37e3-e66e-42fc-b593-ce3d528b9b78\\secrets.json");
 
             // Add ShopDbContext
             builder.Services.AddDbContext<ShopDbContext>(optionsAction =>
@@ -60,6 +59,8 @@ namespace Felo.Talabat.Api
                 return ConnectionMultiplexer.Connect(configuration);
             });
 
+            // Add SignelR
+            builder.Services.AddSignalR();
 
             // Add Identity Services
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -86,7 +87,7 @@ namespace Felo.Talabat.Api
                         "http://shop-web.runasp.net", // deploy in monester
                         "https://shop-web.runasp.net" // deploy in monester
                     )
-                     .AllowAnyHeader().AllowAnyMethod().AllowCredentials(); ;
+                     .AllowAnyHeader().AllowAnyMethod().AllowCredentials();
                 });
             });
             #endregion
@@ -166,6 +167,8 @@ namespace Felo.Talabat.Api
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.MapHub<HubSignalR>("/orderHub"); // Anguler Listing
 
             #endregion
 

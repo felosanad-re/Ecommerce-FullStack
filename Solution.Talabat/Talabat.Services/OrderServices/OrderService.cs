@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.SignalR;
+using System.ComponentModel.DataAnnotations;
 using Talabat.Core.Entites.Carts;
 using Talabat.Core.Entites.Orders;
 using Talabat.Core.Entites.Products;
 using Talabat.Core.GenaricRepo;
+using Talabat.Core.Services.Contract.HubServices;
 using Talabat.Core.Services.Contract.OrderService;
-using Talabat.Core.Services.Contract.PaymentsService;
 using Talabat.Core.Specifications.OrderSpecifications;
 using Talabat.Core.UnitOfWork;
 
@@ -13,7 +14,8 @@ namespace Talabat.Services.OrderServices
     public class OrderService(
         IUnitOfWork unitOfWork,
         IRedisRepo<Cart> repoCart,
-        IOrderBuilder orderBuilder
+        IOrderBuilder orderBuilder,
+        IOrderTracingServiceHub orderTracingHub
         ) : IOrderServices
     {
         #region Services
@@ -21,6 +23,7 @@ namespace Talabat.Services.OrderServices
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly IRedisRepo<Cart> _repoCart = repoCart;
         private readonly IOrderBuilder _orderBuilder = orderBuilder;
+        private readonly IOrderTracingServiceHub _orderTracingHub = orderTracingHub;
         #endregion
 
         public async Task<IReadOnlyList<Order>> GetOrdersAsync()
@@ -104,12 +107,15 @@ namespace Talabat.Services.OrderServices
         }
         #endregion
 
+        #region Get Delivaery
         public async Task<IReadOnlyList<DelivaryMethod>> GetDelivaryMethods()
         {
             var delivery = await _unitOfWork.RepositaryAsync<DelivaryMethod>().GetAllAsync();
             return delivery;
         }
+        #endregion
 
+        #region Delete Order
         public async Task DeleteOrder(string cartId, int orderId)
         {
             var cart = await _repoCart.GetCacheAsync(cartId);
@@ -131,6 +137,23 @@ namespace Talabat.Services.OrderServices
             _unitOfWork.RepositaryAsync<Order>().delete(order!);
             await _unitOfWork.CompleteAsync();
         }
+        #endregion
 
+        #region Tracking Order Status
+        // For Admin 
+        public async Task<Order?> UpdateOrderStatusAsync(int id, OrderStatus status)
+        {
+            var spec = new OrderWithItemsSpec();
+            var updateOrderStatus = await _unitOfWork.RepositaryAsync<Order>().GetSpec(spec);
+            if (updateOrderStatus is null) throw new Exception("Order Not Found");
+
+            updateOrderStatus.OrderStatus = status;
+            await _unitOfWork.CompleteAsync();
+
+            // SignalR
+            await _orderTracingHub.BroadcastOrderStatusChanges(id, status);
+            return updateOrderStatus;
+        }
+        #endregion
     }
 }

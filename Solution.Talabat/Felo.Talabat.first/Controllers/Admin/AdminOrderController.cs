@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Felo.Talabat.Api.ModelDto.AdminModels;
 using Felo.Talabat.Api.ModelDto.OrderRequests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,14 @@ namespace Felo.Talabat.Api.Controllers.Admin
         public async Task<ActionResult<IReadOnlyList<OrderToReturnDto>>> GetAllOrders()
         {
             var orders = await _orderService.GetOrdersAsync();
-            return Ok(orders);
+            return Ok(_mapper.Map<IReadOnlyList<OrderToReturnDto>>(orders));
+        }
+
+        [HttpPost("UpdateOrderStatus")] // Post: /api/AdminOrder/UpdateOrderStatus
+        public async Task<ActionResult<OrderToReturnDto>> UpdateStatus([FromBody]UpdateOrderStatus request)
+        {
+            var order = await _orderService.UpdateOrderStatusAsync(request.Id, request.Status);
+            return Ok(_mapper.Map<OrderToReturnDto>(order));
         }
 
         #endregion

@@ -9,6 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { TableRowCollapseEvent, TableRowExpandEvent } from 'primeng/table';
 import { NotificationsService } from '../../../../Core/Services/notifications.service';
+import { IOrderItems } from '../../../../Core/Interfaces/UserInterfaces/iorder-items';
 @Component({
   selector: 'app-orders',
   standalone: true,
@@ -39,14 +40,20 @@ export class OrdersComponent {
   getOrders() {
     this._adminService.getOrders().subscribe({
       next: (res: Iorder[]) => {
-        console.log(res);
         this.orders = res;
+        console.log(this.orders);
       },
     });
   }
 
   expandAll() {
-    // this.expandedRows = this.products.reduce((acc, p) => (acc[p.id] = true) && acc, {});
+    this.expandedRows = this.orders.reduce(
+      (acc, p: Iorder) => {
+        acc[p.id] = true;
+        return acc;
+      },
+      {} as { [key: string]: boolean },
+    );
   }
 
   collapseAll() {
