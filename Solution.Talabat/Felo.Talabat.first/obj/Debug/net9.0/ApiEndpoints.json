@@ -132,32 +132,6 @@
   },
   {
     "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminController",
-    "Method": "Get",
-    "RelativePath": "api/Admin/{productId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "productId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Felo.Talabat.Api.ModelDto.Products.ProductToReturnDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminController",
     "Method": "AddBrand",
     "RelativePath": "api/Admin/addBrand",
     "HttpMethod": "POST",
@@ -422,6 +396,32 @@
   {
     "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminController",
     "Method": "Get",
+    "RelativePath": "api/Admin/GetProduct/{productId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Felo.Talabat.Api.ModelDto.Products.ProductToReturnDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminController",
+    "Method": "Get",
     "RelativePath": "api/Admin/GetProducts",
     "HttpMethod": "GET",
     "IsController": true,
@@ -508,15 +508,150 @@
   },
   {
     "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminOrderController",
+    "Method": "DeleteNotification",
+    "RelativePath": "api/AdminOrder/DeleteNotification",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminOrderController",
+    "Method": "EditNotification",
+    "RelativePath": "api/AdminOrder/EditNotification",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Talabat.Core.Entites.SignalR.Notifications",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminOrderController",
+    "Method": "GetAll",
+    "RelativePath": "api/AdminOrder/GetAllNotification",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IsDeleted",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsRead",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageIndex",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Talabat.Core.Specifications.SpecModel.Pagination\u00601[[System.Collections.Generic.IReadOnlyList\u00601[[Talabat.Core.Entites.SignalR.Notifications, Talabat.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminOrderController",
+    "Method": "GetUnreadNotification",
+    "RelativePath": "api/AdminOrder/GetUnReadNotification",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IsDeleted",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsRead",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageIndex",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Admin.AdminOrderController",
     "Method": "GetAllOrders",
     "RelativePath": "api/AdminOrder/Orders",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageIndex",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IReadOnlyList\u00601[[Felo.Talabat.Api.ModelDto.OrderRequests.OrderToReturnDto, Felo.Talabat.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Talabat.Core.Specifications.SpecModel.Pagination\u00601[[System.Collections.Generic.IReadOnlyList\u00601[[Felo.Talabat.Api.ModelDto.OrderRequests.OrderToReturnDto, Felo.Talabat.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -542,7 +677,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Felo.Talabat.Api.ModelDto.OrderRequests.OrderToReturnDto",
+        "Type": "Felo.Talabat.Api.ModelDto.OrderRequests.OrderStatusToReturnDto",
         "MediaTypes": [
           "text/plain",
           "application/json",

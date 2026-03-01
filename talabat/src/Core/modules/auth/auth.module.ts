@@ -5,7 +5,6 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MessagesModule } from 'primeng/messages';
-import { ToastModule } from 'primeng/toast';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AutoFocusModule } from 'primeng/autofocus';
 import { RouterLink } from '@angular/router';

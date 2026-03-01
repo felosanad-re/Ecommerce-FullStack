@@ -22,9 +22,8 @@ import { LayoutService } from '../../../Core/Services/app.layout.service';
   styleUrl: './layout/DashbordLayout.scss',
 })
 export class AdminLayoutComponent {
-  constructor(public layoutService: LayoutService) {} // ← تأكد إنه injected
+  constructor(public layoutService: LayoutService) {}
 
-  // ← أضف الـ getter ده هنا
   get containerClass() {
     const config = this.layoutService.config();
     const state = this.layoutService.state;

@@ -15,6 +15,7 @@ export class ProductService {
   // Call Api To Get Products
   getProducts(paramsObj: ProductParams): Observable<IPagination<IProduct>> {
     let params = new HttpParams(); // send parameters with request
+    // Send Product Params
     Object.entries(paramsObj).forEach(([key, value]) => {
       if (value != undefined && value != null) {
         params = params.append(key, value.toString());

@@ -5,18 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|f:\\angular\\e-commerance\\solution.talabat\\felo.talabat.first\\controllers\\admin\\adminordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F1A69121-83B0-45C5-8E77-B4A65D792456}|Felo.Talabat.first\\Felo.Talabat.Api.csproj|solutionrelative:felo.talabat.first\\controllers\\admin\\adminordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA7DD6AD-751E-4141-AECA-9C212699C78F}|Talabat.Services\\Talabat.Services.csproj|f:\\angular\\e-commerance\\solution.talabat\\talabat.services\\orderservices\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA7DD6AD-751E-4141-AECA-9C212699C78F}|Talabat.Services\\Talabat.Services.csproj|solutionrelative:talabat.services\\orderservices\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA7DD6AD-751E-4141-AECA-9C212699C78F}|Talabat.Services\\Talabat.Services.csproj|f:\\angular\\e-commerance\\solution.talabat\\talabat.services\\hubservices\\orderservicetracking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA7DD6AD-751E-4141-AECA-9C212699C78F}|Talabat.Services\\Talabat.Services.csproj|solutionrelative:talabat.services\\hubservices\\orderservicetracking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A84DBC1-B104-49EF-AB79-07934F3459D8}|Talabat.Core\\Talabat.Core.csproj|f:\\angular\\e-commerance\\solution.talabat\\talabat.core\\entites\\orders\\orderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A84DBC1-B104-49EF-AB79-07934F3459D8}|Talabat.Core\\Talabat.Core.csproj|solutionrelative:talabat.core\\entites\\orders\\orderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 232,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,54 +26,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "OrderStatus.cs",
-              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Core\\Entites\\Orders\\OrderStatus.cs",
-              "RelativeDocumentMoniker": "Talabat.Core\\Entites\\Orders\\OrderStatus.cs",
-              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Core\\Entites\\Orders\\OrderStatus.cs",
-              "RelativeToolTip": "Talabat.Core\\Entites\\Orders\\OrderStatus.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAwA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T21:10:33.026Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "AdminOrderController.cs",
               "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Controllers\\Admin\\AdminOrderController.cs",
               "RelativeDocumentMoniker": "Felo.Talabat.first\\Controllers\\Admin\\AdminOrderController.cs",
               "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Felo.Talabat.first\\Controllers\\Admin\\AdminOrderController.cs",
               "RelativeToolTip": "Felo.Talabat.first\\Controllers\\Admin\\AdminOrderController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAhwCsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T21:08:30.814Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "OrderService.cs",
-              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Services\\OrderServices\\OrderService.cs",
-              "RelativeDocumentMoniker": "Talabat.Services\\OrderServices\\OrderService.cs",
-              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Services\\OrderServices\\OrderService.cs",
-              "RelativeToolTip": "Talabat.Services\\OrderServices\\OrderService.cs",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAuwJMAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T20:18:38.681Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "OrderServiceTracking.cs",
-              "DocumentMoniker": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Services\\HubServices\\OrderServiceTracking.cs",
-              "RelativeDocumentMoniker": "Talabat.Services\\HubServices\\OrderServiceTracking.cs",
-              "ToolTip": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Services\\HubServices\\OrderServiceTracking.cs",
-              "RelativeToolTip": "Talabat.Services\\HubServices\\OrderServiceTracking.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAwBgAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T18:40:22.451Z",
+              "WhenOpened": "2026-03-01T01:05:11.617Z",
               "EditorCaption": ""
             }
           ]

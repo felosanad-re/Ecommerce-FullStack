@@ -4,20 +4,13 @@
     <span>Ecommerance</span>
   </a>
 
+  <!-- Sidebar -->
   <button
     #menubutton
     class="p-link layout-menu-button layout-topbar-button"
     (click)="layoutService.onMenuToggle()"
   >
     <i class="pi pi-bars"></i>
-  </button>
-
-  <button
-    #topbarmenubutton
-    class="p-link layout-topbar-menu-button layout-topbar-button"
-    (click)="layoutService.showProfileSidebar()"
-  >
-    <i class="pi pi-ellipsis-v"></i>
   </button>
 
   <div
@@ -28,17 +21,46 @@
         layoutService.state.profileSidebarVisible,
     }"
   >
-    <button class="p-link layout-topbar-button">
-      <i class="pi pi-calendar"></i>
-      <span>Calendar</span>
-    </button>
-    <button class="p-link layout-topbar-button">
-      <i class="pi pi-user"></i>
-      <span>Profile</span>
-    </button>
-    <button class="p-link layout-topbar-button" [routerLink]="'/documentation'">
-      <i class="pi pi-cog"></i>
-      <span>Settings</span>
-    </button>
+    <p-button
+      (onClick)="op.toggle($event)"
+      icon="pi pi-bell"
+      [badge]="notificationCount"
+      badgeClass="text-xl w-5 h-5"
+    />
   </div>
+  <p-overlayPanel #op [showCloseIcon]="true" styleClass="notification-panel">
+    <div class="notification-container">
+      <div
+        *ngFor="let member of status; let i = index"
+        class="notification-item flex justify-content-between align-items-start"
+      >
+        <!-- LEFT CONTENT -->
+        <div class="notification-left">
+          <div class="order-id">Order #{{ member.orderId }}</div>
+
+          <div class="order-status">
+            {{ member.status }}
+          </div>
+
+          <div class="order-message">
+            {{ member.message }}
+          </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="notification-right flex flex-column align-items-end">
+          <span class="order-time">
+            {{ member.createdAt | date: "short" }}
+          </span>
+
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-text p-button-sm delete-btn"
+            (click)="removeNotification(i)"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </p-overlayPanel>
 </div>

@@ -4,6 +4,7 @@ using Talabat.Core.Entites.Brands;
 using Talabat.Core.Entites.Categories;
 using Talabat.Core.Entites.Orders;
 using Talabat.Core.Entites.Products;
+using Talabat.Core.Entites.SignalR;
 using Talabat.Core.Entites.StockTransactions;
 
 namespace Talabat.Repositaries.Data
@@ -28,5 +29,6 @@ namespace Talabat.Repositaries.Data
         public DbSet<DelivaryMethod> DeliveryMethods { get; set; }
         public DbSet<OrderItems> OrderItems { get; set; }
         public DbSet<StockTransaction> StockTransactions { get; set; }
+        public DbSet<Notifications> Notifications { get; set; }
     }
 }

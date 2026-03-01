@@ -17,7 +17,7 @@ namespace Talabat.Repositaries.Data.Hubs
 
         // Send Notification For All Admins
         [Authorize(Roles = SD.SUPER_ADMIN)]
-        public async Task JoinAdminsGroup()
+        public async Task JoinAdminGroup()
         {
             await Groups.AddToGroupAsync(
                 Context.ConnectionId,

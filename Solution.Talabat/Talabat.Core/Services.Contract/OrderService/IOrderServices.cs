@@ -1,10 +1,11 @@
 ﻿using Talabat.Core.Entites.Orders;
+using Talabat.Core.Specifications.OrderSpecifications;
 
 namespace Talabat.Core.Services.Contract.OrderService
 {
     public interface IOrderServices
     {
-        Task<IReadOnlyList<Order>> GetOrdersAsync();
+        Task<IReadOnlyList<Order>> GetOrdersAsync(OrderParams @params);
 
         Task<Order?> CreateOrder(string cartId, string buyerEmail, AddressShiper addressShiper, int delivary);
 

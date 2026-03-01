@@ -26,9 +26,9 @@ namespace Talabat.Services.OrderServices
         private readonly IOrderTracingServiceHub _orderTracingHub = orderTracingHub;
         #endregion
 
-        public async Task<IReadOnlyList<Order>> GetOrdersAsync()
+        public async Task<IReadOnlyList<Order>> GetOrdersAsync(OrderParams @params)
         {
-            var spec = new OrderWithItemsSpec();
+            var spec = new OrderWithItemsSpec(@params);
             var order = await _unitOfWork.RepositaryAsync<Order>().GetAllAsyncSpec(spec);
 
             return order;
@@ -143,7 +143,7 @@ namespace Talabat.Services.OrderServices
         // For Admin 
         public async Task<Order?> UpdateOrderStatusAsync(int id, OrderStatus status)
         {
-            var spec = new OrderWithItemsSpec();
+            var spec = new OrderWithItemsSpec(id);
             var updateOrderStatus = await _unitOfWork.RepositaryAsync<Order>().GetSpec(spec);
             if (updateOrderStatus is null) throw new Exception("Order Not Found");
 

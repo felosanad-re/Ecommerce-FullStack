@@ -9,15 +9,15 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { StyleClassModule } from 'primeng/styleclass';
 import { PanelMenuModule } from 'primeng/panelmenu';
-import { ProductParams } from '../../../../Core/Interfaces/UserInterfaces/product-params';
 import { MenuItem } from 'primeng/api';
 import { Subscription, debounceTime } from 'rxjs';
 import { IProduct } from '../../../../Core/Interfaces/UserInterfaces/iproduct';
-import { ProductService } from '../../../../Core/Services/UserServices/product.service';
 import { LayoutService } from '../../../../Core/Services/app.layout.service';
 import { Iorder } from '../../../../Core/Interfaces/UserInterfaces/iorder';
-import { Application } from 'express';
 import { ApplicationUser } from '../../../../Core/Interfaces/application-user';
+import { IOrderItems } from '../../../../Core/Interfaces/UserInterfaces/iorder-items';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
 @Component({
   selector: 'app-dashbord',
   standalone: true,
@@ -30,6 +30,8 @@ import { ApplicationUser } from '../../../../Core/Interfaces/application-user';
     StyleClassModule,
     PanelMenuModule,
     ButtonModule,
+    DialogModule,
+    InputTextModule,
   ],
   templateUrl: './dashbord.component.html',
   styleUrl: './dashbord.component.scss',
@@ -37,21 +39,19 @@ import { ApplicationUser } from '../../../../Core/Interfaces/application-user';
 export class DashbordComponent implements OnInit, OnDestroy {
   items!: MenuItem[];
 
-  allProducts: IProduct[] = [];
-
+  allProductItems: IOrderItems[] = [];
+  productItem: IProduct = {} as IProduct;
   chartData: any;
 
   chartOptions: any;
 
   subscription!: Subscription;
 
-  productParams = new ProductParams();
-
   getOrderCount!: number;
 
   getAccountCount!: number;
+  visible: boolean = false;
   constructor(
-    private _productService: ProductService,
     public layoutService: LayoutService,
     private _adminService: AdminService,
   ) {
@@ -64,11 +64,9 @@ export class DashbordComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initChart();
-    this._productService.getProducts(this.productParams).subscribe({
-      next: (response: any) => {
-        this.allProducts = response.products.map((product: IProduct) => ({
-          ...product,
-        }));
+    this._adminService.getOrders().subscribe({
+      next: (response: Iorder[]) => {
+        this.allProductItems = response.flatMap((order) => order.items); // loop + map
       },
       error: (error) => console.log(error),
     });
@@ -112,7 +110,7 @@ export class DashbordComponent implements OnInit, OnDestroy {
         },
         {
           label: 'Second Dataset',
-          data: [28, 48, 40, 19, 86, 27, 90],
+          data: [30, 48, 40, 19, 86, 27, 90],
           fill: false,
           backgroundColor: documentStyle.getPropertyValue('--green-600'),
           borderColor: documentStyle.getPropertyValue('--green-600'),
@@ -156,5 +154,16 @@ export class DashbordComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  getProductDetails(id: number) {
+    console.log(id);
+    this.visible = true;
+    this._adminService.getProductDetails(id).subscribe({
+      next: (res: IProduct) => {
+        console.log(res);
+        this.productItem = res;
+      },
+    });
   }
 }

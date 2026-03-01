@@ -154,3 +154,63 @@
     }
   }
 }
+
+.notification-panel {
+  width: 380px;
+}
+
+.notification-container {
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 14px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s ease;
+}
+
+.notification-item:hover {
+  background-color: #f8f9fa;
+}
+
+.notification-left {
+  flex: 1;
+  padding-right: 10px;
+}
+
+.order-id {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.order-status {
+  font-size: 13px;
+  color: #4b5563;
+  margin-top: 3px;
+}
+
+.order-message {
+  font-size: 13px;
+  margin-top: 5px;
+  color: #6b7280;
+}
+
+.notification-right {
+  min-width: 110px;
+}
+
+.order-time {
+  font-size: 11px;
+  color: gray;
+  margin-bottom: 6px;
+}
+
+.delete-btn {
+  opacity: 0.6;
+}
+
+.delete-btn:hover {
+  opacity: 1;
+  color: #ef4444;
+}

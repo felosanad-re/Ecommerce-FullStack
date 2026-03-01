@@ -53,6 +53,7 @@ export class ProductComponent {
     this.productParams.pageIndex = this.pageIndex;
     this.productParams.pageSize = this.pageSize;
     this.productParams.search = this.searchValue;
+    this.productParams.isDeleted = false;
     this._productService.getProducts(this.productParams).subscribe({
       next: (response) => {
         this.productCount = response.count;

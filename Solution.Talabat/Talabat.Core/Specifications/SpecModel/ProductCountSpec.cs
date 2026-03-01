@@ -9,7 +9,9 @@ namespace Talabat.Core.Specifications.SpecModel
                     P => (string.IsNullOrEmpty(productParams.Search) || P.Name.Contains(productParams.Search))
                     && (!productParams.BrandId.HasValue || P.BrandId == productParams.BrandId)
                     && (!productParams.CategoryId.HasValue || P.CategoryId == productParams.CategoryId)
-                  )
+                    &&
+                    (!productParams.IsDeleted.HasValue || P.IsDeleted == productParams.IsDeleted)
+            )
         {
             
         }

@@ -21,6 +21,7 @@
     "@angular/platform-server": "^17.3.0",
     "@angular/router": "^17.3.0",
     "@angular/ssr": "^17.3.17",
+    "@microsoft/signalr": "^10.0.0",
     "@primeuix/themes": "^2.0.3",
     "@stripe/stripe-js": "^8.7.0",
     "chart.js": "^3.3.2",

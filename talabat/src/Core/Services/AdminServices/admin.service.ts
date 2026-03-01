@@ -9,6 +9,9 @@ import { IBrand } from '../../Interfaces/UserInterfaces/ibrand';
 import { environment } from '../../../environment';
 import { Iorder } from '../../Interfaces/UserInterfaces/iorder';
 import { ApplicationUser } from '../../Interfaces/application-user';
+import { IupdateOrderStatus } from '../../Interfaces/iupdate-order-status';
+import { IOrderStatusResponse } from '../../Interfaces/iorder-status-response';
+import { Notifications } from '../../Interfaces/Notifications';
 
 @Injectable({
   providedIn: 'root',
@@ -156,6 +159,21 @@ export class AdminService {
   getOrders(): Observable<Iorder[]> {
     return this._http.get<Iorder[]>(
       `${environment.apiUrl}/api/AdminOrder/Orders`,
+    );
+  }
+
+  updateOrderStatus(
+    request: IupdateOrderStatus,
+  ): Observable<IOrderStatusResponse> {
+    return this._http.post<IOrderStatusResponse>(
+      `${environment.apiUrl}/api/AdminOrder/UpdateOrderStatus`,
+      request,
+    );
+  }
+
+  getAllNotifications(): Observable<Notifications[]> {
+    return this._http.get<Notifications[]>(
+      `${environment.apiUrl}/api/AdminOrder/GetAllNotification`,
     );
   }
 }

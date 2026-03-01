@@ -80,7 +80,7 @@
     <div class="card">
       <h5>Recent Sales</h5>
       <p-table
-        [value]="allProducts"
+        [value]="allProductItems"
         [paginator]="true"
         [rows]="5"
         responsiveLayout="scroll"
@@ -112,18 +112,16 @@
               {{ product.price | currency: "USD" }}
             </td>
             <td style="width: 15%">
-              <button
-                pButton
-                pRipple
-                type="button"
-                icon="pi pi-search"
-                class="p-button p-component p-button-text p-button-icon-only"
-              ></button>
+              <p-button
+                (onClick)="getProductDetails(product.productId)"
+                label="Show"
+              />
             </td>
           </tr>
         </ng-template>
       </p-table>
     </div>
+    <!-- Best Selling -->
     <div class="card">
       <div class="flex justify-content-between align-items-center mb-5">
         <h5>Best Selling Products</h5>
@@ -139,7 +137,7 @@
         </div>
       </div>
       <ul class="list-none p-0 m-0">
-        @for (product of allProducts; track $index) {
+        @for (product of allProductItems; track $index) {
           <li
             class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4"
           >
@@ -147,7 +145,7 @@
               <span class="text-900 font-medium mr-2 mb-1 md:mb-0">{{
                 product.name
               }}</span>
-              <div class="mt-1 text-600">{{ product.brand }}</div>
+              <div class="mt-1 text-600">{{ product.Price }}</div>
             </div>
             <div class="mt-2 md:mt-0 flex align-items-center">
               <div
@@ -167,6 +165,7 @@
     </div>
   </div>
 
+  <!-- Chart -->
   <div class="col-12 xl:col-6">
     <div class="card">
       <h5>Sales Overview</h5>
@@ -177,4 +176,45 @@
       ></p-chart>
     </div>
   </div>
+  <!-- Show product Details -->
+  <p-dialog
+    header="Edit Profile"
+    [modal]="true"
+    [(visible)]="visible"
+    [style]="{ width: '50rem', height: '30rem' }"
+  >
+    <span class="p-text-secondary block mb-5">Show Product Details.</span>
+    <div class="flex align-items-center gap-3 mb-3">
+      <label for="name" class="font-semibold w-6rem">Product Name</label>
+      <input
+        pInputText
+        disabled
+        id="name"
+        class="flex-auto"
+        autocomplete="off"
+        [value]="productItem.name"
+      />
+    </div>
+    <div class="flex align-items-center gap-3 mb-3">
+      <label for="image" class="font-semibold w-6rem">Product Image</label>
+      <img
+        [src]="productItem.pictureUrl"
+        alt="productItem.name"
+        width="100"
+        height="100"
+      />
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+      <label for="price" class="font-semibold w-6rem">Product Price</label>
+      <input
+        pInputText
+        disabled
+        id="price"
+        class="flex-auto"
+        autocomplete="off"
+        [value]="productItem.price"
+      />
+    </div>
+  </p-dialog>
+  <!-- Notification Real Time [SignalR] -->
 </div>

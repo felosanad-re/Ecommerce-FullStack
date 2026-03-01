@@ -8,6 +8,7 @@
     (onRowExpand)="onRowExpand($event)"
     (onRowCollapse)="onRowCollapse($event)"
   >
+    <!-- Two buttons -->
     <ng-template pTemplate="caption">
       <div class="flex flex-wrap justify-content-end gap-2">
         <p-button
@@ -24,6 +25,7 @@
         />
       </div>
     </ng-template>
+    <!-- Table Headers -->
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 5rem"></th>
@@ -32,12 +34,13 @@
         <th pSortableColumn="category">
           Delivary Method <p-sortIcon field="category" />
         </th>
-        <th pSortableColumn="inventoryStatus">
-          Status <p-sortIcon field="inventoryStatus" />
-        </th>
+        <th>Order Status</th>
+        <th>edit</th>
       </tr>
     </ng-template>
+    <!-- Table Body -->
     <ng-template pTemplate="body" let-order let-expanded="expanded">
+      <!-- Show Order Details -->
       <tr>
         <td>
           <p-button
@@ -53,7 +56,10 @@
         <td>{{ order.buyerEmail }}</td>
         <td>{{ order.total | currency: "USD" }}</td>
         <td>{{ order.delivaryMethod }}</td>
-        <td>{{ order.orderStatus }}</td>
+        <th>{{ order.orderStatus }}</th>
+        <th>
+          <p-button (onClick)="showDialog(order.id)" label="Show" />
+        </th>
       </tr>
     </ng-template>
     <!-- Order Items Details -->
@@ -61,25 +67,27 @@
       <tr>
         <td colspan="7">
           <div class="p-3">
+            <!-- Order Items Headers -->
             <p-table [value]="order.items" dataKey="id">
               <ng-template pTemplate="header">
                 <tr>
                   <th pSortableColumn="id">Id <p-sortIcon field="price" /></th>
-                  <th pSortableColumn="customer">
-                    Product Name <p-sortIcon field="customer" />
+                  <th pSortableColumn="productName">
+                    Product Name <p-sortIcon field="productName" />
                   </th>
-                  <th pSortableColumn="date">
-                    Count <p-sortIcon field="date" />
+                  <th pSortableColumn="count">
+                    Count <p-sortIcon field="count" />
                   </th>
-                  <th pSortableColumn="amount">
-                    Price <p-sortIcon field="amount" />
+                  <th pSortableColumn="price">
+                    Price <p-sortIcon field="price" />
                   </th>
-                  <th pSortableColumn="status">
-                    Image <p-sortIcon field="status" />
+                  <th pSortableColumn="image">
+                    Image <p-sortIcon field="image" />
                   </th>
                   <th style="width: 4rem"></th>
                 </tr>
               </ng-template>
+              <!-- Order Items Body -->
               <ng-template pTemplate="body" let-order>
                 <tr>
                   <td>{{ order.id }}</td>
@@ -98,7 +106,7 @@
               </ng-template>
               <ng-template pTemplate="emptymessage">
                 <tr>
-                  <td colspan="6">There are no order for this product yet.</td>
+                  <td colspan="6">There are no Items for this Order yet.</td>
                 </tr>
               </ng-template>
             </p-table>
@@ -107,4 +115,35 @@
       </tr>
     </ng-template>
   </p-table>
+
+  <!-- Edit Order Status -->
+  <div class="card flex justify-content-center">
+    <p-dialog
+      header="Edit Order Status"
+      [modal]="true"
+      [(visible)]="visible"
+      [style]="{ width: '50rem', height: '30rem' }"
+    >
+      <span class="p-text-secondary block mb-5">Update Order Status.</span>
+      <div class="flex align-items-center gap-3 mb-3">
+        <label for="username" class="font-semibold w-6rem">Order Status</label>
+        <p-dropdown
+          [options]="orderStatus"
+          [(ngModel)]="selectedOrderStatus"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Select a Status"
+        >
+        </p-dropdown>
+      </div>
+      <div class="flex justify-content-end gap-2">
+        <p-button
+          label="Cancel"
+          severity="secondary"
+          (onClick)="visible = false"
+        />
+        <p-button label="Save" (onClick)="editOrderStatus()" />
+      </div>
+    </p-dialog>
+  </div>
 </div>

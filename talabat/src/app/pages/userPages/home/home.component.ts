@@ -69,6 +69,7 @@ export class HomeComponent {
   private loadProducts(): void {
     this.productParams.pageSize = this.pageSize;
     this.productParams.pageIndex = this.pageIndex;
+    this.productParams.isDeleted = false;
     this._productService.getProducts(this.productParams).subscribe({
       next: (response: any) => {
         this.allProducts = response.products.map((product: IProduct) => ({

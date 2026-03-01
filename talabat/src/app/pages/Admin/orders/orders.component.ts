@@ -9,7 +9,14 @@ import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { TableRowCollapseEvent, TableRowExpandEvent } from 'primeng/table';
 import { NotificationsService } from '../../../../Core/Services/notifications.service';
-import { IOrderItems } from '../../../../Core/Interfaces/UserInterfaces/iorder-items';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms';
+import { OrderStatus } from '../../../../Core/Interfaces/order-status';
+import { IupdateOrderStatus } from '../../../../Core/Interfaces/iupdate-order-status';
+import { Order } from '@stripe/stripe-js';
+
 @Component({
   selector: 'app-orders',
   standalone: true,
@@ -20,14 +27,27 @@ import { IOrderItems } from '../../../../Core/Interfaces/UserInterfaces/iorder-i
     RatingModule,
     ButtonModule,
     CommonModule,
+    DialogModule,
+    InputTextModule,
+    FormsModule,
+    DropdownModule,
   ],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss',
 })
 export class OrdersComponent {
   orders: Iorder[] = [];
-
+  selecteOrder!: number;
+  visible: boolean = false;
   expandedRows = {};
+  orderStatus = Object.values(OrderStatus)
+    .filter((key) => isNaN(Number(key)))
+    .map((key) => ({
+      label: key,
+      value: OrderStatus[key as keyof typeof OrderStatus],
+    }));
+
+  selectedOrderStatus!: OrderStatus;
   constructor(
     private _adminService: AdminService,
     private _notificationService: NotificationsService,
@@ -47,6 +67,7 @@ export class OrdersComponent {
   }
 
   expandAll() {
+    // open all rows by order Id
     this.expandedRows = this.orders.reduce(
       (acc, p: Iorder) => {
         acc[p.id] = true;
@@ -94,5 +115,25 @@ export class OrdersComponent {
       'Product Collapsed',
       event.data.name,
     );
+  }
+  showDialog(id: number) {
+    this.selecteOrder = id;
+    this.visible = true;
+  }
+
+  editOrderStatus(): void {
+    // debugger;
+    const data: IupdateOrderStatus = {
+      status: Number(this.selectedOrderStatus!),
+      id: this.selecteOrder,
+    };
+    console.log(data);
+    this._adminService.updateOrderStatus(data).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getOrders();
+      },
+    });
+    this.visible = false;
   }
 }

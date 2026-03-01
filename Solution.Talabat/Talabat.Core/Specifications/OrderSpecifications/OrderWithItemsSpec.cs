@@ -9,11 +9,18 @@ namespace Talabat.Core.Specifications.OrderSpecifications
 {
     public class OrderWithItemsSpec: BaseSpecification<Order>
     {
-        public OrderWithItemsSpec()
+        public OrderWithItemsSpec(OrderParams @params)
             :base()
         {
             Includes.Add(O => O.Items);
             Includes.Add(O => O.DelivaryMethod!);
+            AddPagination((@params.PageIndex - 1) * @params.PageSize, @params.PageSize);
+        }
+
+        public OrderWithItemsSpec(int orderId)
+            : base(O => O.Id == orderId)
+        {
+
         }
     }
 }

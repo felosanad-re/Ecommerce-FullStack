@@ -4,7 +4,7 @@ namespace Talabat.Core.Specifications.SpecModel
 {
     public class ProductSpecifications : BaseSpecification<Product>
     {
-        public ProductSpecifications(ProductParams productParams) 
+        public ProductSpecifications(ProductParams productParams)
             : base(
                     P => (string.IsNullOrEmpty(productParams.Search) || P.Name.ToLower().Contains(productParams.Search))
                     &&

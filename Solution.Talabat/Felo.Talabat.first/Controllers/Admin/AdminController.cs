@@ -104,7 +104,7 @@ namespace Felo.Talabat.Api.Controllers.Admin
         #endregion
 
         #region Get Product By Id
-        [HttpGet("{productId}")]
+        [HttpGet("GetProduct/{productId}")]
         public async Task<ActionResult<ProductToReturnDto>> Get(int productId)
         {
             var product = await _productService.GetProductAsync(productId);

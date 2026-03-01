@@ -41,6 +41,7 @@ namespace Felo.Talabat.Api.Helpers
             CreateMap<AddCategoryRequest, Category>();
 
             CreateMap<ApplicationUser, ApplicationUserToReturn>();
+            CreateMap<Order, OrderStatusToReturnDto>();
         }
     }
 }
