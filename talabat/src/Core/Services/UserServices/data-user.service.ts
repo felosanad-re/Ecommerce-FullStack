@@ -7,8 +7,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class DataUserService {
   constructor(private _http: HttpClient) {}
-  // عملت بروبيرتي من النوع ده علشان اقدر اجيب اسم اليوزر
+  // عملت بروبيرتي من النوع ده علشان اقدر اجيب اسم النوع
   userName: BehaviorSubject<string> = new BehaviorSubject<string>(
-    localStorage.getItem('userName') || 'Vistor',
+    localStorage.getItem('userName') || 'Log In',
   );
 }

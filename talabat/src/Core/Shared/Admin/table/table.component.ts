@@ -1,7 +1,7 @@
 import { Component, Input, input } from '@angular/core';
-import { AdminService } from '../../../../Core/Services/AdminServices/admin.service';
-import { IProduct } from '../../../../Core/Interfaces/UserInterfaces/iproduct';
-import { ProductParams } from '../../../../Core/Interfaces/UserInterfaces/product-params';
+import { AdminService } from '../../../Services/AdminServices/admin.service';
+import { IProduct } from '../../../Interfaces/UserInterfaces/iproduct';
+import { ProductParams } from '../../../Interfaces/UserInterfaces/product-params';
 import { ConfirmationService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
@@ -20,13 +20,14 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { IBrand } from '../../../../Core/Interfaces/UserInterfaces/ibrand';
-import { ICategory } from '../../../../Core/Interfaces/UserInterfaces/icategory';
-import { NotificationsService } from '../../../../Core/Services/notifications.service';
-import { StockTypes } from '../../../../Core/Interfaces/stock-types';
+import { IBrand } from '../../../Interfaces/UserInterfaces/ibrand';
+import { ICategory } from '../../../Interfaces/UserInterfaces/icategory';
+import { NotificationsService } from '../../../Services/notifications.service';
+import { StockTypes } from '../../../Interfaces/stock-types';
 import { Subject } from 'rxjs';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 @Component({
-  selector: 'app-taple',
+  selector: 'app-table',
   standalone: true,
   imports: [
     TableModule,
@@ -47,9 +48,10 @@ import { Subject } from 'rxjs';
     InputTextModule,
     FormsModule,
     InputNumberModule,
+    PaginatorModule,
   ],
-  templateUrl: './taple.component.html',
-  styleUrl: './taple.component.scss',
+  templateUrl: './table.component.html',
+  styleUrl: './table.component.scss',
   providers: [ConfirmationService],
   styles: [
     `
@@ -61,7 +63,7 @@ import { Subject } from 'rxjs';
     `,
   ],
 })
-export class TapleComponent {
+export class TableComponent {
   constructor(
     private _adminService: AdminService,
     private confirmationService: ConfirmationService,
@@ -72,7 +74,7 @@ export class TapleComponent {
   product!: IProduct;
   @Input({ required: true }) brands!: IBrand[];
   @Input({ required: true }) categories!: ICategory[];
-  countOfProduct!: number;
+  @Input({ required: true }) countOfProduct!: number;
   selectedProducts!: IProduct[] | null;
   isAddProduct!: boolean;
 
@@ -145,7 +147,6 @@ export class TapleComponent {
     const file = event.files?.[0];
     if (!file) return;
 
-    // تحقق من الحجم والنوع (اختياري)
     if (file.size > 2000000) {
       this._notificationService.showError(
         'Add Product Error',
@@ -185,7 +186,7 @@ export class TapleComponent {
         );
         this.productDialog = false;
         this.resetForm();
-        window.location.reload(); // أو تحديث الجدول بدون reload لو ممكن
+        window.location.reload();
       },
       error: (err) => {
         this._notificationService.showError('AddProduct', 'add error');

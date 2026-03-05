@@ -46,7 +46,6 @@ namespace Felo.Talabat.Api.Controllers.Admin
         }
         #endregion
 
-
         #region GetProducts
         // GET: /api/Admin/GetProducts
         [HttpGet("GetProducts")]

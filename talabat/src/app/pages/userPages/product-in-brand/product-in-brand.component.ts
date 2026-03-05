@@ -31,11 +31,11 @@ export class ProductInBrandComponent {
   getProductWithBrand(id: number): void {
     this._productService.getProducts(this.ProductParams).subscribe({
       next: (response) => {
-        this.productWithBrand = response.products;
+        this.productWithBrand = response.data;
         if (this.productWithBrand.length > 0) {
           this.brandType = this.productWithBrand[0];
         }
-        console.log(response.products);
+        console.log(response.data);
       },
       error: (error) => console.log(error),
     });

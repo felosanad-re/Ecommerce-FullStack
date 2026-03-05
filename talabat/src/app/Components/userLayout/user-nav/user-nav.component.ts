@@ -4,6 +4,7 @@ import { MenuItem } from 'primeng/api';
 import { DataUserService } from '../../../../Core/Services/UserServices/data-user.service';
 import { Router } from '@angular/router';
 import { CartService } from '../../../../Core/Services/UserServices/cart.service';
+import { AuthService } from '../../../../Core/Services/ِAuthServices/auth.service';
 
 @Component({
   selector: 'app-user-nav',
@@ -23,6 +24,7 @@ export class UserNavComponent {
     private _userData: DataUserService,
     private _cartService: CartService,
     private _router: Router,
+    public _authService: AuthService,
   ) {}
   ngOnInit() {
     this.getUserName();
@@ -54,6 +56,16 @@ export class UserNavComponent {
   // Create function To Get UserName
   getUserName(): void {
     this._userData.userName.subscribe((res) => (this.userName = res));
+  }
+
+  handleUserClick(): void {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this._router.navigate(['login']);
+      return;
+    }
+
+    this.isLogOut = !this.isLogOut;
   }
 
   // Function To LogOut User without Api

@@ -72,7 +72,7 @@ export class HomeComponent {
     this.productParams.isDeleted = false;
     this._productService.getProducts(this.productParams).subscribe({
       next: (response: any) => {
-        this.allProducts = response.products.map((product: IProduct) => ({
+        this.allProducts = response.data.map((product: IProduct) => ({
           ...product,
         }));
       },
@@ -85,7 +85,7 @@ export class HomeComponent {
   getSmallProduct(): void {
     this._productService.getProducts(this.productParams).subscribe({
       next: (response: any) => {
-        this.smallProducts = response.products.slice(0, 4);
+        this.smallProducts = response.data.slice(0, 4);
       },
       error: (err) => {
         console.error('Failed to load products', err);

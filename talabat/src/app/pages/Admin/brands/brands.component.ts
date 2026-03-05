@@ -52,7 +52,7 @@ export class BrandsComponent {
     this.brandDialog = true;
   }
   getBrands(): void {
-    this._adminService.getbrand().subscribe({
+    this._adminService.getBrand().subscribe({
       next: (res: IBrand[]) => {
         this.brands = res;
         console.log(this.brands);

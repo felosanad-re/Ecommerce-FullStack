@@ -1,3 +1,17 @@
 <div class="container">
-  <app-taple [products]="product" [categories]="category" [brands]="brand" />
+  <app-table
+    [products]="product"
+    [categories]="category"
+    [brands]="brand"
+    [countOfProduct]="countOfProduct"
+  />
+
+  <div class="card flex justify-content-center">
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="20"
+    />
+  </div>
 </div>

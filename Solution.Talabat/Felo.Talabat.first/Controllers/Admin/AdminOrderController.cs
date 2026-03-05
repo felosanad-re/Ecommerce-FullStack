@@ -3,7 +3,6 @@ using Felo.Talabat.Api.ModelDto.AdminModels;
 using Felo.Talabat.Api.ModelDto.OrderRequests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using Talabat.Core;
 using Talabat.Core.Entites.SignalR;
 using Talabat.Core.Services.Contract.NotificationsServices;
@@ -15,7 +14,7 @@ using Talabat.Core.Specifications.SpecModel;
 namespace Felo.Talabat.Api.Controllers.Admin
 {
     [Authorize]
-    //[Authorize(Roles = SD.SUPER_ADMIN + "," + SD.ADMIN)]
+    [Authorize(Roles = SD.SUPER_ADMIN + "," + SD.ADMIN)]
     public class AdminOrderController : BaseController
     {
         #region Services
@@ -32,7 +31,6 @@ namespace Felo.Talabat.Api.Controllers.Admin
         #endregion
 
         #region GetAllOrders
-        [Authorize(Roles = SD.SUPER_ADMIN + "," + SD.ADMIN)]
         [HttpGet("Orders")] // Get: /api/AdminOrder/Orders
         public async Task<ActionResult<Pagination<IReadOnlyList<OrderToReturnDto>>>> GetAllOrders([FromQuery]OrderParams @params)
         {
@@ -43,7 +41,6 @@ namespace Felo.Talabat.Api.Controllers.Admin
         #endregion
 
         #region Update OrderStatus
-        [Authorize(Roles = SD.SUPER_ADMIN + "," + SD.ADMIN)]
         [HttpPost("UpdateOrderStatus")] // Post: /api/AdminOrder/UpdateOrderStatus
         public async Task<ActionResult<OrderStatusToReturnDto>> UpdateStatus([FromBody] UpdateOrderStatus request)
         {

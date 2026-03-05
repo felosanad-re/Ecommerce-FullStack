@@ -12,6 +12,7 @@ import { ApplicationUser } from '../../Interfaces/application-user';
 import { IupdateOrderStatus } from '../../Interfaces/iupdate-order-status';
 import { IOrderStatusResponse } from '../../Interfaces/iorder-status-response';
 import { Notifications } from '../../Interfaces/Notifications';
+import { ParamNotification } from '../../Interfaces/Notifications/param-notification';
 
 @Injectable({
   providedIn: 'root',
@@ -101,7 +102,7 @@ export class AdminService {
     );
   }
 
-  getbrand(): Observable<IBrand[]> {
+  getBrand(): Observable<IBrand[]> {
     return this._http.get<IBrand[]>(`${environment.apiUrl}/api/Admin/Brands`);
   }
 
@@ -156,8 +157,8 @@ export class AdminService {
     );
   }
 
-  getOrders(): Observable<Iorder[]> {
-    return this._http.get<Iorder[]>(
+  getOrders(): Observable<IPagination<Iorder>> {
+    return this._http.get<IPagination<Iorder>>(
       `${environment.apiUrl}/api/AdminOrder/Orders`,
     );
   }
@@ -171,9 +172,31 @@ export class AdminService {
     );
   }
 
-  getAllNotifications(): Observable<Notifications[]> {
-    return this._http.get<Notifications[]>(
+  getAllNotifications(
+    data: ParamNotification,
+  ): Observable<IPagination<Notifications>> {
+    let params = new HttpParams();
+    Object.entries(data).forEach(([key, value]) => {
+      if (value != null && value != undefined) {
+        params = params.append(key, value.toString());
+      }
+    });
+    return this._http.get<IPagination<Notifications>>(
       `${environment.apiUrl}/api/AdminOrder/GetAllNotification`,
+      { params },
+    );
+  }
+
+  deleteNotification(id: number): Observable<any> {
+    return this._http.delete(
+      `${environment.apiUrl}/api/AdminOrder/DeleteNotification?id=${id}`,
+    );
+  }
+
+  readNotification(id: number): Observable<any> {
+    return this._http.put(
+      `${environment.apiUrl}/api/AdminOrder/EditNotification?id=${id}`,
+      {},
     );
   }
 }

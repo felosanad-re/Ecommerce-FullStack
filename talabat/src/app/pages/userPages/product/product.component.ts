@@ -57,7 +57,7 @@ export class ProductComponent {
     this._productService.getProducts(this.productParams).subscribe({
       next: (response) => {
         this.productCount = response.count;
-        this.allProducts = response.products.map((product: IProduct) => ({
+        this.allProducts = response.data.map((product: IProduct) => ({
           ...product,
           // isAddedToCart: this._cartService.isAddToCart(product) || false,
         }));

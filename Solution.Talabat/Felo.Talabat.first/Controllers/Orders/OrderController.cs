@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using Felo.Talabat.Api.ModelDto.OrderRequests;
-using Felo.Talabat.Api.ModelDto.Payment;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Stripe;
-using Stripe.Checkout;
 using System.Security.Claims;
 using Talabat.Core.Entites.Orders;
 using Talabat.Core.Services.Contract.OrderService;

@@ -28,7 +28,7 @@
 
       <!-- Main Container [Parent] -->
       <div class="hidden md:block md:col-6">
-        <!-- Products [Childrens]-->
+        <!-- Products [Children]-->
         <app-card [isSmallCard]="true" [products]="smallProducts" />
       </div>
 
@@ -41,6 +41,7 @@
       <!-- End Show Our Products -->
     </div>
   </div>
+  <!-- Pagination -->
   <div class="card flex justify-content-center">
     <p-paginator
       (onPageChange)="onPageChange($event)"

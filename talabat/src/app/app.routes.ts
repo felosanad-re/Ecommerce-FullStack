@@ -1,15 +1,18 @@
 import { Routes } from '@angular/router';
 import { authGuard } from '../Core/guard/auth.guard';
 import { detailsResolver } from '../Core/Resolvers/details.resolver';
+import { roleGuard } from '../Core/guard/role.guard';
 
 export const routes: Routes = [
+  // User Routes
   {
     path: '',
     loadComponent: () =>
       import('./Layouts/user-layout/user-layout.component').then(
         (m) => m.UserLayoutComponent,
       ),
-    // canActivate: [authGuard], // guard to block user from go to home without login
+    /// data: { Roles: ['CUSTOMER'], redirectTo: '/login' },
+    /// canActivate: [roleGuard], // guard to block user from go to home without login
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       // home
@@ -162,7 +165,7 @@ export const routes: Routes = [
       },
     ],
   },
-  // Admin Dashbord
+  // Admin Dashboard
   {
     path: 'admin',
     // canActivate: [adminGuard],
@@ -170,6 +173,8 @@ export const routes: Routes = [
       import('./Layouts/admin/admin-layout.component').then(
         (c) => c.AdminLayoutComponent,
       ),
+    canActivate: [roleGuard],
+    data: { Roles: ['ADMIN', 'SUPER_ADMIN'], redirectTo: '/home' },
     children: [
       {
         path: 'dashboard',

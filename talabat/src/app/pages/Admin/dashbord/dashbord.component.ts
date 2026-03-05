@@ -18,6 +18,7 @@ import { ApplicationUser } from '../../../../Core/Interfaces/application-user';
 import { IOrderItems } from '../../../../Core/Interfaces/UserInterfaces/iorder-items';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { IPagination } from '../../../../Core/Interfaces/UserInterfaces/ipagination';
 @Component({
   selector: 'app-dashbord',
   standalone: true,
@@ -65,8 +66,8 @@ export class DashbordComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.initChart();
     this._adminService.getOrders().subscribe({
-      next: (response: Iorder[]) => {
-        this.allProductItems = response.flatMap((order) => order.items); // loop + map
+      next: (response: IPagination<Iorder>) => {
+        this.allProductItems = response.data.flatMap((order) => order.items); // loop + map
       },
       error: (error) => console.log(error),
     });
@@ -77,8 +78,8 @@ export class DashbordComponent implements OnInit, OnDestroy {
     ];
 
     this._adminService.getOrders().subscribe({
-      next: (res: Iorder[]) => {
-        this.getOrderCount = res.length;
+      next: (res: IPagination<Iorder>) => {
+        this.getOrderCount = res.data.length;
       },
     });
 

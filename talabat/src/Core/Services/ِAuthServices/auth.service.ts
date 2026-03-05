@@ -34,10 +34,10 @@ interface CurrentUser {
   providedIn: 'root',
 })
 export class AuthService {
-  // get CuterrentUser
+  // get CurrentUser
   private currentUserSubject = new BehaviorSubject<CurrentUser | null>(null);
 
-  curentUser$ = this.currentUserSubject.asObservable();
+  currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(private _http: HttpClient) {
     this.loadUserFromStorage();

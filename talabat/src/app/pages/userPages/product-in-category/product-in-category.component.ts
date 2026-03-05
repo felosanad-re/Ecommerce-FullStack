@@ -31,8 +31,8 @@ export class ProductInCategoryComponent {
   getProductWithCategory(id: number): void {
     this._productService.getProducts(this.productParams).subscribe({
       next: (response) => {
-        this.productWithCategory = response.products;
-        console.log(response.products);
+        this.productWithCategory = response.data;
+        console.log(response.data);
         if (this.productWithCategory.length > 0) {
           this.categoryType = this.productWithCategory[0]; // Get Category name
         }

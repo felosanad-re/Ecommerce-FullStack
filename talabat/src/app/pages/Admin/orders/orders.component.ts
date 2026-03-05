@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { OrderStatus } from '../../../../Core/Interfaces/order-status';
 import { IupdateOrderStatus } from '../../../../Core/Interfaces/iupdate-order-status';
 import { Order } from '@stripe/stripe-js';
+import { IPagination } from '../../../../Core/Interfaces/UserInterfaces/ipagination';
 
 @Component({
   selector: 'app-orders',
@@ -59,8 +60,8 @@ export class OrdersComponent {
 
   getOrders() {
     this._adminService.getOrders().subscribe({
-      next: (res: Iorder[]) => {
-        this.orders = res;
+      next: (res: IPagination<Iorder>) => {
+        this.orders = res.data;
         console.log(this.orders);
       },
     });
