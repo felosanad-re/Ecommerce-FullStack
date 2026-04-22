@@ -1,5 +1,5 @@
 .user-name {
-  background-color: #1c99ab;
+  background-color: var(--primary-color);
   position: relative;
   &::before {
     content: "";
@@ -10,7 +10,7 @@
     border: {
       width: 15px;
       style: solid;
-      color: #1c99ab transparent transparent transparent;
+      color: var(--primary-color) transparent transparent transparent;
     }
   }
 }
@@ -19,7 +19,7 @@
   bottom: 0;
   left: 50%;
   transform: translate(-50%, calc(100% + 15px));
-  background-color: #1c99ab;
+  background-color: var(--primary-color);
 }
 
 .admin {
@@ -27,9 +27,73 @@
   bottom: -115%;
   left: 50%;
   transform: translate(-50%, calc(100% + 15px));
-  background-color: #1c99ab;
+  background-color: var(--primary-color);
 }
 
 .p-badge {
-  background-color: #1c99ab !important;
+  background-color: var(--primary-color) !important;
+}
+// .nav-brand-wrapper {
+//   flex-wrap: nowrap;
+// }
+
+.dashboard-link {
+  position: absolute;
+  white-space: nowrap;
+  text-decoration: none;
+  z-index: 10;
+}
+
+:host ::ng-deep .p-menubar-start,
+:host ::ng-deep .p-menubar-end {
+  display: flex;
+  align-items: center;
+}
+
+:host ::ng-deep .p-menubar-root-list {
+  align-items: center;
+}
+
+:host ::ng-deep .p-menubar {
+  background-color: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+:host ::ng-deep .p-menubar .p-menubar-item {
+  color: var(--text-color);
+}
+
+:host ::ng-deep .p-menubar .p-menubar-item:hover {
+  background-color: var(--surface-hover);
+}
+
+.card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-name {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.log-out {
+  position: absolute;
+
+  z-index: 11;
+}
+
+@media (max-width: 768px) {
+  .nav-brand-wrapper {
+    gap: 0.75rem;
+  }
+
+  .dashboard-link {
+    top: calc(100% + 3.5rem);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
 }

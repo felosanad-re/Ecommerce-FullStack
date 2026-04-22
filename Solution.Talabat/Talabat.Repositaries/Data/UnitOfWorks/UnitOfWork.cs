@@ -19,7 +19,7 @@ namespace Talabat.Repositaries.Data.UnitOfWorks
         public UnitOfWork(ShopDbContext dbContext)
         {
             _dbContext = dbContext;
-            _repositary = new Hashtable();
+            _repositary = new Hashtable(); // Key[RepoName] And Value[repository]
         }
 
         public IGenaricRepo<TEntity> RepositaryAsync<TEntity>() where TEntity : ModelBase

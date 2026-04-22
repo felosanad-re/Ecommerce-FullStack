@@ -6,7 +6,7 @@ namespace Talabat.Services.AttachmentServices
     public class AttachmentService : IAttachmentService
     {
         // Extentions Allows
-        private readonly List<string> _allowExtentions = new() { ".png", ".jpg", "jpeg" };
+        private readonly List<string> _allowExtentions = new() { ".png", ".jpg", ".jpeg" };
         private const int _allowMaxSize = 2_097_152;
         // Allow MaxSize
 

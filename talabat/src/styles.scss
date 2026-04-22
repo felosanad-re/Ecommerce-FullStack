@@ -3,13 +3,109 @@
 @import "primeng/resources/primeng.min.css";
 @import "primeflex/primeflex.css";
 
+/* Dark Mode Styles */
+[data-theme="dark"] {
+  /* PrimeNG Dark Theme */
+  --p-surface-0: #0f0f0f;
+  --p-surface-50: #262626;
+  --p-surface-100: #404040;
+  --p-surface-200: #525252;
+  --p-surface-300: #626262;
+  --p-surface-400: #737373;
+  --p-surface-500: #868686;
+  --p-surface-600: #9ca3af;
+  --p-surface-700: #b8b8b8;
+  --p-surface-800: #d4d4d4;
+  --p-surface-900: #ffffff;
+  --p-surface-950: #ffffff;
+
+  --p-surface-card: #1e1e1e;
+  --p-surface-overlay: #2d2d2d;
+  --p-surface-hover: #3a3a3a;
+  --p-surface-border: #404040;
+
+  --p-text-color: #ffffff;
+  --p-text-color-secondary: #b0b0b0;
+  --p-text-color-contrast: #000000;
+
+  --p-primary-50: #e7f5ff;
+  --p-primary-100: #b3d9ff;
+  --p-primary-200: #80bdff;
+  --p-primary-300: #4d94ff;
+  --p-primary-400: #1a75ff;
+  --p-primary-500: #007bff;
+  --p-primary-600: #0056b3;
+  --p-primary-700: #004494;
+  --p-primary-800: #003375;
+  --p-primary-900: #002256;
+  --p-primary-950: #001237;
+
+  --p-gray-50: #f9fafb;
+  --p-gray-100: #f3f4f6;
+  --p-gray-200: #e5e7eb;
+  --p-gray-300: #d1d5db;
+  --p-gray-400: #9ca3af;
+  --p-gray-500: #6b7280;
+  --p-gray-600: #4b5563;
+  --p-gray-700: #374151;
+  --p-gray-800: #1f2937;
+  --p-gray-900: #111827;
+  --p-gray-950: #030712;
+
+  --p-surface-ground: #121212;
+}
+
+/* Dark Theme Support */
+[data-theme="dark"] {
+  --surface-card: #1e1e1e;
+  --surface-overlay: #2d2d2d;
+  --surface-hover: #3a3a3a;
+  --surface-border: #404040;
+  --text-color: #ffffff;
+  --text-color-secondary: #b0b0b0;
+  --surface-ground: #121212;
+  --surface-900: #ffffff;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --info-color: #17a2b8;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --text-color-contrast: #000000;
+}
+
+[data-theme="light"] {
+  --surface-card: #ffffff;
+  --surface-overlay: #f8f9fa;
+  --surface-hover: #e9ecef;
+  --surface-border: #dee2e6;
+  --text-color: #212529;
+  --text-color-secondary: #6c757d;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --info-color: #17a2b8;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --text-color-contrast: #ffffff;
+}
+
 /* General */
 $scale: 14px; /* main font size */
 $borderRadius: 12px; /* border radius of layout element e.g. card, sidebar */
 $transitionDuration: 0.2s; /* transition duration of layout elements e.g. sidebar, overlay menus */
 
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease;
+  background-color: var(--surface-ground);
+  color: var(--text-color);
+}
+
+/* Ensure all elements inherit the theme */
+* {
+  box-sizing: border-box;
 }
 
 .container-fluid {

@@ -45,3 +45,9 @@ bin/
 obj/
 *.user
 Properties/PublishProfiles/*.user
+
+.claude
+
+.vs/
+bin/
+obj/

@@ -68,10 +68,10 @@ namespace Felo.Talabat.Api
                 options.Password.RequiredLength = 5;
             }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
-            // Add All Identity Dependancy Injection
+            // Add All Identity Dependency Injection
             builder.Services.AddIdentityServices(builder.Configuration);
 
-            // Add All Application Services Dependancy
+            // Add All Application Services Dependency
             builder.Services.AddApplicationServices();
 
             // Add Error Response Model
@@ -94,18 +94,18 @@ namespace Felo.Talabat.Api
             StripeConfiguration.ApiKey = builder.Configuration["StripeSitting:SecretKey"];
             var app = builder.Build();
 
-            #region Update DataBase And Applyed Migrations
+            #region Update DataBase And Applied Migrations
             // Add Scope
             var scope = app.Services.CreateScope();
             // Add Service
             var services = scope.ServiceProvider;
-            // Create Object from ShopDbContext Implicitaly
+            // Create Object from ShopDbContext Implicitly
             var _context = services.GetRequiredService<ShopDbContext>();
-            // Create Object from ApplicationDbContext Implicitaly
+            // Create Object from ApplicationDbContext Implicitly
             var _ApplicationContext = services.GetRequiredService<ApplicationDbContext>();
-            // Create Object From Ilooger Factory Implicitaly
+            // Create Object From ILogger Factory Implicitly
             var logger = services.GetRequiredService<ILoggerFactory>();
-            // Create New Object DbInitialization Implicitaly
+            // Create New Object DbInitialization Implicitly
             var _dbInitialization = services.GetRequiredService<IDbInitialization>();
             
             // Apply and Update Database
@@ -114,7 +114,7 @@ namespace Felo.Talabat.Api
                 await _ApplicationContext.Database.MigrateAsync();
                 await _context.Database.MigrateAsync();
                 await _dbInitialization.CreateInitializationAsync();
-                // Create New Object ShopDbContextSeed Implicitaly
+                // Create New Object ShopDbContextSeed Implicitly
                 await ShopDbContextSeed.SeedAsync(_context);
             }
             catch (Exception ex)
@@ -125,14 +125,13 @@ namespace Felo.Talabat.Api
             #endregion
             //builder.Logging.AddFile("logs/app-{Date}.log");
             // Configure the HTTP request pipeline.
-            #region Middlwears 
+            #region Midllweare
             if (app.Environment.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();   // ده بيظهر stack trace كامل
+                app.UseDeveloperExceptionPage();
             }
             else
             {
-                // حتى في Production، خلينا نشوف الخطأ مؤقتاً
                 app.UseExceptionHandler(errorApp =>
                 {
                     errorApp.Run(async context =>
@@ -168,7 +167,7 @@ namespace Felo.Talabat.Api
 
             app.MapControllers();
 
-            app.MapHub<HubSignalR>("/orderHub"); // Anguler Listing
+            app.MapHub<HubSignalR>("/orderHub"); // Angular Listing
 
             #endregion
 

@@ -19,6 +19,8 @@ export class UserNavComponent {
   isLogOut: boolean = false;
   userName: string = '';
   cartCount: number = 0;
+  showDashboardButton: boolean = false;
+  isLoggedIn: boolean = false;
 
   constructor(
     private _userData: DataUserService,
@@ -29,6 +31,7 @@ export class UserNavComponent {
   ngOnInit() {
     this.getUserName();
     this.getUserCartCount();
+    this.updateAuthState();
     this.items = [
       {
         label: 'Home',
@@ -51,11 +54,22 @@ export class UserNavComponent {
         path: 'categories',
       },
     ];
+
+    this._authService.currentUser$.subscribe(() => {
+      this.updateAuthState();
+    });
   }
 
   // Create function To Get UserName
   getUserName(): void {
-    this._userData.userName.subscribe((res) => (this.userName = res));
+    this._userData.userName.subscribe((res) => {
+      if (res) {
+        this.userName = res;
+        return;
+      }
+
+      this.userName = localStorage.getItem('userName') ?? '';
+    });
   }
 
   handleUserClick(): void {
@@ -73,6 +87,9 @@ export class UserNavComponent {
     localStorage.removeItem('token');
     localStorage.removeItem('userName');
     localStorage.removeItem('current_user');
+    this.userName = '';
+    this.isLogOut = false;
+    this.updateAuthState();
     this._router.navigate(['login']);
   }
 
@@ -82,5 +99,22 @@ export class UserNavComponent {
     this._cartService
       .getCartCount()
       .subscribe((res) => (this.cartCount = res.items.length));
+  }
+
+  private updateAuthState(): void {
+    this.isLoggedIn = this._authService.checkToken();
+    this.showDashboardButton =
+      this.isLoggedIn &&
+      (this._authService.isAdmin() || this._authService.isSuperAdmin());
+
+    if (!this.isLoggedIn) {
+      this.userName = '';
+      this.isLogOut = false;
+      return;
+    }
+
+    if (!this.userName) {
+      this.userName = localStorage.getItem('userName') ?? '';
+    }
   }
 }

@@ -19,6 +19,7 @@ export class LoginComponent {
   email!: FormControl;
   password!: FormControl;
   loginForm!: FormGroup;
+
   constructor(
     private _notificationsService: NotificationsService,
     private _authService: AuthService,

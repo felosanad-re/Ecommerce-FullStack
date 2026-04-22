@@ -25,7 +25,7 @@ namespace Talabat.Core.Specifications.SpecModel
             {
                 switch (productParams.Sort)
                 {
-                    case "PriceAsync":
+                    case "PriceAsc":
                         AddOrderBy(P => P.Price);
                         break;
                     case "PriceDesc":

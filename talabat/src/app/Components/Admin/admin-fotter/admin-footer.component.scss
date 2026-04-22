@@ -1,0 +1,18 @@
+.layout-footer {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--surface-card);
+  border-top: 1px solid var(--surface-border);
+  color: var(--text-color-secondary);
+  font-size: 0.875rem;
+
+  figure {
+    margin: 0;
+    padding-right: 0.5rem;
+  }
+
+  span {
+    color: var(--text-color);
+  }
+}

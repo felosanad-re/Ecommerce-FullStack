@@ -147,3 +147,27 @@
         }
     }
 }
+
+/* Dark Mode Topbar Styles */
+[data-theme="dark"] {
+    .layout-topbar {
+        background-color: var(--surface-card);
+        box-shadow:
+            0px 3px 5px rgba(255, 255, 255, 0.02),
+            0px 0px 2px rgba(255, 255, 255, 0.05),
+            0px 1px 4px rgba(255, 255, 255, 0.08);
+
+        .layout-topbar-logo {
+            color: var(--surface-900);
+        }
+
+        .layout-topbar-button {
+            color: var(--text-color-secondary);
+
+            &:hover {
+                color: var(--text-color);
+                background-color: var(--surface-hover);
+            }
+        }
+    }
+}

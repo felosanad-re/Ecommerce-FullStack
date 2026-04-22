@@ -1,0 +1,50 @@
+// /* Dashboard card styling for dark mode */
+// .card {
+//   background-color: var(--surface-card);
+//   border: 1px solid var(--surface-border);
+//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+//   transition: background-color 0.2s ease;
+// }
+
+// /* Text color adjustments for dark mode */
+// .text-500 {
+//   color: var(--text-color-secondary);
+// }
+
+// .text-900 {
+//   color: var(--text-color);
+// }
+
+// /* Chart styling for dark mode */
+// p-chart {
+//   background-color: var(--surface-card);
+//   border: 1px solid var(--surface-border);
+//   border-radius: $borderRadius;
+//   padding: 1rem;
+// }
+
+// /* Table styling for dark mode */
+// :host ::ng-deep .p-datatable {
+//   background-color: var(--surface-card);
+//   border: 1px solid var(--surface-border);
+// }
+
+// :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+//   background-color: var(--surface-overlay);
+//   color: var(--text-color);
+//   border-color: var(--surface-border);
+// }
+
+// :host ::ng-deep .p-datatable .p-datatable-tbody > tr {
+//   background-color: var(--surface-card);
+//   color: var(--text-color);
+//   border-color: var(--surface-border);
+// }
+
+// :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+//   border-color: var(--surface-border);
+// }
+
+// :host ::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+//   background-color: var(--surface-hover);
+// }

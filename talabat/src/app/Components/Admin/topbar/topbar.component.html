@@ -27,6 +27,13 @@
       [badge]="notificationCount"
       badgeClass="text-xl w-5 h-5"
     />
+
+    <p-button
+      (onClick)="toggleTheme()"
+      [icon]="isDark ? 'pi pi-sun' : 'pi pi-moon'"
+      [styleClass]="isDark ? 'p-button-outlined' : 'p-button-text'"
+      tooltip="Toggle Dark/Light Mode"
+    />
   </div>
   <p-overlayPanel #op [showCloseIcon]="true" styleClass="notification-panel">
     <div class="notification-container">

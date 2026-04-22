@@ -18,7 +18,7 @@ namespace Felo.Talabat.Api.Errors
             return statusCode switch
             {
                 400 => "A Bad Request",
-                401 => "Autorized, you are not",
+                401 => "Authorized, you are not",
                 404 => "Not found Product",
                 500 => "Server Error",
                 _ => null // Any Error Come Null
