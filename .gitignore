@@ -1,0 +1,54 @@
+# .NET
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.cache
+*.log
+Database/
+Packages/
+node_modules/
+*.nupkg
+.projection.json
+
+# Visual Studio
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Angular
+talabat/node_modules/
+talabat/dist/
+talabat/.angular/
+talabat/coverage/
+talabat/out-tsc/
+talabat/.tmp/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDEs
+.idea/
+*.sw?
+.DS_Store
+Thumbs.db
+
+# Build
+talabat/dist/
+talabat/tmp/
+talabat/out/
+talabat/.angular/
+talabat/coverage/
