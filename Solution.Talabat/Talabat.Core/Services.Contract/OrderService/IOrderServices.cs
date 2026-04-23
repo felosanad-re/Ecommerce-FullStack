@@ -1,5 +1,7 @@
 ﻿using Talabat.Core.Entites.Orders;
+using Talabat.Core.RequestModels.Import;
 using Talabat.Core.RequestModels.Orders;
+using Talabat.Core.ResponseModel.Import;
 using Talabat.Core.Specifications.OrderSpecifications;
 
 namespace Talabat.Core.Services.Contract.OrderService
@@ -26,5 +28,6 @@ namespace Talabat.Core.Services.Contract.OrderService
 
         Task<IReadOnlyList<OrderExportToReturn>> GetOrderForExport();
         Task<IReadOnlyList<OrderItemsExportToReturn>> GetOrderItemsToExport();
+        Task<OrderImportResultDTO> GetOrdersForImportAsync(ImportDTO<OrderImportToReturnDTO> req);
     }
 }

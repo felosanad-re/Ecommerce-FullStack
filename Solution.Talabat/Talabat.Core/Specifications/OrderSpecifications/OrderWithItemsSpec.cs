@@ -26,7 +26,15 @@ namespace Talabat.Core.Specifications.OrderSpecifications
         public OrderWithItemsSpec(int orderId)
             : base(O => O.Id == orderId)
         {
+            Includes.Add(O => O.Items);
+            Includes.Add(O => O.DelivaryMethod!);
+        }
 
+        public OrderWithItemsSpec(IEnumerable<int> orderIds)
+            : base(O => orderIds.Contains(O.Id))
+        {
+            Includes.Add(O => O.Items);
+            Includes.Add(O => O.DelivaryMethod!);
         }
     }
 }

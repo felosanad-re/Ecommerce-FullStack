@@ -58,6 +58,11 @@ namespace Talabat.Core.Specifications.SpecModel
             AddIncludes();
         }
 
+        public ProductSpecifications(IEnumerable<int> productIds)
+            : base(P => productIds.Contains(P.Id))
+        {
+            AddIncludes();
+        }
         private void AddIncludes()
         {
             Includes.Add(P => P.Brand!);

@@ -20,6 +20,8 @@ namespace Talabat.Core.GenaricRepo
         // Add 
         Task AddAsync(T entity);
 
+        Task AddRangeAsync(IEnumerable<T> entities);
+
         //Update
         void Update(T entity);
 

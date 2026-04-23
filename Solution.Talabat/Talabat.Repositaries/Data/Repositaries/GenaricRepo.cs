@@ -58,6 +58,9 @@ namespace Talabat.Repositaries.Data.Repositaries
             _dbContext.Update(entity);
         }
 
+        public Task AddRangeAsync(IEnumerable<T> entities)
+            => _dbContext.AddRangeAsync(entities);
+
 
         #endregion
     }
