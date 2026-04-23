@@ -827,6 +827,26 @@
     ]
   },
   {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Export.ExportController",
+    "Method": "ExportOrders",
+    "RelativePath": "api/Export/Orders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Export.ExportController",
+    "Method": "ExportProducts",
+    "RelativePath": "api/Export/Products",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Felo.Talabat.Api.Controllers.Orders.OrderController",
     "Method": "GetOrder",
     "RelativePath": "api/Order/{id}",

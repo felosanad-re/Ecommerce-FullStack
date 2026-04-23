@@ -619,3 +619,11 @@ F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Debug\net9.0\ref
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Debug\net9.0\Felo.Talabat.Api.pdb
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Debug\net9.0\Felo.Talabat.Api.genruntimeconfig.cache
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Debug\net9.0\ref\Felo.Talabat.Api.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\ClosedXML.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\ClosedXML.Parser.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\DocumentFormat.OpenXml.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\DocumentFormat.OpenXml.Framework.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\ExcelNumberFormat.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\RBush.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\SixLabors.Fonts.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\System.IO.Packaging.dll

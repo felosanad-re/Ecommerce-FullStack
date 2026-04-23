@@ -1,4 +1,5 @@
 ﻿using Talabat.Core.Entites.Orders;
+using Talabat.Core.RequestModels.Orders;
 using Talabat.Core.Specifications.OrderSpecifications;
 
 namespace Talabat.Core.Services.Contract.OrderService
@@ -22,5 +23,8 @@ namespace Talabat.Core.Services.Contract.OrderService
         // For Admin
 
         Task<Order?> UpdateOrderStatusAsync(int id, OrderStatus status);
+
+        Task<IReadOnlyList<OrderExportToReturn>> GetOrderForExport();
+        Task<IReadOnlyList<OrderItemsExportToReturn>> GetOrderItemsToExport();
     }
 }

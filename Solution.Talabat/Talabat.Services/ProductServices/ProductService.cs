@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Talabat.Core.Entites.Products;
 using Talabat.Core.RequestModels;
+using Talabat.Core.RequestModels.Products;
 using Talabat.Core.Services.Contract.ProductServices;
 using Talabat.Core.Specifications.SpecModel;
 using Talabat.Core.UnitOfWork;
@@ -77,6 +78,14 @@ namespace Talabat.Services.ProductServices
             await _unitOfWork.CompleteAsync();
             return true;
         }
+
+        public async Task<IReadOnlyList<ProductExportToReturn>> GetProductForExport()
+        {
+            var data = await _unitOfWork.RepositaryAsync<Product>().GetAllAsyncSpec(new ProductSpecifications());
+            var result = _mapper.Map<IReadOnlyList<ProductExportToReturn>>(data);
+            return result;
+        }
+
         #endregion
     }
 }

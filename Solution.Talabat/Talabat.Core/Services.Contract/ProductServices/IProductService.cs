@@ -1,5 +1,6 @@
 ﻿using Talabat.Core.Entites.Products;
 using Talabat.Core.RequestModels;
+using Talabat.Core.RequestModels.Products;
 using Talabat.Core.Specifications.SpecModel;
 
 namespace Talabat.Core.Services.Contract.ProductServices
@@ -26,6 +27,8 @@ namespace Talabat.Core.Services.Contract.ProductServices
         
         // Delete Product 
         Task<bool> DeleteProduct(int productId);
+
+        Task<IReadOnlyList<ProductExportToReturn>> GetProductForExport();
         #endregion
     }
 }

@@ -23,7 +23,9 @@ namespace Felo.Talabat.Api
 
                 #region Configuration
 
-                builder.Services.AddControllers();
+                builder.Services.AddControllers()
+                    .AddViewLocalization()
+                    .AddDataAnnotationsLocalization();
                 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
                 builder.Services.AddOpenApi();
                 builder.Services.AddEndpointsApiExplorer();

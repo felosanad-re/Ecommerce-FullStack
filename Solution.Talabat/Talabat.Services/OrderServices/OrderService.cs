@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.SignalR;
 using System.ComponentModel.DataAnnotations;
 using Talabat.Core.Entites.Carts;
 using Talabat.Core.Entites.Orders;
 using Talabat.Core.Entites.Products;
 using Talabat.Core.GenaricRepo;
+using Talabat.Core.RequestModels.Orders;
 using Talabat.Core.Services.Contract.HubServices;
 using Talabat.Core.Services.Contract.OrderService;
 using Talabat.Core.Specifications.OrderSpecifications;
@@ -15,7 +17,8 @@ namespace Talabat.Services.OrderServices
         IUnitOfWork unitOfWork,
         IRedisRepo<Cart> repoCart,
         IOrderBuilder orderBuilder,
-        IOrderTracingServiceHub orderTracingHub
+        IOrderTracingServiceHub orderTracingHub,
+        IMapper mapper
         ) : IOrderServices
     {
         #region Services
@@ -24,6 +27,7 @@ namespace Talabat.Services.OrderServices
         private readonly IRedisRepo<Cart> _repoCart = repoCart;
         private readonly IOrderBuilder _orderBuilder = orderBuilder;
         private readonly IOrderTracingServiceHub _orderTracingHub = orderTracingHub;
+        private readonly IMapper _mapper = mapper;
         #endregion
 
         public async Task<IReadOnlyList<Order>> GetOrdersAsync(OrderParams @params)
@@ -154,6 +158,46 @@ namespace Talabat.Services.OrderServices
             await _orderTracingHub.BroadcastOrderStatusChanges(id, status);
             return updateOrderStatus;
         }
+
         #endregion
+        public async Task<IReadOnlyList<OrderExportToReturn>> GetOrderForExport()
+        {
+            var data = await _unitOfWork.RepositaryAsync<Order>().GetAllAsyncSpec(new OrderWithItemsSpec());
+            var result = _mapper.Map<IReadOnlyList<OrderExportToReturn>>(data);
+
+            // Get Shipping Address
+            foreach (var order in result)
+            {
+                // Get Address for each order
+                var address = data.FirstOrDefault(o => o.Id == order.Id)?.AddressShiper;
+                if(address != null)
+                {
+                    var parts = new[]
+                    {
+                        address.FirstName,
+                        address.LastName,
+                        address.City,
+                        address.Street
+                    };
+                    order.AddressShiper = string.Join(" - ", parts.Where(p => !string.IsNullOrWhiteSpace(p)));
+                }
+            }
+            return result;
+        }
+
+        public async Task<IReadOnlyList<OrderItemsExportToReturn>> GetOrderItemsToExport()
+        {
+            var orders = await _unitOfWork.RepositaryAsync<Order>().GetAllAsyncSpec(new OrderWithItemsSpec());
+            var result = orders.Where(o => o.Items != null && o.Items.Any())
+                .SelectMany(o => o.Items, (order, item) => new OrderItemsExportToReturn
+                {
+                    OrderId = order.Id, // To Attach every item with his order Id
+                    Count = item.Count,
+                    Price = item.Price,
+                    ProductId = item.Product.ProductId,
+                    ProductName = item.Product.Name
+                }).ToList();
+            return result;
+        }
     }
 }

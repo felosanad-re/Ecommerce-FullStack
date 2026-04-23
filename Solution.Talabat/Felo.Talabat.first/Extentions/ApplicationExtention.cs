@@ -2,6 +2,7 @@
 using Talabat.Core.GenaricRepo;
 using Talabat.Core.Services.Contract.AttachmentService;
 using Talabat.Core.Services.Contract.CartServices;
+using Talabat.Core.Services.Contract.ExportServices;
 using Talabat.Core.Services.Contract.HubServices;
 using Talabat.Core.Services.Contract.NotificationsServices;
 using Talabat.Core.Services.Contract.OrderService;
@@ -12,6 +13,7 @@ using Talabat.Repositaries.Data;
 using Talabat.Repositaries.Data.UnitOfWorks;
 using Talabat.Services.AttachmentServices;
 using Talabat.Services.CartServices;
+using Talabat.Services.ExportServices;
 using Talabat.Services.HubServices;
 using Talabat.Services.NotificationServices;
 using Talabat.Services.OrderServices;
@@ -24,6 +26,10 @@ namespace Felo.Talabat.Api.Extentions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            // Add Localization
+            services.AddLocalization(o => o.ResourcesPath = "Localization");
+            // Add Export
+            services.AddScoped<IExportService, ExportService>();
             //Allow NotificationServices
             services.AddScoped(typeof(INotificationService), typeof(NotificationService));
             //Allow IOrderTrackingHub

@@ -9,6 +9,12 @@ namespace Talabat.Core.Specifications.OrderSpecifications
 {
     public class OrderWithItemsSpec: BaseSpecification<Order>
     {
+        public OrderWithItemsSpec()
+            :base()
+        {
+            Includes.Add(O => O.Items);
+            Includes.Add(O => O.DelivaryMethod!);
+        }
         public OrderWithItemsSpec(OrderParams @params)
             :base()
         {
