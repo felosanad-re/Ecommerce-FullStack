@@ -205,4 +205,24 @@ export class TableComponent {
     const value = event.target.value;
     this.searchSubject.next(value.trim() === '' ? null : value);
   }
+
+  exportProducts() {
+    this._adminService.exportProducts().subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Products.xlsx';
+        link.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        this._notificationService.showError(
+          'Export Products',
+          'Failed to export products',
+        );
+        console.error(err);
+      },
+    });
+  }
 }

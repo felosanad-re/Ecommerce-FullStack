@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Talabat.Core.RequestModels.Exports;
 using Talabat.Core.RequestModels.Orders;
@@ -9,6 +10,7 @@ using Talabat.Core.Services.Contract.ProductServices;
 
 namespace Felo.Talabat.Api.Controllers.Export
 {
+    [Authorize]
     public class ExportController : BaseController
     {
         protected readonly IExportService _exportService;

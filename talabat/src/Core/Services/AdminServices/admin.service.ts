@@ -199,4 +199,18 @@ export class AdminService {
       {},
     );
   }
+
+  exportProducts(): Observable<Blob> {
+    return this._http.get(
+      `${environment.apiUrl}/api/Export/Products`,
+      { responseType: 'blob' },
+    );
+  }
+
+  exportOrders(): Observable<Blob> {
+    return this._http.get(
+      `${environment.apiUrl}/api/Export/Orders`,
+      { responseType: 'blob' },
+    );
+  }
 }

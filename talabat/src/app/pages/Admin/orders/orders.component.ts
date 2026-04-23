@@ -17,6 +17,8 @@ import { OrderStatus } from '../../../../Core/Interfaces/order-status';
 import { IupdateOrderStatus } from '../../../../Core/Interfaces/iupdate-order-status';
 import { Order } from '@stripe/stripe-js';
 import { IPagination } from '../../../../Core/Interfaces/UserInterfaces/ipagination';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @Component({
   selector: 'app-orders',
@@ -32,6 +34,8 @@ import { IPagination } from '../../../../Core/Interfaces/UserInterfaces/ipaginat
     InputTextModule,
     FormsModule,
     DropdownModule,
+    FileUploadModule,
+    ToolbarModule,
   ],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss',
@@ -136,5 +140,25 @@ export class OrdersComponent {
       },
     });
     this.visible = false;
+  }
+
+  exportOrders() {
+    this._adminService.exportOrders().subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Orders.xlsx';
+        link.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        this._notificationService.showError(
+          'Export Orders',
+          'Failed to export orders',
+        );
+        console.error(err);
+      },
+    });
   }
 }

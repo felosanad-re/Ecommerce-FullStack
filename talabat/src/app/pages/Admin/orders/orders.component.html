@@ -1,5 +1,39 @@
 <div class="card">
   <p-toast />
+  <p-toolbar styleClass="mb-4 gap-2">
+    <ng-template pTemplate="left">
+      <p-button
+        label="Expand All"
+        icon="pi pi-plus"
+        text
+        (onClick)="expandAll()"
+      />
+      <p-button
+        label="Collapse All"
+        icon="pi pi-minus"
+        text
+        (onClick)="collapseAll()"
+      />
+    </ng-template>
+
+    <ng-template pTemplate="right">
+      <p-fileUpload
+        mode="basic"
+        accept=".xlsx,.xls"
+        [maxFileSize]="1000000"
+        label="Import"
+        chooseLabel="Import"
+        class="mr-2 inline-block"
+      />
+      <p-button
+        severity="help"
+        label="Export"
+        icon="pi pi-upload"
+        (onClick)="exportOrders()"
+      />
+    </ng-template>
+  </p-toolbar>
+
   <p-table
     [value]="orders"
     dataKey="id"
@@ -16,12 +50,14 @@
           icon="pi pi-plus"
           text
           (onClick)="expandAll()"
+          styleClass="hidden"
         />
         <p-button
           label="Collapse All"
           icon="pi pi-minus"
           text
           (onClick)="collapseAll()"
+          styleClass="hidden"
         />
       </div>
     </ng-template>
