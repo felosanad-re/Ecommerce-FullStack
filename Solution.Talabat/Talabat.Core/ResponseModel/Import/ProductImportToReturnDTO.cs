@@ -10,7 +10,7 @@ namespace Talabat.Core.ResponseModel.Import
     public class ProductImportToReturnDTO
     {
         public int Id { get; set; }
-        [Column("Product Name")]
+        [Column("Name")]
         public string Name { get; set; }
         [Column("Descripaion")]
         public string Descripaion { get; set; }

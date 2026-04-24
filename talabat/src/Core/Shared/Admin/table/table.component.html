@@ -21,13 +21,19 @@
     <ng-template pTemplate="right">
       <p-fileUpload
         mode="basic"
-        accept="image/*"
+        accept=".xlsx,.xls"
         [maxFileSize]="1000000"
         label="Import"
         chooseLabel="Import"
         class="mr-2 inline-block"
+        (onSelect)="importProducts($event)"
       />
-      <p-button severity="help" label="Export" icon="pi pi-upload" (onClick)="exportProducts()" />
+      <p-button
+        severity="help"
+        label="Export"
+        icon="pi pi-upload"
+        (onClick)="exportProducts()"
+      />
     </ng-template>
   </p-toolbar>
 

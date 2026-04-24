@@ -612,7 +612,6 @@ F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Debug\net9.0\sta
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Debug\net9.0\staticwebassets.build.json.cache
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Debug\net9.0\staticwebassets.development.json
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Debug\net9.0\Felo.Tal.5DF09FA9.Up2Date
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Debug\net9.0\Felo.Talabat.Api.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Debug\net9.0\refint\Felo.Talabat.Api.dll
@@ -627,3 +626,4 @@ F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\Exc
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\RBush.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\SixLabors.Fonts.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\System.IO.Packaging.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

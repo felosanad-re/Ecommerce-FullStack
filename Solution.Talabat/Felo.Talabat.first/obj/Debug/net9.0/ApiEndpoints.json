@@ -847,6 +847,108 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Import.ImportController",
+    "Method": "ImportOrders",
+    "RelativePath": "api/Import/Orders",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "ZipFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Config.SheetName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Config.StartRow",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Config.HasHeader",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Config.ColumnMapping",
+        "Type": "System.Collections.Generic.Dictionary\u00602[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Talabat.Core.ResponseModel.Import.OrderImportResultDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Felo.Talabat.Api.Controllers.Import.ImportController",
+    "Method": "ImportProducts",
+    "RelativePath": "api/Import/Products",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "ZipFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Config.SheetName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Config.StartRow",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Config.HasHeader",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Config.ColumnMapping",
+        "Type": "System.Collections.Generic.Dictionary\u00602[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Talabat.Core.ResponseModel.Import.ImportToReturnDTO\u00601[[Talabat.Core.ResponseModel.Import.ProductImportToReturnDTO, Talabat.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Felo.Talabat.Api.Controllers.Orders.OrderController",
     "Method": "GetOrder",
     "RelativePath": "api/Order/{id}",

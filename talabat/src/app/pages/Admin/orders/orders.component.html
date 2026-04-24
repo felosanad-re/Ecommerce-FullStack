@@ -19,11 +19,22 @@
     <ng-template pTemplate="right">
       <p-fileUpload
         mode="basic"
+        accept=".zip"
+        [maxFileSize]="10000000"
+        label="Images Zip"
+        chooseLabel="Images Zip"
+        class="mr-2 inline-block"
+        (onSelect)="onZipFileSelect($event)"
+        (onClear)="onZipFileClear()"
+      />
+      <p-fileUpload
+        mode="basic"
         accept=".xlsx,.xls"
         [maxFileSize]="1000000"
         label="Import"
         chooseLabel="Import"
         class="mr-2 inline-block"
+        (onSelect)="importOrders($event)"
       />
       <p-button
         severity="help"

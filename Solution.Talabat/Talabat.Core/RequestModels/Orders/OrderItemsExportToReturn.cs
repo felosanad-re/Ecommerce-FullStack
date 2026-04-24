@@ -13,7 +13,7 @@ namespace Talabat.Core.RequestModels.Orders
         public string ProductName { get; set; }
         public int Count { get; set; }
         public decimal Price { get; set; }
-
+        public string? PictureUrl { get; set; }
         public int OrderId { get; set; }
     }
 }

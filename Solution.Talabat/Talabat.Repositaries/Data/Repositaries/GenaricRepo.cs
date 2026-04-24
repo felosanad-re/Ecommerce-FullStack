@@ -61,6 +61,12 @@ namespace Talabat.Repositaries.Data.Repositaries
         public Task AddRangeAsync(IEnumerable<T> entities)
             => _dbContext.AddRangeAsync(entities);
 
+        public void Remove(T entity)
+            => _dbContext.Set<T>().Remove(entity);
+
+        public void RemoveRange(IEnumerable<T> entities)
+            => _dbContext.Set<T>().RemoveRange(entities);
+
 
         #endregion
     }

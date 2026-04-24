@@ -7,5 +7,10 @@ namespace Talabat.Core.ResponseModel.Import
         public int Count { get; set; }
         public decimal Price { get; set; }
         public int OrderId { get; set; }
+
+        /// <summary>
+        /// URL of the product image uploaded from the zip file, or the existing product image.
+        /// </summary>
+        public string? PictureUrl { get; set; }
     }
 }

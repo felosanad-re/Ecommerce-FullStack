@@ -19,6 +19,7 @@ import { Order } from '@stripe/stripe-js';
 import { IPagination } from '../../../../Core/Interfaces/UserInterfaces/ipagination';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToolbarModule } from 'primeng/toolbar';
+import { ImportResult } from '../../../../Core/Interfaces/import-result';
 
 @Component({
   selector: 'app-orders',
@@ -45,6 +46,7 @@ export class OrdersComponent {
   selecteOrder!: number;
   visible: boolean = false;
   expandedRows = {};
+  selectedZipFile: File | null = null;
   orderStatus = Object.values(OrderStatus)
     .filter((key) => isNaN(Number(key)))
     .map((key) => ({
@@ -160,5 +162,56 @@ export class OrdersComponent {
         console.error(err);
       },
     });
+  }
+
+  onZipFileSelect(event: any) {
+    const file = event.files[0];
+    if (file) {
+      this.selectedZipFile = file;
+      this._notificationService.showSuccedded(
+        'Images Zip',
+        `Zip file "${file.name}" selected`,
+      );
+    }
+  }
+
+  onZipFileClear() {
+    this.selectedZipFile = null;
+  }
+
+  importOrders(event: any) {
+    const file = event.files[0];
+    if (!file) {
+      this._notificationService.showError('Import Orders', 'No file selected');
+      return;
+    }
+    this._adminService
+      .importOrders(file, this.selectedZipFile ?? undefined)
+      .subscribe({
+        next: (res: ImportResult<unknown>) => {
+          const details = `Total Rows: ${res.totalRows} | Added: ${res.addedCount} | Skipped Duplicates: ${res.skippedDuplicates}`;
+          if (res.errors && res.errors.length > 0) {
+            const errorDetails = res.errors.join('\n');
+            this._notificationService.showError(
+              'Import Orders - Errors',
+              `${details}\nErrors:\n${errorDetails}`,
+            );
+          } else {
+            this._notificationService.showSuccedded(
+              'Import Orders',
+              `${res.message}\n${details}`,
+            );
+          }
+          this.selectedZipFile = null;
+          this.getOrders();
+        },
+        error: (err) => {
+          this._notificationService.showError(
+            'Import Orders',
+            'Failed to import orders',
+          );
+          console.error(err);
+        },
+      });
   }
 }

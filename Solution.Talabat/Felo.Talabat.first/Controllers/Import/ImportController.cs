@@ -7,8 +7,8 @@ using Talabat.Core.Services.Contract.ProductServices;
 
 namespace Felo.Talabat.Api.Controllers.Import
 {
-    [Authorize]
-    public class ImportController : BaseController
+    //[Authorize]
+    public class ImportController: BaseController
     {
         private readonly IProductService _productService;
         private readonly IOrderServices _orderService;
@@ -20,33 +20,27 @@ namespace Felo.Talabat.Api.Controllers.Import
         }
 
         [HttpPost("Products")] // Post: /api/Import/Products
-        public async Task<ActionResult<ImportToReturnDTO<ProductImportToReturnDTO>>> ImportProducts([FromForm] IFormFile file)
+        public async Task<ActionResult<ImportToReturnDTO<ProductImportToReturnDTO>>> ImportProducts([FromForm] ImportDTO<ProductImportToReturnDTO> req)
         {
-            if (file == null || file.Length == 0)
+            if (req.File == null || req.File.Length == 0)
             {
                 return BadRequest(new { Message = "Excel file is required." });
             }
 
-            var result = await _productService.GetProductsForImportAsync(new ImportDTO<ProductImportToReturnDTO>
-            {
-                File = file
-            });
+            var result = await _productService.GetProductsForImportAsync(req);
 
             return Ok(result);
         }
 
         [HttpPost("Orders")] // Post: /api/Import/Orders
-        public async Task<ActionResult<OrderImportResultDTO>> ImportOrders([FromForm] IFormFile file)
+        public async Task<ActionResult<OrderImportResultDTO>> ImportOrders([FromForm] ImportDTO<OrderImportToReturnDTO> req)
         {
-            if (file == null || file.Length == 0)
+            if (req.File == null || req.File.Length == 0)
             {
                 return BadRequest(new { Message = "Excel file is required." });
             }
 
-            var result = await _orderService.GetOrdersForImportAsync(new ImportDTO<OrderImportToReturnDTO>
-            {
-                File = file
-            });
+            var result = await _orderService.GetOrdersForImportAsync(req);
 
             return Ok(result);
         }

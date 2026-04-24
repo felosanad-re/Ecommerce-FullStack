@@ -13,6 +13,8 @@ import { IupdateOrderStatus } from '../../Interfaces/iupdate-order-status';
 import { IOrderStatusResponse } from '../../Interfaces/iorder-status-response';
 import { Notifications } from '../../Interfaces/Notifications';
 import { ParamNotification } from '../../Interfaces/Notifications/param-notification';
+import { ImportResult } from '../../Interfaces/import-result';
+import { throws } from 'assert';
 
 @Injectable({
   providedIn: 'root',
@@ -20,9 +22,20 @@ import { ParamNotification } from '../../Interfaces/Notifications/param-notifica
 export class AdminService {
   constructor(private _http: HttpClient) {}
 
+  // Form Builder
+  private buildImportFormData(file: File): FormData {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('config.sheetName', 'Products');
+    formData.append('config.startRow', '2');
+    formData.append('config.hasHeader', 'true');
+
+    return formData;
+  }
+
   getProducts(productParam: ProductParams): Observable<IPagination<IProduct>> {
     let params = new HttpParams();
-    // ForLoop everyeach key and value in product params
+    // ForLoop every each key and value in product params
     Object.entries(productParam).forEach(([key, value]) => {
       if (value != undefined && value != null) {
         params = params.append(key, value.toString());
@@ -201,16 +214,33 @@ export class AdminService {
   }
 
   exportProducts(): Observable<Blob> {
-    return this._http.get(
-      `${environment.apiUrl}/api/Export/Products`,
-      { responseType: 'blob' },
-    );
+    return this._http.get(`${environment.apiUrl}/api/Export/Products`, {
+      responseType: 'blob',
+    });
   }
 
   exportOrders(): Observable<Blob> {
-    return this._http.get(
-      `${environment.apiUrl}/api/Export/Orders`,
-      { responseType: 'blob' },
+    return this._http.get(`${environment.apiUrl}/api/Export/Orders`, {
+      responseType: 'blob',
+    });
+  }
+
+  importProducts(file: File): Observable<ImportResult<unknown>> {
+    const formData = this.buildImportFormData(file);
+    return this._http.post<ImportResult<unknown>>(
+      `${environment.apiUrl}/api/Import/Products`,
+      formData,
+    );
+  }
+
+  importOrders(file: File, zipFile?: File): Observable<ImportResult<unknown>> {
+    const formData = this.buildImportFormData(file);
+    if (zipFile) {
+      formData.append('zipFile', zipFile);
+    }
+    return this._http.post<ImportResult<unknown>>(
+      `${environment.apiUrl}/api/Import/Orders`,
+      formData,
     );
   }
 }

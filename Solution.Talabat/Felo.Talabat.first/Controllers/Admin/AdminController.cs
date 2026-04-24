@@ -68,7 +68,7 @@ namespace Felo.Talabat.Api.Controllers.Admin
                 try
                 {
                    var fileName = await _attachmentService.UploadAsync(addProductRequest.ProductPic, "products");
-                    productPic = $"/files/products/{fileName}";
+                    productPic = fileName; // UploadAsync now returns the relative path (e.g. "files/products/guid.png")
                 }
                 catch (Exception ex)
                 {

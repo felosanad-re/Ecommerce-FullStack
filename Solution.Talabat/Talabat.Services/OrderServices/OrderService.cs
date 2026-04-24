@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
 using System.ComponentModel.DataAnnotations;
+using System.IO.Compression;
 using System.Reflection;
 using Talabat.Core.Entites.Carts;
 using Talabat.Core.Entites.Orders;
@@ -9,6 +11,7 @@ using Talabat.Core.GenaricRepo;
 using Talabat.Core.RequestModels.Import;
 using Talabat.Core.RequestModels.Orders;
 using Talabat.Core.ResponseModel.Import;
+using Talabat.Core.Services.Contract.AttachmentService;
 using Talabat.Core.Services.Contract.ImportServices;
 using Talabat.Core.Services.Contract.HubServices;
 using Talabat.Core.Services.Contract.OrderService;
@@ -23,7 +26,8 @@ namespace Talabat.Services.OrderServices
         IOrderBuilder orderBuilder,
         IOrderTracingServiceHub orderTracingHub,
         IMapper mapper,
-        IimportService importService
+        IimportService importService,
+        IAttachmentService attachmentService
         ) : IOrderServices
     {
         #region Services
@@ -34,6 +38,7 @@ namespace Talabat.Services.OrderServices
         private readonly IOrderTracingServiceHub _orderTracingHub = orderTracingHub;
         private readonly IMapper _mapper = mapper;
         private readonly IimportService _importService = importService;
+        private readonly IAttachmentService _attachmentService = attachmentService;
         #endregion
 
         public async Task<IReadOnlyList<Order>> GetOrdersAsync(OrderParams @params)
@@ -203,7 +208,8 @@ namespace Talabat.Services.OrderServices
                     Count = item.Count,
                     Price = item.Price,
                     ProductId = item.Product.ProductId,
-                    ProductName = item.Product.Name
+                    ProductName = item.Product.Name,
+                    PictureUrl = item.Product.PictureUrl
                 }).ToList();
             return result;
         }
@@ -212,39 +218,84 @@ namespace Talabat.Services.OrderServices
         #region  Get Orders ForImport Async
         public async Task<OrderImportResultDTO> GetOrdersForImportAsync(ImportDTO<OrderImportToReturnDTO> req)
         {
-            // Read the same Excel file twice because each worksheet maps to a different DTO shape.
-            var orderSheet = await _importService.ExcelImportAsync(new ImportDTO<OrderImportToReturnDTO>
-            {
-                File = req.File,
-                Config = BuildImportConfig<OrderImportToReturnDTO>("Orders")
-            });
+            var (orderRows, itemRows, errors, result) = await LoadImportSheetsAsync(req);
+            var skippedDuplicates = 0;
 
-            var orderItemsSheet = await _importService.ExcelImportAsync(new ImportDTO<OrderItemImportToReturnDTO>
-            {
-                File = req.File,
-                Config = BuildImportConfig<OrderItemImportToReturnDTO>("OrderItems")
-            });
+            // ── Extract images from the optional zip file and upload them ──
+            // Key = file name without extension (matched by ProductId or ProductName), Value = uploaded URL
+            var uploadedImages = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-            var errors = new List<string>();
-            errors.AddRange(orderSheet.Errors);
-            errors.AddRange(orderItemsSheet.Errors);
-
-            var orderRows = orderSheet.Data;
-            var itemRows = orderItemsSheet.Data;
-            var result = new OrderImportResultDTO
+            if (req.ZipFile is not null && req.ZipFile.Length > 0)
             {
-                TotalRows = orderRows.Count + itemRows.Count,
-                Orders = orderRows,
-                Items = itemRows
-            };
+                var imageEntries = ExtractImageEntries(req.ZipFile, errors);
+
+                foreach (var (fileName, imageData) in imageEntries)
+                {
+                    try
+                    {
+                        var uploadedFileName = await UploadImageAsync(fileName, imageData);
+                        // Store by file name without extension so we can match "1.png" → key "1", "iPhone.png" → key "iPhone"
+                        var key = Path.GetFileNameWithoutExtension(fileName);
+                        if (!string.IsNullOrWhiteSpace(key))
+                        {
+                            uploadedImages[key] = uploadedFileName;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        errors.Add($"Failed to upload image '{fileName}': {ex.Message}");
+                    }
+                }
+            }
+
+            // Set PictureUrl on each item row from uploaded images or existing product data.
+            foreach (var itemRow in itemRows)
+            {
+                // Try matching by ProductId first, then by ProductName
+                if (uploadedImages.TryGetValue(itemRow.ProductId.ToString(), out var uploadedUrl))
+                {
+                    itemRow.PictureUrl = uploadedUrl;
+                }
+                else if (!string.IsNullOrWhiteSpace(itemRow.ProductName) &&
+                         uploadedImages.TryGetValue(itemRow.ProductName.Trim(), out uploadedUrl))
+                {
+                    itemRow.PictureUrl = uploadedUrl;
+                }
+            }
+
+            orderRows = NormalizeImportedOrders(orderRows, errors, ref skippedDuplicates);
+            itemRows = NormalizeImportedOrderItems(itemRows, errors, ref skippedDuplicates);
 
             // Group all imported items by the worksheet OrderId so each order row can rebuild its snapshot.
             var groupedItems = itemRows
                 .GroupBy(i => i.OrderId)
                 .ToDictionary(g => g.Key, g => g.ToList());
 
-            var productLookup = (await _unitOfWork.RepositaryAsync<Product>().GetAllAsync())
+            var productRepo = _unitOfWork.RepositaryAsync<Product>();
+            var productLookup = (await productRepo.GetAllAsync())
                 .ToDictionary(p => p.Id);
+
+            // ── Update Product.PictureUrl in the database for any matched uploaded images ──
+            if (uploadedImages.Count > 0)
+            {
+                foreach (var product in productLookup.Values)
+                {
+                    if (uploadedImages.TryGetValue(product.Id.ToString(), out var urlById))
+                    {
+                        product.PictureUrl = urlById;
+                        productRepo.Update(product);
+                    }
+                    else if (!string.IsNullOrWhiteSpace(product.Name) &&
+                             uploadedImages.TryGetValue(product.Name.Trim(), out var urlByName))
+                    {
+                        product.PictureUrl = urlByName;
+                        productRepo.Update(product);
+                    }
+                }
+            }
+
+            ApplyImportedPriceUpdates(itemRows, productLookup, productRepo);
+
             var deliveryMethods = await _unitOfWork.RepositaryAsync<DelivaryMethod>().GetAllAsync();
             var deliveryMethodById = deliveryMethods.ToDictionary(d => d.Id);
             var deliveryMethodByName = deliveryMethods
@@ -298,25 +349,22 @@ namespace Talabat.Services.OrderServices
 
                 if (orderRow.Id > 0 && existingOrdersById.TryGetValue(orderRow.Id, out var existingOrder))
                 {
-                    // Update the tracked order and replace its items with the imported snapshot.
-                    existingOrder.BuyerEmail = orderRow.BuyerEmail.Trim();
-                    existingOrder.OrderStatus = orderStatus;
-                    existingOrder.DelivaryMethodId = deliveryMethod.Id;
-                    existingOrder.DelivaryMethod = deliveryMethod;
-                    existingOrder.AddressShiper = address;
-                    existingOrder.SubTotal = subTotal;
-                    existingOrder.PaymentId = string.IsNullOrWhiteSpace(orderRow.PaymentId) ? null : orderRow.PaymentId.Trim();
-
-                    if (parsedOrderDate.HasValue)
+                    if (!HasOrderChanges(existingOrder, orderRow, builtItems, deliveryMethod, orderStatus, address, subTotal, parsedOrderDate))
                     {
-                        existingOrder.OrderDate = parsedOrderDate.Value;
+                        skippedDuplicates++;
+                        continue;
                     }
 
-                    existingOrder.Items.Clear();
-                    foreach (var item in builtItems)
-                    {
-                        existingOrder.Items.Add(item);
-                    }
+                    ApplyImportedOrderValues(
+                        existingOrder,
+                        orderRow,
+                        deliveryMethod,
+                        orderStatus,
+                        address,
+                        subTotal,
+                        parsedOrderDate);
+
+                    MergeOrderItems(existingOrder, builtItems);
 
                     _unitOfWork.RepositaryAsync<Order>().Update(existingOrder);
                     result.UpdatedCount++;
@@ -356,11 +404,98 @@ namespace Talabat.Services.OrderServices
             }
 
             result.AddedCount = newOrders.Count;
+            result.SkippedDuplicates = skippedDuplicates;
             result.Errors = errors;
             return result;
         }
 
         #region Helper Methods
+        private async Task<(List<OrderImportToReturnDTO> Orders, List<OrderItemImportToReturnDTO> Items, List<string> Errors, OrderImportResultDTO Result)>
+            LoadImportSheetsAsync(ImportDTO<OrderImportToReturnDTO> req)
+        {
+            // Read the same Excel file twice because each worksheet maps to a different DTO shape.
+            var orderSheet = await _importService.ExcelImportAsync(new ImportDTO<OrderImportToReturnDTO>
+            {
+                File = req.File,
+                Config = BuildImportConfig<OrderImportToReturnDTO>("Orders")
+            });
+
+            var orderItemsSheet = await _importService.ExcelImportAsync(new ImportDTO<OrderItemImportToReturnDTO>
+            {
+                File = req.File,
+                Config = BuildImportConfig<OrderItemImportToReturnDTO>("OrderItems")
+            });
+
+            var errors = new List<string>();
+            errors.AddRange(orderSheet.Errors);
+            errors.AddRange(orderItemsSheet.Errors);
+
+            var result = new OrderImportResultDTO
+            {
+                TotalRows = orderSheet.Data.Count,
+                Orders = orderSheet.Data,
+                Items = orderItemsSheet.Data
+            };
+
+            return (orderSheet.Data, orderItemsSheet.Data, errors, result);
+        }
+
+        private static List<OrderImportToReturnDTO> NormalizeImportedOrders(
+            IEnumerable<OrderImportToReturnDTO> orderRows,
+            List<string> errors,
+            ref int skippedDuplicates)
+        {
+            var normalizedOrders = new List<OrderImportToReturnDTO>();
+            var importedIds = new HashSet<int>();
+
+            foreach (var orderRow in orderRows)
+            {
+                if (orderRow.Id > 0 && !importedIds.Add(orderRow.Id))
+                {
+                    errors.Add($"Duplicate order row detected for Id {orderRow.Id}. The last row in the file was used.");
+                    skippedDuplicates++;
+                    normalizedOrders.RemoveAll(o => o.Id == orderRow.Id);
+                }
+
+                normalizedOrders.Add(orderRow);
+            }
+
+            return normalizedOrders;
+        }
+
+        private static List<OrderItemImportToReturnDTO> NormalizeImportedOrderItems(
+            IEnumerable<OrderItemImportToReturnDTO> itemRows,
+            List<string> errors,
+            ref int skippedDuplicates)
+        {
+            var normalizedItems = new Dictionary<(int OrderId, int ProductId), OrderItemImportToReturnDTO>();
+
+            foreach (var itemRow in itemRows)
+            {
+                var key = (itemRow.OrderId, itemRow.ProductId);
+
+                if (normalizedItems.TryGetValue(key, out var existingRow))
+                {
+                    var hasChanges =
+                        existingRow.Count != itemRow.Count ||
+                        existingRow.Price != itemRow.Price ||
+                        !string.Equals(existingRow.ProductName?.Trim(), itemRow.ProductName?.Trim(), StringComparison.OrdinalIgnoreCase) ||
+                        !string.Equals(existingRow.PictureUrl, itemRow.PictureUrl, StringComparison.OrdinalIgnoreCase);
+
+                    if (hasChanges)
+                    {
+                        errors.Add($"Duplicate order item detected for order {itemRow.OrderId} and product {itemRow.ProductId}. The last row in the file was used.");
+                    }
+
+                    skippedDuplicates++;
+                }
+
+                normalizedItems[key] = itemRow;
+            }
+
+            return normalizedItems.Values.ToList();
+        }
+
         private static ImportExcelConfig<T> BuildImportConfig<T>(string sheetName)
         {
             return new ImportExcelConfig<T>
@@ -388,6 +523,170 @@ namespace Talabat.Services.OrderServices
             };
         }
 
+        private static void ApplyImportedOrderValues(
+            Order existingOrder,
+            OrderImportToReturnDTO orderRow,
+            DelivaryMethod deliveryMethod,
+            OrderStatus orderStatus,
+            AddressShiper address,
+            decimal subTotal,
+            DateTimeOffset? parsedOrderDate)
+        {
+            existingOrder.BuyerEmail = orderRow.BuyerEmail.Trim();
+            existingOrder.OrderStatus = orderStatus;
+            existingOrder.DelivaryMethodId = deliveryMethod.Id;
+            existingOrder.DelivaryMethod = deliveryMethod;
+            existingOrder.AddressShiper = address;
+            existingOrder.SubTotal = subTotal;
+            existingOrder.PaymentId = string.IsNullOrWhiteSpace(orderRow.PaymentId) ? null : orderRow.PaymentId.Trim();
+
+            if (parsedOrderDate.HasValue)
+            {
+                existingOrder.OrderDate = parsedOrderDate.Value;
+            }
+        }
+
+        private static bool HasOrderChanges(
+            Order existingOrder,
+            OrderImportToReturnDTO orderRow,
+            IReadOnlyCollection<OrderItems> importedItems,
+            DelivaryMethod deliveryMethod,
+            OrderStatus orderStatus,
+            AddressShiper address,
+            decimal subTotal,
+            DateTimeOffset? parsedOrderDate)
+        {
+            if (!string.Equals(existingOrder.BuyerEmail, orderRow.BuyerEmail.Trim(), StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            if (existingOrder.OrderStatus != orderStatus ||
+                existingOrder.DelivaryMethodId != deliveryMethod.Id ||
+                existingOrder.SubTotal != subTotal ||
+                !string.Equals(existingOrder.PaymentId ?? string.Empty, orderRow.PaymentId?.Trim() ?? string.Empty, StringComparison.Ordinal))
+            {
+                return true;
+            }
+
+            if (!AreAddressesEqual(existingOrder.AddressShiper, address))
+            {
+                return true;
+            }
+
+            if (parsedOrderDate.HasValue && existingOrder.OrderDate != parsedOrderDate.Value)
+            {
+                return true;
+            }
+
+            return !AreOrderItemsEqual(existingOrder.Items, importedItems);
+        }
+
+        private static bool AreAddressesEqual(AddressShiper current, AddressShiper imported)
+        {
+            return string.Equals(current.FirstName, imported.FirstName, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(current.LastName, imported.LastName, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(current.City, imported.City, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(current.Street, imported.Street, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static bool AreOrderItemsEqual(IEnumerable<OrderItems> currentItems, IEnumerable<OrderItems> importedItems)
+        {
+            var currentMap = currentItems
+                .GroupBy(item => item.Product.ProductId)
+                .ToDictionary(group => group.Key, group => group.First());
+
+            var importedMap = importedItems
+                .GroupBy(item => item.Product.ProductId)
+                .ToDictionary(group => group.Key, group => group.Last());
+
+            if (currentMap.Count != importedMap.Count)
+            {
+                return false;
+            }
+
+            foreach (var importedEntry in importedMap)
+            {
+                if (!currentMap.TryGetValue(importedEntry.Key, out var currentItem))
+                {
+                    return false;
+                }
+
+                var importedItem = importedEntry.Value;
+                if (currentItem.Count != importedItem.Count ||
+                    currentItem.Price != importedItem.Price ||
+                    !string.Equals(currentItem.Product.Name, importedItem.Product.Name, StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(currentItem.Product.PictureUrl, importedItem.Product.PictureUrl, StringComparison.OrdinalIgnoreCase))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static void ApplyImportedPriceUpdates(
+            IEnumerable<OrderItemImportToReturnDTO> itemRows,
+            Dictionary<int, Product> productLookup,
+            IGenaricRepo<Product> productRepo)
+        {
+            foreach (var latestItem in itemRows)
+            {
+                if (!productLookup.TryGetValue(latestItem.ProductId, out var product))
+                {
+                    continue;
+                }
+
+                if (product.Price == latestItem.Price)
+                {
+                    continue;
+                }
+
+                product.Price = latestItem.Price;
+                productRepo.Update(product);
+            }
+        }
+
+        private void MergeOrderItems(Order existingOrder, IEnumerable<OrderItems> importedItems)
+        {
+            var orderItemsRepo = _unitOfWork.RepositaryAsync<OrderItems>();
+            var currentItemsByProductId = existingOrder.Items
+                .GroupBy(item => item.Product.ProductId)
+                .ToDictionary(group => group.Key, group => group.First());
+
+            var importedItemsByProductId = importedItems
+                .GroupBy(item => item.Product.ProductId)
+                .ToDictionary(group => group.Key, group => group.Last());
+
+            var itemsToRemove = existingOrder.Items
+                .Where(item => !importedItemsByProductId.ContainsKey(item.Product.ProductId))
+                .ToList();
+
+            if (itemsToRemove.Count > 0)
+            {
+                orderItemsRepo.RemoveRange(itemsToRemove);
+
+                foreach (var item in itemsToRemove)
+                {
+                    existingOrder.Items.Remove(item);
+                }
+            }
+
+            foreach (var importedItem in importedItemsByProductId.Values)
+            {
+                if (currentItemsByProductId.TryGetValue(importedItem.Product.ProductId, out var currentItem))
+                {
+                    currentItem.Count = importedItem.Count;
+                    currentItem.Price = importedItem.Price;
+                    currentItem.Product.Name = importedItem.Product.Name;
+                    currentItem.Product.PictureUrl = importedItem.Product.PictureUrl;
+                    continue;
+                }
+
+                existingOrder.Items.Add(importedItem);
+            }
+        }
+
         // Rebuild the imported order items from the second worksheet.
         private static List<OrderItems> BuildOrderItems(
             int orderId,
@@ -412,15 +711,90 @@ namespace Talabat.Services.OrderServices
                 }
 
                 productLookup.TryGetValue(itemRow.ProductId, out var product);
+
+                // Prefer the uploaded image from the zip (PictureUrl already set on the row),
+                // otherwise fall back to the existing product image.
+                var pictureUrl = !string.IsNullOrWhiteSpace(itemRow.PictureUrl)
+                    ? itemRow.PictureUrl
+                    : product?.PictureUrl ?? string.Empty;
+
                 var productSnapshot = new ProductInOrderItem(
                     itemRow.ProductId,
                     string.IsNullOrWhiteSpace(itemRow.ProductName) ? product?.Name ?? string.Empty : itemRow.ProductName.Trim(),
-                    product?.PictureUrl ?? string.Empty);
+                    pictureUrl);
 
                 builtItems.Add(new OrderItems(productSnapshot, itemRow.Count, itemRow.Price));
             }
 
             return builtItems;
+        }
+
+        /// <summary>
+        /// Extracts image entries from a zip file. Returns a list of (fileName, imageData) tuples.
+        /// Only files with allowed image extensions are extracted; sub-folders are flattened.
+        /// </summary>
+        private static List<(string FileName, byte[] Data)> ExtractImageEntries(
+            IFormFile zipFile,
+            List<string> errors)
+        {
+            var allowedExtensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ".png", ".jpg", ".jpeg" };
+            var entries = new List<(string FileName, byte[] Data)>();
+
+            try
+            {
+                using var zipStream = zipFile.OpenReadStream();
+                using var archive = new ZipArchive(zipStream, ZipArchiveMode.Read);
+
+                foreach (var entry in archive.Entries)
+                {
+                    var extension = Path.GetExtension(entry.Name);
+                    if (!allowedExtensions.Contains(extension))
+                        continue;
+
+                    // Skip directory entries
+                    if (entry.Length == 0)
+                        continue;
+
+                    using var entryStream = entry.Open();
+                    using var ms = new MemoryStream();
+                    entryStream.CopyTo(ms);
+                    entries.Add((entry.Name, ms.ToArray()));
+                }
+            }
+            catch (InvalidDataException ex)
+            {
+                errors.Add($"The uploaded zip file is invalid or corrupted: {ex.Message}");
+            }
+
+            return entries;
+        }
+
+        /// <summary>
+        /// Uploads a single image using the AttachmentService and returns the stored file name.
+        /// </summary>
+        private async Task<string> UploadImageAsync(string fileName, byte[] imageData)
+        {
+            // Create a temporary IFormFile from the byte array so the AttachmentService can process it.
+            using var stream = new MemoryStream(imageData);
+            var formFile = new FormFile(stream, 0, imageData.Length, "file", fileName)
+            {
+                Headers = new HeaderDictionary(),
+                ContentType = GetContentType(fileName)
+            };
+
+            var uploadedFileName = await _attachmentService.UploadAsync(formFile, "products");
+            return uploadedFileName;
+        }
+
+        private static string GetContentType(string fileName)
+        {
+            var extension = Path.GetExtension(fileName).ToLowerInvariant();
+            return extension switch
+            {
+                ".png" => "image/png",
+                ".jpg" or ".jpeg" => "image/jpeg",
+                _ => "application/octet-stream"
+            };
         }
 
         private static DateTimeOffset? ParseOrderDate(string? orderDate)

@@ -26,6 +26,7 @@ import { NotificationsService } from '../../../Services/notifications.service';
 import { StockTypes } from '../../../Interfaces/stock-types';
 import { Subject } from 'rxjs';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { ImportResult } from '../../../Interfaces/import-result';
 @Component({
   selector: 'app-table',
   standalone: true,
@@ -222,6 +223,40 @@ export class TableComponent {
           'Failed to export products',
         );
         console.error(err);
+      },
+    });
+  }
+
+  importProducts(event: any) {
+    const file: File = event?.files?.[0] ?? event?.currentFiles?.[0];
+
+    if (!file) {
+      this._notificationService.showError(
+        'Import Products',
+        'No file selected',
+      );
+    }
+
+    this._adminService.importProducts(file).subscribe({
+      next: (res: ImportResult<unknown>) => {
+        const errors = res.errors?.filter((error) => error.trim());
+        if (errors?.length) {
+          this._notificationService.showError(
+            'Import Products',
+            errors.join(', '),
+          );
+        } else {
+          this._notificationService.showSuccedded(
+            'Import Products',
+            'Products imported successfully',
+          );
+        }
+      },
+      error: (err) => {
+        this._notificationService.showError(
+          'Import Products',
+          err?.error?.message || err?.message || 'Import failed',
+        );
       },
     });
   }
