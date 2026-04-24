@@ -1,14 +1,14 @@
-$bgColor: #f7f7f7;
+$bgColor: var(--surface-ground);
 $jaggedDistance: 32px;
 
 // boo
 $booSize: $jaggedDistance * 5;
-$booBg: $bgColor;
-$booShadow: darken($booBg, 5%);
+$booBg: var(--surface-ground);
+$booShadow: var(--surface-border);
 
 // face
 $booFaceSize: round($jaggedDistance / 1.3333);
-$booFaceColor: #9b9b9b;
+$booFaceColor: var(--text-color-secondary);
 
 // ===========
 
@@ -107,7 +107,7 @@ body {
   border-bottom: 0;
   overflow: hidden;
   border-radius: ($booSize / 2) ($booSize / 2) 0 0;
-  box-shadow: -($jaggedDistance / 2) 0 0 2px rgba($booShadow, 0.5) inset;
+  box-shadow: -($jaggedDistance / 2) 0 0 2px rgba(0, 0, 0, 0.2) inset;
   @include border-bottom-jagged($jaggedDistance, $bgColor);
   animation: floating 3s ease-in-out infinite;
 
@@ -146,10 +146,21 @@ body {
 .shadow {
   width: $booSize - $jaggedDistance;
   height: $jaggedDistance / 2;
-  background-color: rgba($booShadow, 0.75);
+  background-color: rgba(0, 0, 0, 0.15);
   margin-top: $jaggedDistance * 1.25;
   margin-right: auto;
   margin-left: auto;
   border-radius: 50%;
   animation: floatingShadow 3s ease-in-out infinite;
+}
+
+/* Dark Mode Page Not Found Styles */
+[data-theme="dark"] {
+  .boo {
+    box-shadow: -($jaggedDistance / 2) 0 0 2px rgba(255, 255, 255, 0.1) inset;
+  }
+
+  .shadow {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }

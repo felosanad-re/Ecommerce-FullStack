@@ -1,8 +1,21 @@
 .layout-footer {
-    transition: margin-left $transitionDuration;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 1rem;
-    border-top: 1px solid var(--surface-border);
+  transition:
+    margin-left $transitionDuration,
+    background-color 0.3s ease,
+    color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--surface-border);
+  color: var(--text-color-secondary);
+}
+
+/* Dark Mode Footer Styles */
+[data-theme="dark"] {
+  .layout-footer {
+    background-color: var(--surface-card);
+    border-top-color: var(--surface-border);
+    color: var(--text-color-secondary);
+  }
 }

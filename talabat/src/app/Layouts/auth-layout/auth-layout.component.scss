@@ -1,0 +1,8 @@
+:host {
+  min-height: 100vh;
+  background-color: var(--surface-ground);
+  color: var(--text-color);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}

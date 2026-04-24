@@ -1,17 +1,34 @@
 .p-button {
-  background: #1c99ab;
-  border: 1px solid #1c99ab;
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 
 .p-button.p-button-outlined {
-  color: #fff;
+  color: var(--text-color);
 }
 
 .p-dataview .p-dataview-emptymessage {
   padding: 2.25rem;
-  background: #1c99ab;
+  background: var(--primary-color);
   color: #fff;
   border-radius: 10px;
   text-align: center;
   font-size: 24px;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] {
+  .p-dataview .p-dataview-emptymessage {
+    background: var(--primary-color);
+    color: #ffffff;
+  }
+
+  .p-dataview {
+    background-color: var(--surface-card);
+    color: var(--text-color);
+  }
+
+  .text-900 {
+    color: var(--text-color) !important;
+  }
 }

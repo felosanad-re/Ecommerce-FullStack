@@ -6,6 +6,10 @@
   border-top: 1px solid var(--surface-border);
   color: var(--text-color-secondary);
   font-size: 0.875rem;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 
   figure {
     margin: 0;
@@ -14,5 +18,18 @@
 
   span {
     color: var(--text-color);
+  }
+}
+
+/* Dark Mode Footer Styles */
+[data-theme="dark"] {
+  .layout-footer {
+    background-color: var(--surface-card);
+    border-top-color: var(--surface-border);
+    color: var(--text-color-secondary);
+
+    span {
+      color: var(--text-color);
+    }
   }
 }

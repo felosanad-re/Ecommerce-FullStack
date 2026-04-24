@@ -95,10 +95,13 @@ $scale: 14px; /* main font size */
 $borderRadius: 12px; /* border radius of layout element e.g. card, sidebar */
 $transitionDuration: 0.2s; /* transition duration of layout elements e.g. sidebar, overlay menus */
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-  transition: background-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
   background-color: var(--surface-ground);
   color: var(--text-color);
 }
@@ -190,4 +193,609 @@ html, body {
 
 .text-contrast {
   color: var(--text-color-contrast);
+}
+
+/* ============================================
+   DARK MODE - PrimeNG Component Overrides
+   ============================================ */
+[data-theme="dark"] {
+  /* Card */
+  .card {
+    background-color: var(--surface-card);
+    color: var(--text-color);
+    border: 1px solid var(--surface-border);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* PrimeNG Table */
+  .p-datatable {
+    background-color: var(--surface-card);
+    color: var(--text-color);
+
+    .p-datatable-header {
+      background-color: var(--surface-overlay);
+      color: var(--text-color);
+      border-color: var(--surface-border);
+    }
+
+    .p-datatable-thead > tr > th {
+      background-color: var(--surface-overlay);
+      color: var(--text-color);
+      border-color: var(--surface-border);
+    }
+
+    .p-datatable-tbody > tr {
+      background-color: var(--surface-card);
+      color: var(--text-color);
+
+      > td {
+        border-color: var(--surface-border);
+      }
+
+      &:hover {
+        background-color: var(--surface-hover);
+      }
+
+      &.p-highlight {
+        background-color: var(--primary-color);
+        color: var(--text-color-contrast);
+      }
+    }
+
+    .p-datatable-footer {
+      background-color: var(--surface-overlay);
+      color: var(--text-color);
+      border-color: var(--surface-border);
+    }
+
+    .p-sortable-column.p-highlight {
+      background-color: var(--surface-hover);
+      color: var(--primary-color);
+    }
+
+    .p-sortable-column:not(.p-highlight):hover {
+      background-color: var(--surface-hover);
+      color: var(--text-color);
+    }
+
+    .p-paginator-bottom {
+      background-color: var(--surface-overlay);
+      color: var(--text-color);
+      border-color: var(--surface-border);
+    }
+  }
+
+  /* PrimeNG Paginator */
+  .p-paginator {
+    background-color: var(--surface-overlay);
+    color: var(--text-color);
+    border-color: var(--surface-border);
+
+    .p-paginator-pages .p-paginator-page {
+      color: var(--text-color);
+
+      &.p-highlight {
+        background-color: var(--primary-color);
+        color: #ffffff;
+      }
+
+      &:not(.p-highlight):hover {
+        background-color: var(--surface-hover);
+        color: var(--text-color);
+      }
+    }
+
+    .p-paginator-first,
+    .p-paginator-prev,
+    .p-paginator-next,
+    .p-paginator-last {
+      color: var(--text-color);
+      border-color: var(--surface-border);
+
+      &:hover {
+        background-color: var(--surface-hover);
+        color: var(--text-color);
+      }
+    }
+  }
+
+  /* PrimeNG Dialog */
+  .p-dialog {
+    background-color: var(--surface-card);
+    color: var(--text-color);
+    border: 1px solid var(--surface-border);
+
+    .p-dialog-header {
+      background-color: var(--surface-overlay);
+      color: var(--text-color);
+      border-color: var(--surface-border);
+    }
+
+    .p-dialog-content {
+      background-color: var(--surface-card);
+      color: var(--text-color);
+    }
+
+    .p-dialog-footer {
+      border-color: var(--surface-border);
+    }
+  }
+
+  /* PrimeNG Overlay Panel */
+  .p-overlaypanel {
+    background-color: var(--surface-card);
+    color: var(--text-color);
+    border: 1px solid var(--surface-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  /* PrimeNG Input */
+  .p-inputtext {
+    background-color: var(--surface-overlay);
+    color: var(--text-color);
+    border-color: var(--surface-border);
+
+    &:enabled:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    &:disabled {
+      background-color: var(--surface-hover);
+      color: var(--text-color-secondary);
+    }
+  }
+
+  /* PrimeNG Input Group */
+  .p-inputgroup {
+    .p-inputgroup-addon {
+      background-color: var(--surface-overlay);
+      color: var(--text-color-secondary);
+      border-color: var(--surface-border);
+    }
+  }
+
+  /* PrimeNG Dropdown */
+  .p-dropdown {
+    background-color: var(--surface-overlay);
+    color: var(--text-color);
+    border-color: var(--surface-border);
+
+    .p-dropdown-label {
+      color: var(--text-color);
+    }
+
+    .p-dropdown-trigger {
+      color: var(--text-color-secondary);
+    }
+
+    .p-dropdown-panel {
+      background-color: var(--surface-card);
+      color: var(--text-color);
+      border-color: var(--surface-border);
+
+      .p-dropdown-items .p-dropdown-item {
+        color: var(--text-color);
+
+        &:hover {
+          background-color: var(--surface-hover);
+          color: var(--text-color);
+        }
+
+        &.p-highlight {
+          background-color: var(--primary-color);
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  /* PrimeNG Toolbar */
+  .p-toolbar {
+    background-color: var(--surface-overlay);
+    color: var(--text-color);
+    border-color: var(--surface-border);
+  }
+
+  /* PrimeNG Menubar */
+  .p-menubar {
+    background-color: var(--surface-card);
+    color: var(--text-color);
+    border-color: var(--surface-border);
+
+    .p-menubar-item {
+      color: var(--text-color);
+
+      &:hover {
+        background-color: var(--surface-hover);
+        color: var(--text-color);
+      }
+    }
+
+    .p-menubar-root-list {
+      background-color: var(--surface-card);
+    }
+
+    .p-submenu-list {
+      background-color: var(--surface-card);
+      border-color: var(--surface-border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  /* PrimeNG Sidebar */
+  .p-sidebar {
+    background-color: var(--surface-card);
+    color: var(--text-color);
+
+    .p-sidebar-header {
+      color: var(--text-color);
+    }
+
+    .p-sidebar-content {
+      color: var(--text-color);
+    }
+  }
+
+  /* PrimeNG Toast */
+  .p-toast {
+    .p-toast-message {
+      background-color: var(--surface-overlay);
+      color: var(--text-color);
+      border-color: var(--surface-border);
+    }
+  }
+
+  /* PrimeNG Messages */
+  .p-messages {
+    &.p-messages-error {
+      background-color: rgba(220, 53, 69, 0.15);
+      border-color: var(--danger-color);
+      color: var(--danger-color);
+    }
+  }
+
+  /* PrimeNG FileUpload */
+  .p-fileupload {
+    .p-fileupload-buttonbar {
+      background-color: var(--surface-overlay);
+      border-color: var(--surface-border);
+    }
+
+    .p-fileupload-content {
+      background-color: var(--surface-card);
+      border-color: var(--surface-border);
+    }
+  }
+
+  /* PrimeNG DataView */
+  .p-dataview {
+    background-color: var(--surface-card);
+    color: var(--text-color);
+
+    .p-dataview-header {
+      background-color: var(--surface-overlay);
+      color: var(--text-color);
+      border-color: var(--surface-border);
+    }
+
+    .p-dataview-content {
+      background-color: var(--surface-card);
+      color: var(--text-color);
+    }
+
+    .p-dataview-emptymessage {
+      background-color: var(--surface-overlay);
+      color: var(--text-color-secondary);
+    }
+  }
+
+  /* PrimeNG InputNumber */
+  .p-inputnumber {
+    .p-inputtext {
+      background-color: var(--surface-overlay);
+      color: var(--text-color);
+      border-color: var(--surface-border);
+    }
+  }
+
+  /* PrimeNG ConfirmDialog */
+  .p-confirmdialog {
+    background-color: var(--surface-card);
+    color: var(--text-color);
+  }
+
+  /* PrimeNG Badge */
+  .p-badge {
+    background-color: var(--primary-color);
+    color: #ffffff;
+  }
+
+  /* PrimeNG Galleria */
+  .p-galleria {
+    background-color: var(--surface-card);
+    color: var(--text-color);
+
+    .p-galleria-item-nav {
+      background-color: var(--surface-overlay);
+      color: var(--text-color);
+
+      &:hover {
+        background-color: var(--surface-hover);
+      }
+    }
+  }
+
+  /* PrimeNG Chart container */
+  p-chart {
+    background-color: var(--surface-card);
+    color: var(--text-color);
+  }
+
+  /* PrimeNG Menu (popup) */
+  .p-menu {
+    background-color: var(--surface-card);
+    color: var(--text-color);
+    border-color: var(--surface-border);
+
+    .p-menuitem {
+      .p-menuitem-link {
+        color: var(--text-color);
+
+        &:hover {
+          background-color: var(--surface-hover);
+          color: var(--text-color);
+        }
+      }
+    }
+  }
+
+  /* Surface utility classes for dark mode */
+  .surface-300 {
+    background-color: var(--surface-hover) !important;
+  }
+
+  /* Text color utility overrides for dark mode */
+  .text-500 {
+    color: var(--text-color-secondary) !important;
+  }
+
+  .text-600 {
+    color: var(--text-color-secondary) !important;
+  }
+
+  .text-900 {
+    color: var(--text-color) !important;
+  }
+
+  /* Background utility overrides for dark mode */
+  .bg-blue-100 {
+    background-color: rgba(0, 123, 255, 0.15) !important;
+  }
+
+  .bg-orange-100 {
+    background-color: rgba(255, 152, 0, 0.15) !important;
+  }
+
+  .bg-cyan-100 {
+    background-color: rgba(0, 188, 212, 0.15) !important;
+  }
+
+  .bg-purple-100 {
+    background-color: rgba(156, 39, 176, 0.15) !important;
+  }
+
+  /* Form field styling */
+  .field label {
+    color: var(--text-color);
+  }
+
+  /* Section headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--text-color);
+  }
+
+  /* Links - only target plain links, not those inside colored buttons */
+  a:not(.log-out):not(.admin):not(.user-name):not(.dashboard-link) {
+    color: var(--primary-color);
+  }
+
+  /* Validation messages */
+  .validation-msg .card {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  /* Shadow adjustments for dark mode */
+  .shadow-4 {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Button text color fix */
+  .p-button-text.p-button-plain {
+    color: var(--text-color-secondary);
+
+    &:hover {
+      color: var(--text-color);
+      background-color: var(--surface-hover);
+    }
+  }
+
+  /* PrimeNG TabView */
+  .p-tabview {
+    background-color: var(--surface-card);
+    color: var(--text-color);
+
+    .p-tabview-nav {
+      background-color: var(--surface-overlay);
+      border-color: var(--surface-border);
+
+      li {
+        .p-tabview-nav-link {
+          color: var(--text-color-secondary);
+          border-color: var(--surface-border);
+
+          &:hover {
+            color: var(--text-color);
+            background-color: var(--surface-hover);
+          }
+        }
+
+        &.p-highlight .p-tabview-nav-link {
+          color: var(--primary-color);
+          border-color: var(--primary-color);
+        }
+      }
+    }
+
+    .p-tabview-panels {
+      background-color: var(--surface-card);
+      color: var(--text-color);
+    }
+  }
+
+  /* PrimeNG RadioButton */
+  .p-radiobutton {
+    .p-radiobutton-box {
+      background-color: var(--surface-overlay);
+      border-color: var(--surface-border);
+      color: var(--text-color);
+
+      &.p-highlight {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+      }
+
+      &:not(.p-highlight):hover {
+        border-color: var(--primary-color);
+      }
+    }
+
+    .p-radiobutton-label {
+      color: var(--text-color);
+    }
+  }
+
+  /* PrimeNG Checkbox */
+  .p-checkbox {
+    .p-checkbox-box {
+      background-color: var(--surface-overlay);
+      border-color: var(--surface-border);
+      color: var(--text-color);
+
+      &.p-highlight {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+      }
+
+      &:not(.p-highlight):hover {
+        border-color: var(--primary-color);
+      }
+    }
+  }
+
+  /* PrimeNG InputOtp */
+  .p-inputotp {
+    .p-inputotp-input {
+      background-color: var(--surface-overlay);
+      border-color: var(--surface-border);
+      color: var(--text-color);
+
+      &:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+    }
+  }
+
+  /* PrimeNG InputTextarea */
+  .p-inputtextarea {
+    background-color: var(--surface-overlay);
+    color: var(--text-color);
+    border-color: var(--surface-border);
+
+    &:enabled:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+  }
+
+  /* PrimeNG Tag */
+  .p-tag {
+    background-color: var(--primary-color);
+    color: #ffffff;
+  }
+
+  /* PrimeNG TableHeaderCheckbox */
+  .p-tableheadercheckbox .p-checkbox-box,
+  .p-tablecheckbox .p-checkbox-box {
+    background-color: var(--surface-overlay);
+    border-color: var(--surface-border);
+
+    &.p-highlight {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      color: #ffffff;
+    }
+  }
+
+  /* PrimeNG CellEditor */
+  .p-cell-editor {
+    .p-inputtext {
+      background-color: var(--surface-overlay);
+      color: var(--text-color);
+      border-color: var(--surface-border);
+    }
+  }
+
+  /* PrimeNG IconField */
+  .p-icon-field .p-input-icon {
+    color: var(--text-color-secondary);
+  }
+
+  /* PrimeNG ConfirmDialog */
+  .p-confirm-dialog {
+    background-color: var(--surface-card);
+    color: var(--text-color);
+  }
+
+  /* PrimeNG InputNumber */
+  .p-inputnumber-button-group {
+    .p-button {
+      background-color: var(--surface-overlay);
+      border-color: var(--surface-border);
+      color: var(--text-color);
+
+      &:hover {
+        background-color: var(--surface-hover);
+      }
+    }
+  }
+
+  /* Scrollbar styling for dark mode */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--surface-ground);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--surface-border);
+    border-radius: 4px;
+
+    &:hover {
+      background: var(--text-color-secondary);
+    }
+  }
 }

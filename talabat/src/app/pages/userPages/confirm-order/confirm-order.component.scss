@@ -3,3 +3,26 @@
   text-align: center;
   vertical-align: middle;
 }
+
+/* Dark Mode Styles */
+[data-theme="dark"] {
+  :host ::ng-deep .center-table th {
+    background-color: var(--surface-overlay);
+    color: var(--text-color);
+    border-color: var(--surface-border);
+  }
+
+  :host ::ng-deep .center-table td {
+    color: var(--text-color);
+    border-color: var(--surface-border);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--text-color);
+  }
+}

@@ -1,0 +1,56 @@
+:host ::ng-deep .p-menubar {
+  background-color: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+:host ::ng-deep .p-menubar .p-menubar-item {
+  color: var(--text-color);
+
+  &:hover {
+    background-color: var(--surface-hover);
+    color: var(--text-color);
+  }
+}
+
+:host ::ng-deep .p-menubar-root-list {
+  align-items: center;
+}
+
+.card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] {
+  :host ::ng-deep .p-menubar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  :host ::ng-deep .p-menubar .p-menubar-item {
+    color: var(--text-color);
+
+    &:hover {
+      background-color: var(--surface-hover);
+      color: var(--text-color);
+    }
+  }
+
+  :host ::ng-deep .p-menubar .p-menubar-start span {
+    color: var(--text-color);
+  }
+}

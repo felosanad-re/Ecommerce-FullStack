@@ -4,3 +4,20 @@
 }
 
 // maxheight / lineheight = row --> لو عاوز احدد عدد الصفوف اللي بتظهر في العمود
+
+/* Dark Mode Card Styles */
+[data-theme="dark"] {
+  .content {
+    h3 {
+      color: var(--text-color);
+    }
+
+    p {
+      color: var(--text-color-secondary);
+    }
+  }
+
+  .shadow-2 {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+  }
+}

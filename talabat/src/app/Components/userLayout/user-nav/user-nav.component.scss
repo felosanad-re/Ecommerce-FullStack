@@ -20,6 +20,7 @@
   left: 50%;
   transform: translate(-50%, calc(100% + 15px));
   background-color: var(--primary-color);
+  color: #ffffff;
 }
 
 .admin {
@@ -28,20 +29,19 @@
   left: 50%;
   transform: translate(-50%, calc(100% + 15px));
   background-color: var(--primary-color);
+  color: #ffffff;
 }
 
 .p-badge {
   background-color: var(--primary-color) !important;
 }
-// .nav-brand-wrapper {
-//   flex-wrap: nowrap;
-// }
 
 .dashboard-link {
   position: absolute;
   white-space: nowrap;
   text-decoration: none;
   z-index: 10;
+  color: #ffffff;
 }
 
 :host ::ng-deep .p-menubar-start,
@@ -58,6 +58,10 @@
   background-color: var(--surface-card);
   border: 1px solid var(--surface-border);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 :host ::ng-deep .p-menubar .p-menubar-item {
@@ -72,6 +76,10 @@
   background-color: var(--surface-card);
   border: 1px solid var(--surface-border);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .user-name {
@@ -82,7 +90,6 @@
 
 .log-out {
   position: absolute;
-
   z-index: 11;
 }
 
@@ -95,5 +102,73 @@
     top: calc(100% + 3.5rem);
     padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
+  }
+}
+
+/* Dark Mode User Nav Styles */
+[data-theme="dark"] {
+  :host ::ng-deep .p-menubar {
+    background-color: var(--surface-card);
+    border-color: var(--surface-border);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  :host ::ng-deep .p-menubar .p-menubar-item {
+    color: var(--text-color);
+
+    &:hover {
+      background-color: var(--surface-hover);
+      color: var(--text-color);
+    }
+  }
+
+  :host ::ng-deep .p-menubar .p-menubar-start span {
+    color: var(--text-color);
+  }
+
+  .card {
+    background-color: var(--surface-card);
+    border-color: var(--surface-border);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .text-900 {
+    color: var(--text-color) !important;
+  }
+
+  /* Ensure white text on primary-colored buttons/links */
+  .user-name {
+    color: #ffffff !important;
+
+    span {
+      color: #ffffff !important;
+    }
+  }
+
+  .log-out {
+    color: #ffffff !important;
+    background-color: var(--primary-color);
+
+    span {
+      color: #ffffff !important;
+    }
+  }
+
+  .admin {
+    color: #ffffff !important;
+    background-color: var(--primary-color);
+
+    span {
+      color: #ffffff !important;
+    }
+  }
+
+  .dashboard-link {
+    color: #ffffff !important;
+    background-color: var(--primary-color);
+
+    span {
+      color: #ffffff !important;
+    }
   }
 }

@@ -7,7 +7,9 @@
   width: 100%;
   padding: 0 2rem;
   background-color: var(--surface-card);
-  transition: left 0.2s;
+  transition:
+    left 0.2s,
+    background-color 0.3s ease;
   display: flex;
   align-items: center;
   box-shadow:
@@ -18,7 +20,7 @@
   .layout-topbar-logo {
     display: flex;
     align-items: center;
-    color: var(--surface-900);
+    color: var(--text-color);
     font-size: 1.5rem;
     font-weight: 500;
     border-radius: 12px;
@@ -46,7 +48,9 @@
     width: 3rem;
     height: 3rem;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
 
     &:hover {
       color: var(--text-color);
@@ -183,6 +187,7 @@
 .order-id {
   font-weight: 600;
   font-size: 14px;
+  color: var(--text-color);
 }
 
 .order-status {
@@ -213,5 +218,64 @@
   &:hover {
     opacity: 1;
     color: var(--danger-color);
+  }
+}
+
+/* Dark Mode Topbar Styles */
+[data-theme="dark"] {
+  .layout-topbar {
+    background-color: var(--surface-card);
+    box-shadow:
+      0px 3px 5px rgba(0, 0, 0, 0.2),
+      0px 0px 2px rgba(0, 0, 0, 0.3),
+      0px 1px 4px rgba(0, 0, 0, 0.25);
+
+    .layout-topbar-logo {
+      color: var(--text-color);
+    }
+
+    .layout-topbar-button {
+      color: var(--text-color-secondary);
+
+      &:hover {
+        color: var(--text-color);
+        background-color: var(--surface-hover);
+      }
+    }
+  }
+
+  .notification-item {
+    background-color: var(--surface-overlay);
+    border-bottom-color: var(--surface-border);
+
+    &:hover {
+      background-color: var(--surface-hover);
+    }
+  }
+
+  .order-id {
+    color: var(--text-color);
+  }
+
+  .order-status {
+    color: var(--text-color-secondary);
+  }
+
+  .order-message {
+    color: var(--text-color-secondary);
+  }
+
+  .order-time {
+    color: var(--text-color-secondary);
+  }
+
+  @media (max-width: 991px) {
+    .layout-topbar .layout-topbar-menu {
+      background-color: var(--surface-overlay);
+      box-shadow:
+        0px 3px 5px rgba(0, 0, 0, 0.2),
+        0px 0px 2px rgba(0, 0, 0, 0.3),
+        0px 1px 4px rgba(0, 0, 0, 0.25);
+    }
   }
 }
