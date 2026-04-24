@@ -17,6 +17,9 @@ namespace Talabat.Core.GenaricRepo
         // Get Spec
         Task<T?> GetSpec(ISpecification<T> specification);
 
+        // Count Spec
+        Task<int> CountAsyncSpec(ISpecification<T> specification);
+
         // Add 
         Task AddAsync(T entity);
 

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ICart } from '../../Interfaces/UserInterfaces/icart';
 import { environment } from '../../../environment';
 
@@ -13,21 +13,28 @@ export class CartService {
   cartCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   cartState = new BehaviorSubject<ICart | null>(null);
 
+  private syncCartState(cart: ICart | null): void {
+    this.cartState.next(cart);
+    this.cartCount.next(cart?.items?.length ?? 0);
+  }
+
   // Call Api To Get Cart Count for user --> Cart array of string
   getCartCount(): Observable<ICart> {
-    return this._http.get<ICart>(`${environment.apiUrl}/api/Carts/CartDetails`);
+    return this._http
+      .get<ICart>(`${environment.apiUrl}/api/Carts/CartDetails`)
+      .pipe(tap((cart) => this.syncCartState(cart)));
   }
 
   addToCart(cartData: ICart): Observable<ICart> {
-    return this._http.post<ICart>(
-      `${environment.apiUrl}/api/Carts/UpdateOrCreateCart`,
-      cartData,
-    );
+    return this._http
+      .post<ICart>(`${environment.apiUrl}/api/Carts/UpdateOrCreateCart`, cartData)
+      .pipe(tap((cart) => this.syncCartState(cart)));
   }
 
   getCartDetails(): Observable<ICart> {
-    return this._http.get<ICart>(`${environment.apiUrl}/api/Carts/CartDetails`);
-    // .pipe(tap((cart) => this.cartState.next(cart)));
+    return this._http
+      .get<ICart>(`${environment.apiUrl}/api/Carts/CartDetails`)
+      .pipe(tap((cart) => this.syncCartState(cart)));
   }
 
   getCurrentCart(): ICart | null {
@@ -35,6 +42,8 @@ export class CartService {
   }
 
   deleteCart(): Observable<any> {
-    return this._http.delete(`${environment.apiUrl}/api/Carts/DeleteCart`);
+    return this._http
+      .delete(`${environment.apiUrl}/api/Carts/DeleteCart`)
+      .pipe(tap(() => this.syncCartState(null)));
   }
 }

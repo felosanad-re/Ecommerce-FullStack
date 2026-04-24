@@ -306,3 +306,11 @@ F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Release\net9.0\w
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Release\net9.0\win-x86\Serilog.Sinks.File.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Release\net9.0\win-x86\Serilog.Sinks.RollingFile.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Release\net9.0\win-x86\Microsoft.Extensions.Caching.StackExchangeRedis.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Release\net9.0\win-x86\ClosedXML.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Release\net9.0\win-x86\ClosedXML.Parser.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Release\net9.0\win-x86\DocumentFormat.OpenXml.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Release\net9.0\win-x86\DocumentFormat.OpenXml.Framework.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Release\net9.0\win-x86\ExcelNumberFormat.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Release\net9.0\win-x86\RBush.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Release\net9.0\win-x86\SixLabors.Fonts.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Release\net9.0\win-x86\System.IO.Packaging.dll

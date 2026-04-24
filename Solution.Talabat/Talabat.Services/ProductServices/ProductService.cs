@@ -50,9 +50,7 @@ namespace Talabat.Services.ProductServices
         public async Task<int> GetProductCountAsync(ProductParams productParams)
         {
             var spec = new ProductCountSpec(productParams);
-            var count = await _unitOfWork.RepositaryAsync<Product>().GetAllAsyncSpec(spec);
-
-            return count.Count;
+            return await _unitOfWork.RepositaryAsync<Product>().CountAsyncSpec(spec);
         } 
         #endregion
 

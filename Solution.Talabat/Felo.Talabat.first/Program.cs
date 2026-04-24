@@ -32,9 +32,10 @@ namespace Felo.Talabat.Api
                 builder.Services.AddSwaggerGen();
 
 
-                // Add secret file
-                builder.Configuration
-                    .AddJsonFile("C:\\Users\\Act\\AppData\\Roaming\\Microsoft\\UserSecrets\\ac7b37e3-e66e-42fc-b593-ce3d528b9b78\\secrets.json");
+                if (builder.Environment.IsDevelopment())
+                {
+                    builder.Configuration.AddUserSecrets<Program>(optional: true);
+                }
 
                 // Add ShopDbContext
                 builder.Services.AddDbContext<ShopDbContext>(optionsAction =>
@@ -52,15 +53,29 @@ namespace Felo.Talabat.Api
 
                 builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
                 {
-                    var configuration = ConfigurationOptions.Parse(
-                        builder.Configuration.GetConnectionString("Redis"),
-                        true
-                    );
+                    var redisConnectionString = builder.Configuration.GetConnectionString("Redis")
+                        ?? throw new InvalidOperationException("Redis connection string is missing.");
 
-                    configuration.AbortOnConnectFail = false;
-                    configuration.ConnectRetry = 3;
-                    configuration.ConnectTimeout = 5000;
-                    configuration.SyncTimeout = 5000;
+                    var redisUri = new Uri(redisConnectionString);
+                    var configuration = new ConfigurationOptions
+                    {
+                        AbortOnConnectFail = false,
+                        ConnectRetry = 3,
+                        ConnectTimeout = 10000,
+                        SyncTimeout = 10000,
+                        AsyncTimeout = 10000,
+                        KeepAlive = 60,
+                        Ssl = redisUri.Scheme.Equals("rediss", StringComparison.OrdinalIgnoreCase),
+                        SslHost = redisUri.Host,
+                        User = string.IsNullOrWhiteSpace(redisUri.UserInfo.Split(':')[0])
+                            ? null
+                            : redisUri.UserInfo.Split(':')[0],
+                        Password = redisUri.UserInfo.Contains(':')
+                            ? redisUri.UserInfo[(redisUri.UserInfo.IndexOf(':') + 1)..]
+                            : null,
+                    };
+
+                    configuration.EndPoints.Add(redisUri.Host, redisUri.Port);
                     return ConnectionMultiplexer.Connect(configuration);
                 });
 
@@ -89,8 +104,8 @@ namespace Felo.Talabat.Api
                         options.WithOrigins(
                             "http://localhost:4200",
                             "https://localhost:4200",
-                            "http://shop-web.runasp.net", // deploy in monester
-                            "https://shop-web.runasp.net" // deploy in monester
+                            "http://shoppingfast.runasp.net",
+                            "https://shoppingfast.runasp.net"
                         )
                          .AllowAnyHeader().AllowAnyMethod().AllowCredentials();
                     });

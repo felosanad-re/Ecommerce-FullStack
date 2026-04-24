@@ -52,7 +52,6 @@ export class DetailsComponent {
     this._cartService.addToCart(cartData).subscribe((next) => {
       // debugger;
       this.isAddedToCart = true;
-      this._cartService.cartCount.next(next.items.length); // Get Number Of Carts
       this._notificationsService.showSuccedded('Add To Cart', 'Product Added');
     });
   }

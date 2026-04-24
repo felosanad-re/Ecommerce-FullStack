@@ -14,3 +14,5 @@ F:\angular\E-commerance\Solution.Talabat\Talabat.Services\obj\Release\net9.0\Tal
 F:\angular\E-commerance\Solution.Talabat\Talabat.Services\obj\Release\net9.0\refint\Talabat.Services.dll
 F:\angular\E-commerance\Solution.Talabat\Talabat.Services\obj\Release\net9.0\Talabat.Services.pdb
 F:\angular\E-commerance\Solution.Talabat\Talabat.Services\obj\Release\net9.0\ref\Talabat.Services.dll
+F:\angular\E-commerance\Solution.Talabat\Talabat.Services\bin\Release\net9.0\Talabat.Repositaries.dll
+F:\angular\E-commerance\Solution.Talabat\Talabat.Services\bin\Release\net9.0\Talabat.Repositaries.pdb

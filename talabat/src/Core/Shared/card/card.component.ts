@@ -52,7 +52,6 @@ export class CardComponent {
     this._cartService.addToCart(cartData).subscribe((next) => {
       console.log(next);
       product.isAddedToCart = true;
-      this._cartService.cartCount.next(next.items.length);
       this._notificationsService.showSuccedded('Add To Cart', 'Product Added');
     });
   }

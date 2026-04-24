@@ -57,6 +57,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.1, )"
@@ -254,6 +258,10 @@
               "target": "Package",
               "version": "[9.0.12, )"
             },
+            "Microsoft.AspNetCore.SignalR.Core": {
+              "target": "Package",
+              "version": "[1.2.9, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[9.0.12, )"
@@ -318,6 +326,9 @@
             "projectReferences": {
               "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Core\\Talabat.Core.csproj": {
                 "projectPath": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Core\\Talabat.Core.csproj"
+              },
+              "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Repositaries\\Talabat.Repositaries.csproj": {
+                "projectPath": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Repositaries\\Talabat.Repositaries.csproj"
               }
             }
           }
@@ -341,6 +352,10 @@
             "AutoMapper": {
               "target": "Package",
               "version": "[12.0.1, )"
+            },
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.105.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",

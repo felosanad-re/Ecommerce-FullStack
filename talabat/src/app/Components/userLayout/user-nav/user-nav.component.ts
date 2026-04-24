@@ -88,6 +88,8 @@ export class UserNavComponent {
     localStorage.removeItem('userName');
     localStorage.removeItem('current_user');
     this.userName = '';
+    this._cartService.cartCount.next(0);
+    this._cartService.cartState.next(null);
     this.isLogOut = false;
     this.updateAuthState();
     this._router.navigate(['login']);
@@ -95,10 +97,14 @@ export class UserNavComponent {
 
   // Get Cart Count --> حاليا الكود ده مش شغال لحد ما اعمل جزء الكارت
   getUserCartCount(): void {
-    const cartId = localStorage.getItem('cartId') ?? '';
-    this._cartService
-      .getCartCount()
-      .subscribe((res) => (this.cartCount = res.items.length));
+    this._cartService.cartCount.subscribe((count) => (this.cartCount = count));
+
+    if (!this._authService.checkToken()) {
+      this.cartCount = 0;
+      return;
+    }
+
+    this._cartService.getCartCount().subscribe();
   }
 
   private updateAuthState(): void {

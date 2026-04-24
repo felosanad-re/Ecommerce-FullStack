@@ -18,14 +18,16 @@ namespace Felo.Talabat.Api.Controllers.Products
         private readonly ICategoryService _categoryService;
         private readonly IRedisRepo<Cart> _cartRepo;
         private readonly IMapper _mapper;
+        private readonly ILogger<ProductsController> _logger;
 
-        public ProductsController(IProductService productService, IMapper mapper, IBrandService brandService, ICategoryService categoryService, IRedisRepo<Cart> cartRepo)
+        public ProductsController(IProductService productService, IMapper mapper, IBrandService brandService, ICategoryService categoryService, IRedisRepo<Cart> cartRepo, ILogger<ProductsController> logger)
         {
             _productService = productService;
             _mapper = mapper;
             _brandService = brandService;
             _categoryService = categoryService;
             _cartRepo = cartRepo;
+            _logger = logger;
         }
 
         // GET: /api/Products
@@ -39,14 +41,24 @@ namespace Felo.Talabat.Api.Controllers.Products
                 var products = await _productService.GetProductsAsync(productParams);
                 var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
 
-                // Get Cart To Check If User Add This Product To His Carts
-                var cart = await _cartRepo.GetCacheAsync(cartId);
-                if (cart?.Items.Count > 0)
+                if (!string.IsNullOrWhiteSpace(userId))
                 {
-                    var productInCart = cart.Items.Select(i => i.Id).ToHashSet();
-                    foreach (var item in data)
+                    try
                     {
-                        item.IsAddedToCart = productInCart.Contains(item.Id);
+                        // Get Cart To Check If User Add This Product To His Carts
+                        var cart = await _cartRepo.GetCacheAsync(cartId);
+                        if (cart?.Items.Count > 0)
+                        {
+                            var productInCart = cart.Items.Select(i => i.Id).ToHashSet();
+                            foreach (var item in data)
+                            {
+                                item.IsAddedToCart = productInCart.Contains(item.Id);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogWarning(ex, "Skipping cart lookup for products because Redis is unavailable for user {UserId}", userId);
                     }
                 }
 

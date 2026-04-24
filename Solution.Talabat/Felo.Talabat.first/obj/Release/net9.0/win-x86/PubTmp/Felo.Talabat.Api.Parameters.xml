@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="IIS Web Application Name" description="" value="site56104" tags="IisApp">
+  <parameter name="IIS Web Application Name" description="" value="site65336" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^F:\\angular\\E-commerance\\Solution\.Talabat\\Felo\.Talabat\.first\\obj\\Release\\net9\.0\\win-x86\\PubTmp\\Out\\$" />
   </parameter>
 </parameters>

@@ -626,4 +626,3 @@ F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\Exc
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\RBush.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\SixLabors.Fonts.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\bin\Debug\net9.0\System.IO.Packaging.dll
-F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

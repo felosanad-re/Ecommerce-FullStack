@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Talabat.Repositaries")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a42397a190e4dcb98914e7fc91ae26f4dcf5dc5d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c30ec6250ca5b76aaeadebdf7fa46c2fa5f0748d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Talabat.Repositaries")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Talabat.Repositaries")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

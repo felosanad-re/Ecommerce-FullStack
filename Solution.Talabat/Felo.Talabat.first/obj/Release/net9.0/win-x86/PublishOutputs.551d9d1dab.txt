@@ -8,6 +8,11 @@ F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\w
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\Azure.Core.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\Azure.Identity.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\ClosedXML.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\ClosedXML.Parser.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\DocumentFormat.OpenXml.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\DocumentFormat.OpenXml.Framework.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\ExcelNumberFormat.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\Humanizer.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
@@ -90,6 +95,7 @@ F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\w
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\NuGet.Protocol.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\NuGet.Versioning.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\Pipelines.Sockets.Unofficial.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\RBush.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\Serilog.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\Serilog.Extensions.Logging.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\Serilog.Extensions.Logging.File.dll
@@ -97,6 +103,7 @@ F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\w
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\Serilog.Sinks.Async.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\Serilog.Sinks.File.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\Serilog.Sinks.RollingFile.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\SixLabors.Fonts.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\StackExchange.Redis.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\Stripe.net.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
@@ -113,6 +120,7 @@ F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\w
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\System.Diagnostics.DiagnosticSource.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\System.IO.Hashing.dll
+F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\System.IO.Packaging.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\System.Memory.Data.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\System.Reflection.MetadataLoadContext.dll
 F:\angular\E-commerance\Solution.Talabat\Felo.Talabat.first\obj\Release\net9.0\win-x86\PubTmp\Out\System.Resources.Extensions.dll

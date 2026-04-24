@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NBukCH+DtqU=",
+  "dgSpecHash": "cAP/xJeXiTQ=",
   "success": true,
   "projectFilePath": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Services\\Talabat.Services.csproj",
   "expectedPackageFiles": [
@@ -98,7 +98,8 @@
       "filePath": "F:\\angular\\E-commerance\\Solution.Talabat\\Talabat.Services\\Talabat.Services.csproj",
       "libraryId": "AutoMapper",
       "targetGraphs": [
-        "net9.0"
+        "net9.0",
+        "net9.0/win-x86"
       ]
     }
   ]

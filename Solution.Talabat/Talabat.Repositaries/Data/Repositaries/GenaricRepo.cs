@@ -36,6 +36,18 @@ namespace Talabat.Repositaries.Data.Repositaries
             return await AddSpecifications(specification).FirstOrDefaultAsync();
         }
 
+        public async Task<int> CountAsyncSpec(ISpecification<T> specification)
+        {
+            var query = _dbContext.Set<T>().AsQueryable();
+
+            if (specification.Creteria is not null)
+            {
+                query = query.Where(specification.Creteria);
+            }
+
+            return await query.CountAsync();
+        }
+
         private IQueryable<T> AddSpecifications(ISpecification<T> specification)
         {
             // _dbContext.Set<Product>().include(p => p.brand).include(p => p.Category)

@@ -53,8 +53,8 @@ export class CartsComponent {
   clearCart(): void {
     this._cartService.deleteCart().subscribe({
       next: (res) => {
+        this.allProductInCart = [];
         this._notification.showSuccedded('Delete Cart', res.message);
-        window.location.reload();
       },
     });
   }

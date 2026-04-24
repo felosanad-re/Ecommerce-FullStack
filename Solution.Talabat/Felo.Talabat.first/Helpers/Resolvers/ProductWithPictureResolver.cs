@@ -20,14 +20,19 @@ namespace Felo.Talabat.Api.Helpers.Resolvers
 
             var baseUrl = _configuration["BasePictureUrl"] ?? string.Empty;
 
-            // If Image Have Full Pash
             if (source.PictureUrl.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
                 source.PictureUrl.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
             {
+                if (Uri.TryCreate(source.PictureUrl, UriKind.Absolute, out var absoluteUri) &&
+                    (absoluteUri.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase) ||
+                     absoluteUri.Host.Equals("127.0.0.1", StringComparison.OrdinalIgnoreCase)))
+                {
+                    return $"{baseUrl.TrimEnd('/')}/{absoluteUri.AbsolutePath.TrimStart('/')}";
+                }
+
                 return source.PictureUrl;
             }
 
-            // غير كده → نسبي → ضيف الـ base
             return $"{baseUrl.TrimEnd('/')}/{source.PictureUrl.TrimStart('/')}";
         }
     }
