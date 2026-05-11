@@ -8,7 +8,13 @@ import { ProductParams } from '../../../../Core/Interfaces/UserInterfaces/produc
 import { CartService } from '../../../../Core/Services/UserServices/cart.service';
 import { ICart } from '../../../../Core/Interfaces/UserInterfaces/icart';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
-import { throws } from 'assert';
+
+interface GalleryImage {
+  itemImageSrc: string;
+  alt: string;
+  title: string;
+  description: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -19,7 +25,7 @@ import { throws } from 'assert';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent {
-  images: any[] | undefined;
+  images: GalleryImage[] = [];
   smallProducts!: IProduct[];
   allProducts!: IProduct[];
   productParams = new ProductParams();
@@ -28,39 +34,29 @@ export class HomeComponent {
   pageSize: number = 8;
   productCount!: number;
   // cartItems?: ICartItem;
+
+  responsiveOptions: any[] = [
+    {
+      breakpoint: '1024px',
+      numVisible: 5,
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 3,
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1,
+    },
+  ];
+
   constructor(
     private _productService: ProductService,
     private _cartService: CartService,
   ) {}
 
   ngOnInit() {
-    this._productService.getProducts(this.productParams).subscribe((next) => {
-      console.log(next);
-    });
     this.getSmallProduct();
-    // this.getProductsFromApi();
-    this.images = [
-      {
-        itemImageSrc: 'assets/Product1.png',
-        alt: 'Description for Image 1',
-        title: 'Title 1',
-      },
-      {
-        itemImageSrc: 'assets/Product2.png',
-        alt: 'Description for Image 1',
-        title: 'Title 1',
-      },
-      {
-        itemImageSrc: 'assets/Product3.png',
-        alt: 'Description for Image 1',
-        title: 'Title 1',
-      },
-      {
-        itemImageSrc: 'assets/Product4.png',
-        alt: 'Description for Image 1',
-        title: 'Title 1',
-      },
-    ];
     this._cartService.getCartDetails().subscribe({
       next: () => this.loadProducts(),
       error: () => this.loadProducts(),
@@ -86,6 +82,12 @@ export class HomeComponent {
     this._productService.getProducts(this.productParams).subscribe({
       next: (response: any) => {
         this.smallProducts = response.data.slice(0, 4);
+        this.images = this.smallProducts.map((product) => ({
+          itemImageSrc: product.pictureUrl,
+          alt: product.name,
+          title: product.name,
+          description: product.descripaion,
+        }));
       },
       error: (err) => {
         console.error('Failed to load products', err);

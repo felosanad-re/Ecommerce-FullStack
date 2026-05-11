@@ -45,6 +45,7 @@ export class ProductComponent {
       .subscribe((search) => {
         this.searchValue = search;
         this.pageIndex = 1;
+        this.first = 0;
         this.getAllProduct();
       });
   }
@@ -84,5 +85,12 @@ export class ProductComponent {
 
   onSearchChange(event: any) {
     this.searchInput.next(event.target.value);
+  }
+
+  clearSearch() {
+    this.searchValue = '';
+    this.pageIndex = 1;
+    this.first = 0;
+    this.getAllProduct();
   }
 }

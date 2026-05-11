@@ -1,83 +1,150 @@
-<section>
-  <div class="container">
-    <h1>Your Carts</h1>
-    <p-dataView #dv [value]="allProductInCart" [rows]="5" [paginator]="true">
-      <ng-template pTemplate="list" let-allProductInCart>
-        <div class="grid grid-nogutter">
-          @for (product of allProductInCart; track $index) {
-            <div class="col-12" class="col-12">
-              <div
-                class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3"
-                [ngClass]="{ 'border-top-1 surface-border': !$first }"
-              >
-                <div class="md:w-10rem relative">
-                  <img
-                    class="block xl:block mx-auto border-round w-full"
-                    [src]="product?.pictureUrl"
-                    [alt]="product?.name"
+<section class="cart-page">
+  <div class="cart-shell">
+    <header class="cart-hero">
+      <div>
+        <span class="cart-eyebrow">Shopping cart</span>
+        <h1>Your Cart</h1>
+        <p>Review your selected products, update quantities, and checkout when everything looks right.</p>
+      </div>
+
+      <div class="cart-counter">
+        <strong>{{ cartItemCount }}</strong>
+        <span>{{ cartItemCount === 1 ? "item" : "items" }} selected</span>
+      </div>
+    </header>
+
+    @if (allProductInCart.length > 0) {
+      <div class="cart-layout">
+        <div class="cart-list-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="cart-eyebrow">Items</span>
+              <h2>Ready for checkout</h2>
+            </div>
+            <button
+              pButton
+              type="button"
+              icon="pi pi-trash"
+              label="Clear cart"
+              class="clear-button"
+              (click)="clearCart()"
+            ></button>
+          </div>
+
+          <div class="cart-table-head">
+            <span></span>
+            <span>Item</span>
+            <span>Quantity</span>
+            <span>Total price</span>
+          </div>
+
+          <div class="cart-items">
+            @for (product of allProductInCart; track product.id) {
+              <article class="cart-item">
+                <button
+                  pButton
+                  type="button"
+                  icon="pi pi-times"
+                  class="remove-item-button"
+                  [attr.aria-label]="'Remove ' + product.name"
+                  (click)="removeItem(product)"
+                ></button>
+
+                <div class="product-main">
+                  <div class="product-media">
+                    <img [src]="product.pictureUrl" [alt]="product.name" />
+                  </div>
+
+                  <div class="product-info">
+                    <span class="product-label">Product</span>
+                    <h3>{{ product.name }}</h3>
+                    <span class="unit-price">{{ product.price | currency: "USD" }} each</span>
+                  </div>
+                </div>
+
+                <div class="quantity-control">
+                  <label [for]="'quantity-' + product.id">Quantity</label>
+                  <p-inputNumber
+                    [(ngModel)]="product.count"
+                    [showButtons]="true"
+                    buttonLayout="horizontal"
+                    [inputId]="'quantity-' + product.id"
+                    spinnerMode="horizontal"
+                    [min]="1"
+                    [step]="1"
+                    decrementButtonClass="quantity-button"
+                    incrementButtonClass="quantity-button"
+                    incrementButtonIcon="pi pi-plus"
+                    decrementButtonIcon="pi pi-minus"
+                    (onInput)="updateCount()"
                   />
                 </div>
-                <div
-                  class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4"
-                >
-                  <div
-                    class="flex flex-row md:flex-column justify-content-between align-items-start gap-2"
-                  >
-                    <div>
-                      <div class="text-lg font-medium text-900 mt-2">
-                        {{ product?.name }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex flex-column md:align-items-end gap-5">
-                    <span class="text-xl font-semibold text-900"
-                      >Price: {{ "$" + product?.price }}</span
-                    >
-                    <div class="flex flex-row-reverse md:flex-row gap-2">
-                      <div class="flex-auto">
-                        <label class="mb-2 block font-bold" for="horizontal">
-                          Quantity
-                        </label>
-                        <p-inputNumber
-                          [(ngModel)]="product.count"
-                          [showButtons]="true"
-                          buttonLayout="horizontal"
-                          inputId="horizontal"
-                          spinnerMode="horizontal"
-                          [step]="1"
-                          decrementButtonClass="p-button-danger"
-                          incrementButtonClass="p-button-success"
-                          incrementButtonIcon="pi pi-plus"
-                          decrementButtonIcon="pi pi-minus"
-                          (onInput)="updateCount()"
-                        />
-                      </div>
-                    </div>
-                  </div>
+
+                <div class="line-total">
+                  <span>Total</span>
+                  <strong>{{ getItemTotal(product) | currency: "USD" }}</strong>
                 </div>
-              </div>
-            </div>
-          }
+              </article>
+            }
+          </div>
         </div>
-      </ng-template>
-    </p-dataView>
-    @if (allProductInCart.length > 0) {
-      <p-button
-        [routerLink]="['/checkout']"
-        label="buy now"
-        styleClass="my-2 uppercase w-full font-bold"
-        icon="pi pi-shopping-cart text-2xl mx-5"
-        iconPos="right"
-        severity="warning"
-      />
-      <p-button
-        (click)="clearCart()"
-        label="Clear Carts"
-        styleClass="my-2 uppercase w-full font-bold"
-        icon="pi pi-shopping-cart text-2xl mx-5"
-        iconPos="right"
-        severity="warning"
-      />
+
+        <aside class="summary-card">
+          <span class="cart-eyebrow">Summary</span>
+          <h2>Order details</h2>
+
+          <div class="summary-rows">
+            <div>
+              <span>Subtotal</span>
+              <strong>{{ cartSubtotal | currency: "USD" }}</strong>
+            </div>
+            <div>
+              <span>Delivery</span>
+              <strong>Calculated next</strong>
+            </div>
+            <div>
+              <span>Discount</span>
+              <strong>{{ 0 | currency: "USD" }}</strong>
+            </div>
+          </div>
+
+          <div class="summary-total">
+            <span>Total</span>
+            <strong>{{ cartSubtotal | currency: "USD" }}</strong>
+          </div>
+
+          <button
+            pButton
+            type="button"
+            [routerLink]="['/checkout']"
+            label="Checkout"
+            icon="pi pi-shopping-bag"
+            iconPos="right"
+            class="checkout-button"
+          ></button>
+
+          <p class="summary-note">
+            You can still update your delivery method and payment details on the next step.
+          </p>
+        </aside>
+      </div>
+    } @else {
+      <div class="empty-cart">
+        <div class="empty-icon">
+          <i class="pi pi-shopping-cart"></i>
+        </div>
+        <h2>Your cart is empty</h2>
+        <p>Start adding products and they will appear here ready for checkout.</p>
+        <button
+          pButton
+          type="button"
+          [routerLink]="['/products']"
+          label="Browse products"
+          icon="pi pi-arrow-right"
+          iconPos="right"
+          class="browse-button"
+        ></button>
+      </div>
     }
   </div>
 </section>

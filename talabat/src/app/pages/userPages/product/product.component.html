@@ -1,37 +1,94 @@
-<section>
-  <div class="container">
-    <h1 class="text-primary">All Products</h1>
-    <p>
-      all product is
-      <span class="font-bold text-orange">{{ productCount }}</span>
-    </p>
-    <p-iconField iconPosition="left">
-      <p-inputIcon styleClass="pi pi-search" />
-      <input
-        type="text"
-        pInputText
-        placeholder="Search"
-        class="w-full"
-        (input)="onSearchChange($event)"
-      />
-    </p-iconField>
+<section class="products-page">
+  <div class="products-shell">
+    <header class="products-hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Product catalog</span>
+        <h1>Find what you need faster.</h1>
+        <p>
+          Browse the latest products, search by name, and move through the
+          catalog with a cleaner shopping experience.
+        </p>
+      </div>
 
-    <app-card
-      [products]="allProducts"
-      [isSmallCard]="false"
-      [searchKey]="searchValue"
-    ></app-card>
+      <div class="catalog-stat">
+        <strong>{{ productCount }}</strong>
+        <span>{{ productCount === 1 ? "product" : "products" }} available</span>
+      </div>
+    </header>
 
-    <!-- Pagination -->
-    <div class="flex justify-content-center mt-4">
-      <p-paginator
-        (onPageChange)="onPageChange($event)"
-        [first]="first"
-        [rows]="pageSize"
-        [totalRecords]="productCount"
+    <section class="catalog-toolbar">
+      <div class="search-panel">
+        <label for="product-search">Search products</label>
+        <p-iconField iconPosition="left">
+          <p-inputIcon styleClass="pi pi-search" />
+          <input
+            id="product-search"
+            type="text"
+            pInputText
+            placeholder="Search by product name"
+            class="search-input"
+            [ngModel]="searchValue"
+            (input)="onSearchChange($event)"
+          />
+        </p-iconField>
+      </div>
+
+      <button
+        type="button"
+        class="clear-search"
+        [disabled]="!searchValue"
+        (click)="clearSearch()"
       >
-        <!-- [rowsPerPageOptions]="[6, 12, 24]" -->
-      </p-paginator>
+        <i class="pi pi-times"></i>
+        <span>Clear</span>
+      </button>
+    </section>
+
+    <div class="catalog-status">
+      <div>
+        <span class="eyebrow">Results</span>
+        <h2>
+          @if (searchValue) {
+            Showing results for "{{ searchValue }}"
+          } @else {
+            All products
+          }
+        </h2>
+      </div>
+      <span class="page-pill">Page {{ pageIndex }}</span>
     </div>
+
+    @if (allProducts.length > 0) {
+      <div class="products-grid-panel">
+        <app-card
+          [products]="allProducts"
+          [isSmallCard]="false"
+          [searchKey]="searchValue"
+        ></app-card>
+      </div>
+
+      <div class="pagination-panel">
+        <p-paginator
+          (onPageChange)="onPageChange($event)"
+          [first]="first"
+          [rows]="pageSize"
+          [totalRecords]="productCount"
+          [rowsPerPageOptions]="[8, 12, 24]"
+          styleClass="products-paginator"
+        />
+      </div>
+    } @else {
+      <div class="empty-products">
+        <div class="empty-icon">
+          <i class="pi pi-search"></i>
+        </div>
+        <h2>No products found</h2>
+        <p>Try another search term or clear the search to view the full catalog.</p>
+        <button type="button" class="clear-search primary" (click)="clearSearch()">
+          <i class="pi pi-refresh"></i>
+          <span>Reset search</span>
+        </button>
+      </div>
+    }
   </div>
 </section>

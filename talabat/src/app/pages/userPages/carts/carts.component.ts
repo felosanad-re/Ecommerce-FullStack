@@ -3,10 +3,9 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { CartService } from '../../../../Core/Services/UserServices/cart.service';
 import { DataViewModule } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
-import { TagModule } from 'primeng/tag';
 import { CommonModule } from '@angular/common';
 import { NotificationsService } from '../../../../Core/Services/notifications.service';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { ICartItem } from '../../../../Core/Interfaces/UserInterfaces/ICartItem';
 
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -17,7 +16,6 @@ import { FormsModule } from '@angular/forms';
   imports: [
     DataViewModule,
     ButtonModule,
-    TagModule,
     CommonModule,
     RouterLink,
     InputNumberModule,
@@ -32,7 +30,7 @@ export class CartsComponent {
 
   value3: number = 25;
 
-  cartDetails!: ICart[];
+  cartDetails: ICart = { items: [] };
   constructor(
     private _cartService: CartService,
     private _notification: NotificationsService,
@@ -42,10 +40,29 @@ export class CartsComponent {
     this.getCartDetails();
   }
 
+  get cartItemCount(): number {
+    return this.allProductInCart.reduce(
+      (total, item) => total + (item.count ?? 0),
+      0,
+    );
+  }
+
+  get cartSubtotal(): number {
+    return this.allProductInCart.reduce(
+      (total, item) => total + this.getItemTotal(item),
+      0,
+    );
+  }
+
+  getItemTotal(product: ICartItem): number {
+    return (product.price ?? 0) * (product.count ?? 0);
+  }
+
   getCartDetails(): void {
     this._cartService.getCartDetails().subscribe({
       next: (res: ICart) => {
-        this.allProductInCart = res.items;
+        this.cartDetails = res;
+        this.allProductInCart = res.items ?? [];
       },
     });
   }
@@ -59,14 +76,32 @@ export class CartsComponent {
     });
   }
 
+  removeItem(product: ICartItem): void {
+    const cartDetail: ICart = {
+      ...this.cartDetails,
+      items: this.allProductInCart.filter((item) => item.id !== product.id),
+    };
+
+    this._cartService.addToCart(cartDetail).subscribe({
+      next: (res) => {
+        this.cartDetails = res;
+        this.allProductInCart = res.items ?? [];
+        this._notification.showSuccedded('Delete Item', `${product.name} removed from cart`);
+      },
+    });
+  }
+
   updateCount(): void {
     const cartDetail: ICart = {
       ...this.cartDetails,
-      items: this.allProductInCart,
+      items: this.allProductInCart.map((item) => ({
+        ...item,
+        count: Math.max(item.count ?? 1, 1),
+      })),
     };
     this._cartService.addToCart(cartDetail).subscribe((res) => {
-      this.allProductInCart = res.items;
-      console.log(res.items);
+      this.cartDetails = res;
+      this.allProductInCart = res.items ?? [];
     });
   }
 }

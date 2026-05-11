@@ -1,53 +1,105 @@
-<section>
-  <div class="container-fluid">
-    <div class="grid my-6">
-      <!-- Slider Images -->
-      <div class="col-12 md:col-5">
-        <div class="card">
-          <p-galleria
-            [value]="images"
-            [numVisible]="5"
-            [circular]="true"
-            [showItemNavigators]="true"
-            [showThumbnails]="false"
-            [containerStyle]="{
-              'max-width': '100%',
-              'border-radius': '10px',
-              overflow: 'hidden',
-            }"
-          >
-            <ng-template pTemplate="item" let-item>
-              <img
-                [src]="item.itemImageSrc"
-                style="width: 100%; display: block; height: 240px"
-              />
-            </ng-template>
-          </p-galleria>
+<section class="home-section">
+  <div class="home-shell">
+    <section class="home-hero">
+      <div class="hero-copy">
+        <span class="hero-kicker">Fresh picks, fast checkout</span>
+        <h1>Shop the latest products with a cleaner, faster experience.</h1>
+        <p>
+          Discover featured items, trending choices, and best sellers in one
+          polished storefront.
+        </p>
+
+        <div class="hero-stats">
+          <div>
+            <strong>24/7</strong>
+            <span>Online shopping</span>
+          </div>
+          <div>
+            <strong>Fast</strong>
+            <span>Order updates</span>
+          </div>
+          <div>
+            <strong>Top</strong>
+            <span>Daily deals</span>
+          </div>
         </div>
       </div>
 
-      <!-- Main Container [Parent] -->
-      <div class="hidden md:block md:col-6">
-        <!-- Products [Children]-->
-        <app-card [isSmallCard]="true" [products]="smallProducts" />
+      <div class="hero-gallery">
+        <div class="gallery-toolbar">
+          <div>
+            <span>Featured</span>
+            <h2>Today's highlights</h2>
+          </div>
+          <i class="pi pi-sparkles"></i>
+        </div>
+
+        <p-galleria
+          [value]="images"
+          [numVisible]="5"
+          [circular]="true"
+          [showItemNavigators]="true"
+          [showThumbnails]="false"
+          [showIndicators]="true"
+          [responsiveOptions]="responsiveOptions"
+          styleClass="home-galleria"
+        >
+          <ng-template pTemplate="item" let-item>
+            <article class="galleria-item">
+              <img
+                [src]="item.itemImageSrc"
+                [alt]="item.alt"
+                class="galleria-image"
+              />
+              <div class="galleria-overlay">
+                <span>Featured Product</span>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.description }}</p>
+              </div>
+            </article>
+          </ng-template>
+        </p-galleria>
+      </div>
+    </section>
+
+    <section class="showcase-section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Trending now</span>
+          <h2>Popular picks customers are checking out</h2>
+        </div>
+        <p>Fresh options selected from the current product catalog.</p>
       </div>
 
-      <!-- Start Show Our Products -->
-      <div class="product">
-        <h1>Best Sellers</h1>
-        <!-- Container -->
+      <div class="trending-panel">
+        <app-card [isSmallCard]="true" [products]="smallProducts" />
+      </div>
+    </section>
+
+    <section class="products-section">
+      <div class="section-heading products-heading">
+        <div>
+          <span class="eyebrow">Best sellers</span>
+          <h2>Explore products made for everyday shopping</h2>
+        </div>
+        <p>Browse the catalog and add your favorites to the cart.</p>
+      </div>
+
+      <div class="products-grid">
         <app-card [isSmallCard]="false" [products]="allProducts" />
       </div>
-      <!-- End Show Our Products -->
+    </section>
+
+    <div class="pagination-container">
+      <p-paginator
+        (onPageChange)="onPageChange($event)"
+        [first]="first"
+        [rows]="rows"
+        [totalRecords]="20"
+        [rowsPerPageOptions]="[6, 12, 24]"
+        showPageLinks="true"
+        styleClass="paginator-custom"
+      />
     </div>
-  </div>
-  <!-- Pagination -->
-  <div class="card flex justify-content-center">
-    <p-paginator
-      (onPageChange)="onPageChange($event)"
-      [first]="first"
-      [rows]="rows"
-      [totalRecords]="20"
-    />
   </div>
 </section>
