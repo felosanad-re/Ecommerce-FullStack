@@ -104,27 +104,23 @@ namespace Felo.Talabat.Api.Controllers.Payments
             {
                 var signatureHeader = Request.Headers["Stripe-Signature"];
 
-                // أول حاجة: تحقق من التوقيع
                 var stripeEvent = EventUtility.ConstructEvent(
                     json,
                     signatureHeader,
                     endpointSecret
                 );
 
-                // دلوقتي الـ event موثوق
-
                 if (stripeEvent.Data.Object is Stripe.Checkout.Session session)
                 {
-                    // استخراج البيانات بأمان
                     if (!session.Metadata.TryGetValue("orderId", out var orderIdStr) ||
                         !int.TryParse(orderIdStr, out var orderId))
                     {
                         _logger.LogWarning("Webhook received without valid order_id in metadata");
-                        return Ok();  // رجع 200 عشان Stripe ما يعيدش الإرسال
+                        return Ok();
                     }
 
                     string userEmail = null;
-                    session.Metadata.TryGetValue("userEmail", out userEmail);  // optional
+                    session.Metadata.TryGetValue("userEmail", out userEmail);
 
                     bool succeeded;
 
@@ -159,7 +155,6 @@ namespace Felo.Talabat.Api.Controllers.Payments
                 }
                 else
                 {
-                    // event مش Checkout Session (ممكن payment_intent, charge, إلخ)
                     _logger.LogDebug("Received non-checkout event: {Type}", stripeEvent.Type);
                     return Ok();
                 }
@@ -167,7 +162,7 @@ namespace Felo.Talabat.Api.Controllers.Payments
             catch (StripeException ex)
             {
                 _logger.LogError(ex, "Stripe signature verification failed or invalid event");
-                return BadRequest();  // أو Ok() لو عايز تتجاهل
+                return BadRequest(); 
             }
             catch (Exception ex)
             {

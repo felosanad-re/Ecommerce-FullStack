@@ -74,18 +74,6 @@ namespace Talabat.Services.OrderServices
             var deliveryMethod = await _unitOfWork.RepositaryAsync<DelivaryMethod>().Get(delivary);
             // 4. Calculate SubTotal
             var subTotal = orderItems.Sum(o => o.Price * o.Count);
-
-            //check on ordder have paymentIntent or no
-            /// var orderRepo = _unitOfWork.RepositaryAsync<Order>();
-            /// 
-            /// var orderSpec = new OrderWithPaymentIntentSpec(cart.PaymentIntentId);
-            /// var paymentIntentExist = await orderRepo.GetSpec(orderSpec);
-            /// if (paymentIntentExist != null)
-            /// {
-            ///     // هيحذف الاوردر القديم وبعد ما يحزفه هيروح يشيل الامونت بتاعه 
-            ///     orderRepo.delete(paymentIntentExist);
-            ///     await _paymentService.CreateAndUpdatePaymentIntent(cartId);
-            /// }
             
             // 5.Add Order
             var order = _orderBuilder.SetEmail(buyerEmail)
